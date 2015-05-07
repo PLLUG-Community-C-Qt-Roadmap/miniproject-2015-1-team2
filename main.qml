@@ -8,7 +8,6 @@ Window {
         mouseArea.onClicked: {
             Qt.quit();
         }
-
     }
 
     Item{
