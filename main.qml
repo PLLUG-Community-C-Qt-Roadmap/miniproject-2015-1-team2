@@ -19,11 +19,15 @@ Window {
         y: 10
     }
 
-    Item{
+    Window {
+
+        id: window
+        visible: true
         BackButton {
 
         }
         x: 30
         y: 30
     }
+
 }

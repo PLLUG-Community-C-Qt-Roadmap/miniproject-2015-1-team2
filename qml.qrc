@@ -3,7 +3,6 @@
         <file>main.qml</file>
         <file>MainForm.ui.qml</file>
         <file>ItemForButton.qml</file>
-        <file>BackButton.qml</file>
     </qresource>
     <qresource prefix="/font">
         <file>Font/PAC-FONT.TTF</file>

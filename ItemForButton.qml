@@ -2,12 +2,13 @@ import QtQuick 2.4
 
 Item {
 
+    id: baseButton
+
     property alias text: txt.text
     width: txt.width
     height: txt.height
-    //radius: 10
-    //color: "black"
-    signal clicked()
+
+    signal clicked
 
     FontLoader {
         id: pacmanFont
@@ -37,7 +38,7 @@ Item {
             txt.font.pointSize = 8
         }
 
-        onClicked:  parent.clicked()
+        onClicked:  baseButton.clicked()
     }
 }
 
