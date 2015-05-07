@@ -32,6 +32,10 @@ Window{
             ItemForButton
             {
                 text: "Back"
+                onClicked: {
+
+                    history.close()
+                }
             }
         }
 
