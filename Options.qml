@@ -8,7 +8,7 @@ Window {
         source: "qrc:/font/Font/PAC-FONT.TTF"
     }
     id: options
-    visible: true
+    //visible: true
     width: 360
     height: 360
     color: "black"

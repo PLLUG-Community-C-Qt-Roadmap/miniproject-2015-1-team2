@@ -46,5 +46,16 @@ Window {
                  font.pointSize: 12
              }
         }
+
+        Item {
+            ItemForButton {
+                text: "Back"
+                onClicked: {
+                    highscores.close();
+                }
+            }
+            x: 200
+            y: 300
+        }
     }
 }
