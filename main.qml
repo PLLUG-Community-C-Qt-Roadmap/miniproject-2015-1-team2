@@ -10,4 +10,12 @@ Window {
         }
 
     }
+
+    Item{
+        ItemForButton {
+            text: "text"
+        }
+        x: 10
+        y: 10
+    }
 }
