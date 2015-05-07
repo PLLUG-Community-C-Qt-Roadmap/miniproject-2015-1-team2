@@ -1,10 +1,6 @@
 import QtQuick 2.4
 
 Rectangle {
-    FontLoader {
-        id: pacmanFont
-        source: "qrc:/font/Font/PAC-FONT.TTF"
-    }
     property alias text: txt.text
     width: 100
     height: 20

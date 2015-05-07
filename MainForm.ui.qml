@@ -4,11 +4,6 @@ import QtQuick 2.3
 
 Rectangle {
 
-    FontLoader {
-        id: pacmanFont
-        source: "qrc:/font/Font/PAC-FONT.TTF"
-    }
-
     property alias mouseArea: mouseArea
 
     width: 360
