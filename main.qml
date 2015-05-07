@@ -2,32 +2,67 @@ import QtQuick 2.4
 import QtQuick.Window 2.2
 
 Window {
+
     FontLoader {
         id: pacmanFont
         source: "qrc:/font/Font/PAC-FONT.TTF"
     }
+
     visible: true
+    color: "black"
 
-    MainForm {
-        anchors.fill: parent
-        color: "black"
-        mouseArea.onClicked: {
-            Qt.quit();
-        }
-    }
+    width: 360
+    height: 360
 
-    Item{
+    Column {
+
+        anchors.centerIn: parent
+
         ItemForButton {
-            text: "text"
+            text: "New Game"
+            onClicked: {
+                // TODO
+            }
+        }
+
+        ItemForButton {
+            text: "Options"
+            onClicked: {
+                options.show();
+            }
+        }
+
+        ItemForButton {
+            text: "High Scores"
             onClicked: {
                 highscores.show();
             }
         }
-        x: 10
-        y: 10
+
+        ItemForButton {
+            text: "History"
+            onClicked: {
+                history.show();
+            }
+        }
+
+        ItemForButton {
+            text: "Quit"
+            onClicked: {
+                // TODO
+            }
+        }
 
         HighScores{
             id: highscores
+        }
+
+        Options{
+            id : options
+        }
+
+        History {
+            id: history
         }
     }
 
