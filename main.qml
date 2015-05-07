@@ -4,6 +4,7 @@ import QtQuick.Window 2.2
 Window {
     visible: true
     MainForm {
+        color: "black"
         anchors.fill: parent
         mouseArea.onClicked: {
             Qt.quit();
@@ -16,5 +17,13 @@ Window {
         }
         x: 10
         y: 10
+    }
+
+    Item{
+        BackButton {
+
+        }
+        x: 30
+        y: 30
     }
 }
