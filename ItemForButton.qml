@@ -9,14 +9,21 @@ Rectangle {
     Text {
         id: txt
         color: "white"
+        font.pointSize: 8
         anchors.centerIn: parent
     }
     MouseArea {
         id: mousearea
         anchors.fill: parent
         hoverEnabled: true
-        onEntered: parent.color = "grey"
-        onExited: parent.color = "black"
+        onEntered: {
+            txt.color = "yellow"
+            txt.font.pointSize = 15
+        }
+        onExited: {
+            txt.color = "white"
+            txt.font.pointSize = 8
+        }
     }
 }
 
