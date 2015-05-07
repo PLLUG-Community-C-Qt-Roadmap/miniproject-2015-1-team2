@@ -19,9 +19,16 @@ Window {
     Item{
         ItemForButton {
             text: "text"
+            onClicked: {
+                highscores.show();
+            }
         }
         x: 10
         y: 10
+
+        HighScores{
+            id: highscores
+        }
     }
 
 }
