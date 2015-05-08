@@ -13,6 +13,11 @@ Window {
     width: 360
     height: 360
 
+    // Loads menu item, when ones is clicked
+    Loader {
+        id : itemLoader
+    }
+
 
     Item {
 
@@ -29,51 +34,62 @@ Window {
             spacing: 10
 
             ItemForButton {
-                    text: "New Game"
-                    onClicked: {
-                        // TODO
-                    }
+
+                text: "New Game"
+
+                onClicked: {
+                    // TODO
                 }
+            }
+
             ItemForButton {
+
                 text: "Options"
+
                 onClicked: {
+
+                    itemLoader.source = "Options.qml"
+                    itemLoader.item.show()
                     mainWindow.close()
-                    options.show()
                 }
             }
+
             ItemForButton {
+
                 text: "High Scores"
+
                 onClicked: {
+
+                    itemLoader.source = "HighScores.qml"
+                    itemLoader.item.show()
                     mainWindow.close()
-                    highscores.show()
                 }
             }
+
             ItemForButton {
+
                 text: "History"
+
                 onClicked: {
+
+                    itemLoader.source = "History.qml"
+                    itemLoader.item.show()
                     mainWindow.close()
-                    history.show()
                 }
             }
+
             ItemForButton {
+
                 text: "Quit"
+
                 onClicked: {
                      // TODO
-                    }
                 }
+
             }
 
-            HighScores{
-                id: highscores
-                }
+        }
 
-            Options{
-                id : options
-                }
-
-            History {
-                 id: history
-                }
     }
 }
 

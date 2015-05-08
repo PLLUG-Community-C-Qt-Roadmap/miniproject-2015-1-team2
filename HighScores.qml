@@ -47,8 +47,8 @@ Window {
             ItemForButton {
                 text: "Back"
                 onClicked: {
-                    highscores.close()
                     mainWindow.show()
+                    itemLoader.source = ""
                 }
             }
             x: parent.width/2-30

@@ -8,6 +8,7 @@ Window {
     width: 360
     height: 360
     color: "black"
+
     Text {
         color: "red"
         font.family: pacmanFont.name
@@ -16,35 +17,42 @@ Window {
         y: 20
         text: "Options"
         }
+
     Grid {
         rows: 4
         columns: 2
         anchors.centerIn: parent
         spacing: 20
+
         Text {
             color: "yellow"
             font.family: pacmanFont.name
             font.pointSize: 15
             text: "Sound"
         }
+
         CheckBox {
             checked: true
         }
+
         Text {
             color: "yellow"
             font.family: pacmanFont.name
             font.pointSize: 15
             text: "Volume"
         }
+
         Slider {
             value: 0.5
         }
+
         Text {
             color: "yellow"
             font.family: pacmanFont.name
             font.pointSize: 15
             text: "FullScreen"
         }
+
         CheckBox {
                 checked: true
         }
@@ -56,12 +64,13 @@ Window {
             text: "Difficulty"
         }
     }
+
     Item {
             ItemForButton {
                 text: "Back"
                 onClicked: {
-                    options.close()
                     mainWindow.show()
+                    itemLoader.source = ""
                 }
             }
             x: parent.width/2-30
