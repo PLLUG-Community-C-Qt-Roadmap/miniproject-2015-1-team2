@@ -5,8 +5,8 @@ Item {
     id: baseButton
 
     property alias text: txt.text
-    width: txt.width
-    height: txt.height
+    width: 70
+    height: 20
 
     signal clicked
 
