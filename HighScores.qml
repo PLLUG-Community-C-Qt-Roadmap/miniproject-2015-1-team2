@@ -6,10 +6,6 @@ Window {
     width: 360
     color: "black"
     id: highscores
-    FontLoader {
-        id: pacmanFont
-        source: "qrc:/font/Font/PAC-FONT.TTF"
-    }
 
     Item {
         anchors.fill: parent

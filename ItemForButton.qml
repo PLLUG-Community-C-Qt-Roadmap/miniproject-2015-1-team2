@@ -10,11 +10,6 @@ Item {
 
     signal clicked
 
-    FontLoader {
-        id: pacmanFont
-        source: "qrc:/font/Font/PAC-FONT.TTF"
-    }
-
     Text {
         id: txt
         color: "white"

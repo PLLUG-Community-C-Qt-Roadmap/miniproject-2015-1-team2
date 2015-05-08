@@ -4,12 +4,6 @@ import QtQuick.Layouts 1.1
 
 Window{
 
-
-    FontLoader {
-        id: pacmanFont
-        source: "qrc:/font/Font/PAC-FONT.TTF"
-    }
-
     id: history
 
     width: 360

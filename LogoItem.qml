@@ -2,11 +2,6 @@ import QtQuick 2.4
 
 Item {
 
-    FontLoader {
-        id: pacmanFont
-        source: "qrc:/font/Font/PAC-FONT.TTF"
-    }
-
     Text {
         id: txt
         color: "yellow"

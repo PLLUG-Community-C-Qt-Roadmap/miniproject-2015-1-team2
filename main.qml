@@ -28,52 +28,52 @@ Window {
             anchors.centerIn: parent
             spacing: 10
 
-        ItemForButton {
-                text: "New Game"
+            ItemForButton {
+                    text: "New Game"
+                    onClicked: {
+                        // TODO
+                    }
+                }
+            ItemForButton {
+                text: "Options"
                 onClicked: {
-                    // TODO
+                    mainWindow.close()
+                    options.show()
                 }
             }
-        ItemForButton {
-            text: "Options"
-            onClicked: {
-                mainWindow.close()
-                options.show()
-            }
-        }
-        ItemForButton {
-            text: "High Scores"
-            onClicked: {
-                mainWindow.close()
-                highscores.show()
-            }
-        }
-        ItemForButton {
-            text: "History"
-            onClicked: {
-                mainWindow.close()
-                history.show()
-            }
-        }
-        ItemForButton {
-            text: "Quit"
-            onClicked: {
-                 // TODO
+            ItemForButton {
+                text: "High Scores"
+                onClicked: {
+                    mainWindow.close()
+                    highscores.show()
                 }
             }
-        }
-
-        HighScores{
-            id: highscores
+            ItemForButton {
+                text: "History"
+                onClicked: {
+                    mainWindow.close()
+                    history.show()
+                }
+            }
+            ItemForButton {
+                text: "Quit"
+                onClicked: {
+                     // TODO
+                    }
+                }
             }
 
-        Options{
-            id : options
-            }
+            HighScores{
+                id: highscores
+                }
 
-        History {
-             id: history
-            }
+            Options{
+                id : options
+                }
+
+            History {
+                 id: history
+                }
     }
 }
 

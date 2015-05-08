@@ -3,10 +3,7 @@ import QtQuick.Window 2.2
 import QtQuick.Controls 1.2
 
 Window {
-    FontLoader {
-        id: pacmanFont
-        source: "qrc:/font/Font/PAC-FONT.TTF"
-    }
+
     id: options
     width: 360
     height: 360
