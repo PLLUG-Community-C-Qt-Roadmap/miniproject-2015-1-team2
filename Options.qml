@@ -8,7 +8,6 @@ Window {
         source: "qrc:/font/Font/PAC-FONT.TTF"
     }
     id: options
-    //visible: true
     width: 360
     height: 360
     color: "black"
@@ -25,39 +24,39 @@ Window {
         font.family: pacmanFont.name
         font.pointSize: 15
         x: parent.width/2-80
-        y: 80
+        y: parent.height/2-100
         text: "Sound"
     }
     CheckBox {
         checked: true
         x: parent.width/2+123
-        y: 85
+        y: parent.height/2-95
     }
     Text {
         color: "yellow"
         font.family: pacmanFont.name
         font.pointSize: 15
         x: parent.width/2-80
-        y: 120
+        y: parent.height/2-60
         text: "Volume"
     }
     Slider {
         value: 0.5
         x: parent.width/2+100
-        y: 125
+        y: parent.height/2-55
     }
     Text {
         color: "yellow"
         font.family: pacmanFont.name
         font.pointSize: 15
         x: parent.width/2-80
-        y: 160
+        y: parent.height/2-20
         text: "FullScreen"
     }
     CheckBox {
             checked: true
             x: parent.width/2+123
-            y: 165
+            y: parent.height/2-15
     }
 
     Text {
@@ -65,17 +64,17 @@ Window {
         font.family: pacmanFont.name
         font.pointSize: 15
         x: parent.width/2-80
-        y: 200
+        y: parent.height/2+20
         text: "Difficulty"
     }
     Item {
-        ItemForButton {
-            text: "Back"
-            x: options.width/2+10
-            y: 300
-            onClicked: {
-                options.close()
+            ItemForButton {
+                text: "Back"
+                onClicked: {
+                    options.close()
+                }
             }
+            x: parent.width/2
+            y: parent.height/2+100
         }
-    }
 }
