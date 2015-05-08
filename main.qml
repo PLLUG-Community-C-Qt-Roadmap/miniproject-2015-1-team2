@@ -17,6 +17,7 @@ Window {
     Column {
 
         anchors.centerIn: parent
+        spacing: 10
 
         ItemForButton {
             text: "New Game"
