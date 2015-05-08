@@ -15,66 +15,59 @@ Window {
         color: "red"
         font.family: pacmanFont.name
         font.pointSize: 20
-        x: parent.width/2-50
+        x: parent.width/2-80
         y: 20
         text: "Options"
-    }
-    Text {
-        color: "yellow"
-        font.family: pacmanFont.name
-        font.pointSize: 15
-        x: parent.width/2-80
-        y: parent.height/2-100
-        text: "Sound"
-    }
-    CheckBox {
-        checked: true
-        x: parent.width/2+123
-        y: parent.height/2-95
-    }
-    Text {
-        color: "yellow"
-        font.family: pacmanFont.name
-        font.pointSize: 15
-        x: parent.width/2-80
-        y: parent.height/2-60
-        text: "Volume"
-    }
-    Slider {
-        value: 0.5
-        x: parent.width/2+100
-        y: parent.height/2-55
-    }
-    Text {
-        color: "yellow"
-        font.family: pacmanFont.name
-        font.pointSize: 15
-        x: parent.width/2-80
-        y: parent.height/2-20
-        text: "FullScreen"
-    }
-    CheckBox {
+        }
+    Grid {
+        rows: 4
+        columns: 2
+        anchors.centerIn: parent
+        spacing: 20
+        Text {
+            color: "yellow"
+            font.family: pacmanFont.name
+            font.pointSize: 15
+            text: "Sound"
+        }
+        CheckBox {
             checked: true
-            x: parent.width/2+123
-            y: parent.height/2-15
-    }
+        }
+        Text {
+            color: "yellow"
+            font.family: pacmanFont.name
+            font.pointSize: 15
+            text: "Volume"
+        }
+        Slider {
+            value: 0.5
+        }
+        Text {
+            color: "yellow"
+            font.family: pacmanFont.name
+            font.pointSize: 15
+            text: "FullScreen"
+        }
+        CheckBox {
+                checked: true
+        }
 
-    Text {
-        color: "yellow"
-        font.family: pacmanFont.name
-        font.pointSize: 15
-        x: parent.width/2-80
-        y: parent.height/2+20
-        text: "Difficulty"
+        Text {
+            color: "yellow"
+            font.family: pacmanFont.name
+            font.pointSize: 15
+            text: "Difficulty"
+        }
     }
     Item {
             ItemForButton {
                 text: "Back"
                 onClicked: {
                     options.close()
+                    mainWindow.show()
                 }
             }
-            x: parent.width/2
-            y: parent.height/2+100
+            x: parent.width/2-30
+            y: parent.height/2 + 100
         }
 }

@@ -7,7 +7,7 @@ Window {
         id: pacmanFont
         source: "qrc:/font/Font/PAC-FONT.TTF"
     }
-
+    id: mainWindow
     visible: true
     color: "black"
 
@@ -29,21 +29,24 @@ Window {
         ItemForButton {
             text: "Options"
             onClicked: {
-                options.show();
+                mainWindow.close()
+                options.show()
             }
         }
 
         ItemForButton {
             text: "High Scores"
             onClicked: {
-                highscores.show();
+                mainWindow.close()
+                highscores.show()
             }
         }
 
         ItemForButton {
             text: "History"
             onClicked: {
-                history.show();
+                mainWindow.close()
+                history.show()
             }
         }
 

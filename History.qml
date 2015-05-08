@@ -32,8 +32,8 @@ Window{
             {
                 text: "Back"
                 onClicked: {
-
                     history.close()
+                    mainWindow.show()
                 }
             }
         }

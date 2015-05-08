@@ -51,7 +51,8 @@ Window {
             ItemForButton {
                 text: "Back"
                 onClicked: {
-                    highscores.close();
+                    highscores.close()
+                    mainWindow.show()
                 }
             }
             x: 200
