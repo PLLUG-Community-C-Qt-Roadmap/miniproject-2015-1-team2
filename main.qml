@@ -16,6 +16,7 @@ Window {
     // Loads menu item, when ones is clicked
     Loader {
         id : itemLoader
+
     }
 
 

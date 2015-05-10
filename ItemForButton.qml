@@ -20,7 +20,7 @@ Item {
 
     Item {
         id: animspr
-        x: -70
+        x: txt.x - 20
         y: 5
         z: 1
         visible: false

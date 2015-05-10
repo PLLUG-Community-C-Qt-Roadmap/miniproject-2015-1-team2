@@ -13,5 +13,6 @@
     </qresource>
     <qresource prefix="/images">
         <file>PacmanSprite.png</file>
+        <file>Images/Triangle.png</file>
     </qresource>
 </RCC>
