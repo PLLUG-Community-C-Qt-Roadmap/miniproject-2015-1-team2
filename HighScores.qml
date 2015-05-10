@@ -47,12 +47,12 @@ Window {
             ItemForButton {
                 text: "Back"
                 onClicked: {
-                    highscores.close()
                     mainWindow.show()
+                    itemLoader.source = ""
                 }
             }
-            x: 200
-            y: 300
+            x: parent.width/2-30
+            y: parent.height/2 + 100
         }
     }
 }

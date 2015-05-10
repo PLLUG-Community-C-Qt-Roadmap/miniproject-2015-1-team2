@@ -45,6 +45,7 @@ Window{
 
         Text
         {
+
             text: "150"
             color: "yellow"
             font.bold: true
@@ -69,9 +70,6 @@ Window{
 
     }
 
-
-
-
     Item{
         id: next
         x: parent.width/1.5 - 35
@@ -95,7 +93,7 @@ Window{
                 onClicked: {history.close()
                 mainWindow.show()}
             }
-    }
+        }
 
 
 
@@ -104,4 +102,5 @@ Window{
 
 
 }
+
 
