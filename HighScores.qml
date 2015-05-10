@@ -18,29 +18,78 @@ Window {
             font.pointSize: 30
             color: "red"
          }
-
+        Text {
+            anchors.horizontalCenter: parent
+            text: "Top players"
+            x: 75
+            y: 75
+             color: "yellow"
+             font.family: pacmanFont.name
+             font.pointSize: 16
+           }
         Column {
             anchors.centerIn: parent
             spacing: 20
 
-            Text {
-                text: "   Top players"
-                 color: "yellow"
-                 font.family: pacmanFont.name
-                 font.pointSize: 16
-            }
+            Grid
+            {
+                id: highScoreGrid
+                rows: 10
+                columns: 2
+                anchors.centerIn: parent
+                columnSpacing: 75
+                rowSpacing: 5
 
-            Text {
-                text: "1.Player1---------100<br>
-                       2.Player2----------90<br>
-                       3.Player3----------80<br>
-                       4.Player4----------70<br>
-                       5.Player5----------60"
-                 color: "yellow"
-                 anchors.horizontalCenter: parent.horizontalCenter
-                 font.family: "Arial"
-                 font.pointSize: 12
-             }
+
+                Text
+                {
+                    text: "Player1"
+                    color: "red"
+                    font.bold: true
+                    font.pointSize: 12
+
+                }
+
+                Text
+                {
+
+                    text: "150"
+                    color: "red"
+                    font.bold: true
+                    font.pointSize: 12
+                }
+
+                Text
+                {
+                    text: "Player2"
+                    color: "yellow"
+                    font.bold: true
+                    font.pointSize: 12
+                }
+
+                Text
+                {
+                    text: "150"
+                    color: "yellow"
+                    font.bold: true
+                    font.pointSize: 12
+                }
+                Text
+                {
+                    text: "Player3"
+                    color: "yellow"
+                    font.bold: true
+                    font.pointSize: 12
+                }
+
+                Text
+                {
+                    text: "150"
+                    color: "yellow"
+                    font.bold: true
+                    font.pointSize: 12
+                }
+            }
         }
 
         Item {
