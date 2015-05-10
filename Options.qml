@@ -18,51 +18,72 @@ Window {
         text: "Options"
         }
 
-    Grid {
-        rows: 4
-        columns: 2
-        anchors.centerIn: parent
+    Column {
+
+        anchors{
+
+            left: parent.left
+            leftMargin: 20
+            verticalCenter: parent.verticalCenter
+        }
         spacing: 20
 
-        Text {
-            color: "yellow"
-            font.family: pacmanFont.name
-            font.pointSize: 15
-            text: "Sound"
+        OptionsLevelItem {
+
+                x : someText.x
+                y : someText.y - 40
+
         }
 
-        CheckBox {
-            checked: true
-        }
+        Row {
+            spacing: 20
 
-        Text {
-            color: "yellow"
-            font.family: pacmanFont.name
-            font.pointSize: 15
-            text: "Volume"
-        }
+            Text {
+                id: someText
+                color: "yellow"
+                font.family: pacmanFont.name
+                font.pointSize: 15
+                text: "Sound"
+            }
 
-        Slider {
-            value: 0.5
-        }
-
-        Text {
-            color: "yellow"
-            font.family: pacmanFont.name
-            font.pointSize: 15
-            text: "FullScreen"
-        }
-
-        CheckBox {
+            CheckBox {
                 checked: true
+            }
         }
 
-        Text {
-            color: "yellow"
-            font.family: pacmanFont.name
-            font.pointSize: 15
-            text: "Difficulty"
+        Row {
+            spacing: 20
+
+            Text {
+                color: "yellow"
+                font.family: pacmanFont.name
+                font.pointSize: 15
+                text: "Volume"
+            }
+
+            Slider {
+                value: 0.5
+            }
+
         }
+
+        Row {
+            spacing: 20
+
+            Text {
+
+
+                color: "yellow"
+                font.family: pacmanFont.name
+                font.pointSize: 15
+                text: "FullScreen"
+            }
+
+            CheckBox {
+                    checked: true
+            }
+        }
+
     }
 
     Item {

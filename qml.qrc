@@ -8,6 +8,7 @@
         <file>Options.qml</file>
         <file>LogoItem.qml</file>
         <file>PlayersItem.qml</file>
+        <file>OptionsLevelItem.qml</file>
     </qresource>
     <qresource prefix="/font">
         <file>Font/PAC-FONT.TTF</file>
@@ -15,5 +16,6 @@
     <qresource prefix="/images">
         <file>PacmanSprite.png</file>
         <file>Images/Triangle.png</file>
+        <file>Images/Yellow_Triangle.png</file>
     </qresource>
 </RCC>
