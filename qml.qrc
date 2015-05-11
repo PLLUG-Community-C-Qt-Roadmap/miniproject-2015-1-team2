@@ -7,7 +7,6 @@
         <file>HighScores.qml</file>
         <file>Options.qml</file>
         <file>LogoItem.qml</file>
-        <file>PlayersItem.qml</file>
         <file>OptionsLevelItem.qml</file>
         <file>MainMenu.qml</file>
         <file>NewGame.qml</file>
