@@ -11,6 +11,7 @@
         <file>OptionsLevelItem.qml</file>
         <file>MainMenu.qml</file>
         <file>NewGame.qml</file>
+        <file>Exit.qml</file>
     </qresource>
     <qresource prefix="/font">
         <file>Font/PAC-FONT.TTF</file>

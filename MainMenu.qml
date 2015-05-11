@@ -75,8 +75,20 @@ Window {
                 onClicked: {
                      // TODO
                 }
-
             }
+             ItemForButton {
+                 text: "Exit"
+
+                 onClicked: {
+
+                     itemLoader.source = "Exit.qml"
+                     itemLoader.item.show()
+                     mainMenuLoader.source = ""
+                 }
+
+             }
+
+
 
         }
 
