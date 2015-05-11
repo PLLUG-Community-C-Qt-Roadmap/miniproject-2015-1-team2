@@ -28,21 +28,64 @@ Window {
              font.pointSize: 16
            }
     }
-    Item {
-        Column {
-            anchors.centerIn: parent
-            spacing: 10
-        PlayersItem{
+    Grid
+    {
+        id: highScoreGrid
+        rows: 10
+        columns: 2
+        anchors.centerIn: parent
+        columnSpacing: 75
+        rowSpacing: 5
 
-playerName: "Player1"
-playerScore: "pts"
-        }
-        PlayersItem{
+        Text
+        {
+            text: "Player1"
+            color: "red"
+            font.bold: true
+            font.pointSize: 12
 
-            playerName: "Player2"
-            playerScore: "less pts"
         }
+
+        Text
+        {
+
+            text: "150"
+            color: "red"
+            font.bold: true
+            font.pointSize: 12
         }
+
+        Text
+        {
+            text: "Player2"
+            color: "yellow"
+            font.bold: true
+            font.pointSize: 12
+        }
+
+        Text
+        {
+            text: "150"
+            color: "yellow"
+            font.bold: true
+            font.pointSize: 12
+        }
+        Text
+        {
+            text: "Player3"
+            color: "yellow"
+            font.bold: true
+            font.pointSize: 12
+        }
+
+        Text
+        {
+            text: "150"
+            color: "yellow"
+            font.bold: true
+            font.pointSize: 12
+        }
+
     }
 
         Item {
