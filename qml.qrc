@@ -10,13 +10,16 @@
         <file>PlayersItem.qml</file>
         <file>OptionsLevelItem.qml</file>
         <file>MainMenu.qml</file>
+        <file>NewGame.qml</file>
     </qresource>
     <qresource prefix="/font">
         <file>Font/PAC-FONT.TTF</file>
+        <file>Font/kirbyss.ttf</file>
     </qresource>
     <qresource prefix="/images">
         <file>PacmanSprite.png</file>
         <file>Images/Triangle.png</file>
         <file>Images/Yellow_Triangle.png</file>
+        <file>Images/Start.png</file>
     </qresource>
 </RCC>

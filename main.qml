@@ -8,6 +8,11 @@ Window {
         source: "qrc:/font/Font/PAC-FONT.TTF"
     }
 
+    FontLoader {
+        id: inputPacmanFont
+        source: "qrc:/font/Font/kirbyss.ttf"
+    }
+
     // Loads main menu on start
     Loader {
         id : mainMenuLoader

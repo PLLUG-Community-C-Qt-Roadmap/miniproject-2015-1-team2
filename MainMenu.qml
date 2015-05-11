@@ -27,7 +27,10 @@ Window {
                 text: "New Game"
 
                 onClicked: {
-                    // TODO
+
+                    itemLoader.source = "NewGame.qml"
+                    itemLoader.item.show()
+                    mainMenuLoader.source = ""
                 }
             }
 
