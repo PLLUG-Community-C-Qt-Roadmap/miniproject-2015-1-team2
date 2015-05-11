@@ -47,6 +47,10 @@ Item {
             duration: 1000
             loops: 1
             running: false
+
+            onStopped: {
+                baseButton.clicked()
+            }
         }
     }
 
@@ -88,12 +92,6 @@ Item {
         onClicked: {
             proanim.running = true
             numanim.running = true
-            i = 0
-            while(!proanim.stopped())
-            {
-                i++
-            }
-            baseButton.clicked()
         }
     }
 }
