@@ -61,7 +61,7 @@ Item {
         height: 35
         color: "black"
         x: txt.x - 25
-        y: txt.y - 15
+        y: txt.y - 13
         visible: true
         NumberAnimation on width {
             id: numanim
@@ -86,7 +86,8 @@ Item {
         onExited: {
             txt.color = "white"
             txt.font.pointSize = 8
-           sprite.visible = false
+            if(proanim.running == false)
+                sprite.visible = false
         }
 
         onClicked: {
