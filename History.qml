@@ -90,8 +90,11 @@ Window{
             ItemForButton
             {
                 text: "Back"
-                onClicked: {history.close()
-                mainWindow.show()}
+                onClicked: {
+
+                    mainMenuLoader.source = "MainMenu.qml"
+                    itemLoader.source = ""
+                }
             }
         }
 

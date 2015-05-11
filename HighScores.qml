@@ -49,7 +49,7 @@ playerScore: "pts"
             ItemForButton {
                 text: "Back"
                 onClicked: {
-                    mainWindow.show()
+                    mainMenuLoader.source = "MainMenu.qml"
                     itemLoader.source = ""
                 }
             }

@@ -9,6 +9,7 @@
         <file>LogoItem.qml</file>
         <file>PlayersItem.qml</file>
         <file>OptionsLevelItem.qml</file>
+        <file>MainMenu.qml</file>
     </qresource>
     <qresource prefix="/font">
         <file>Font/PAC-FONT.TTF</file>
