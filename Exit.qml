@@ -21,17 +21,32 @@ Window {
 
     }
     Item{
-        id: next
-        x: parent.width/1.5 - 10
+        id: no
+        x: parent.width/1.5-35
         y: parent.height - 50
 
     ItemForButton{
-         id:back
+
          text: "No"
          onClicked: {
          mainMenuLoader.source = "MainMenu.qml"
          itemLoader.source = ""
 
+            }
+        }
+    Item{
+        id:yes
+        x: parent.width/3-35
+        y: parent.height - 20
+            ItemForButton{
+
+                text: "yes"
+                onClicked: {
+
+                    mainMenuLoader.source = "MainMenu.qml"
+                    itemLoader.source = ""
+                    mainMenuLoader.source = ""
+                }
             }
         }
 
