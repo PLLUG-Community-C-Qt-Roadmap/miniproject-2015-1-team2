@@ -20,36 +20,41 @@ Window {
         y: 15
 
     }
+
     Item{
-        id: no
-        x: parent.width/1.5-35
-        y: parent.height - 50
+        id:yes
+        x: parent.width/3 - 25
+        y: parent.height - 25
+
+
 
     ItemForButton{
 
-         text: "No"
-         onClicked: {
-         mainMenuLoader.source = "MainMenu.qml"
-         itemLoader.source = ""
-
+        text: "yes"
+        onClicked:{
+             mainMenuLoader.source = "MainMenu.qml"
+             itemLoader.source = ""
+             mainMenuLoader.source = ""
             }
+           }
         }
+
     Item{
-        id:yes
-        x: parent.width/3-35
-        y: parent.height - 20
-            ItemForButton{
+        id:no
+        x: parent.width/1.5 - 15
+        y: parent.height - 25
 
-                text: "yes"
-                onClicked: {
 
-                    mainMenuLoader.source = "MainMenu.qml"
-                    itemLoader.source = ""
-                    mainMenuLoader.source = ""
-                }
-            }
-        }
+   ItemForButton{
 
+        text: "No"
+        onClicked: {
+        mainMenuLoader.source = "MainMenu.qml"
+        itemLoader.source = ""
+
+           }
+       }
+ }
 }
 
-}
+

@@ -68,14 +68,8 @@ Window {
                 }
             }
 
-            ItemForButton {
 
-                text: "Quit"
 
-                onClicked: {
-                     // TODO
-                }
-            }
              ItemForButton {
                  text: "Exit"
 
