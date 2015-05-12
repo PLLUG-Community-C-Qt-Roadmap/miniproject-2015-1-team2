@@ -1,7 +1,7 @@
 import QtQuick 2.4
 import QtQuick.Window 2.2
 
-Window {
+Rectangle {
     height: 360
     width: 360
     color: "black"
@@ -92,8 +92,7 @@ Window {
             ItemForButton {
                 text: "Back"
                 onClicked: {
-                    mainMenuLoader.source = "MainMenu.qml"
-                    itemLoader.source = ""
+                    loader.source = "MainMenu.qml"
                 }
             }
             x: parent.width/2-30

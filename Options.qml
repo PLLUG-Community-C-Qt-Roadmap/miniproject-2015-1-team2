@@ -2,7 +2,7 @@ import QtQuick 2.4
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.2
 
-Window {
+Rectangle {
 
     id: options
     width: 360
@@ -90,8 +90,7 @@ Window {
             ItemForButton {
                 text: "Back"
                 onClicked: {
-                    mainMenuLoader.source = "MainMenu.qml"
-                    itemLoader.source = ""
+                    loader.source = "MainMenu.qml"
                 }
             }
             x: parent.width/2-30

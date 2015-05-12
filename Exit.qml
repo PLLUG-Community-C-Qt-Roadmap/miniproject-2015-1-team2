@@ -3,16 +3,14 @@ import QtQuick.Window 2.2
 import QtQuick.Layouts 1.0
 
 
-Window {
+Rectangle {
 
     id:exit
     color: "black"
     width: 200
     height: 100
-    flags: Qt.FramelessWindowHint
 
-    Text
-    {
+    Text {
         text: "Are you sure?"
         color: "red"
         font.family:  pacmanFont.name
@@ -23,21 +21,22 @@ Window {
     }
 
     Item{
+
         id:yes
         x: parent.width/3 - 25
         y: parent.height - 25
 
 
 
-    ItemForButton{
+        ItemForButton{
 
-        text: "yes"
-        onClicked:{
-             itemLoader.source = ""
-             mainMenuLoader.source = ""
+            text: "yes"
+            onClicked:{
+                 loaderForExitWindow.source = ""
+                 loader.source = ""
             }
-           }
         }
+    }
 
     Item{
         id:no
@@ -45,18 +44,17 @@ Window {
         y: parent.height - 25
 
 
-   ItemForButton{
+       ItemForButton{
 
-        text: "No"
-        onClicked: {
-            mainMenuLoader.item.mmItem.enabled = true
-            mainMenuLoader.source = "MainMenu.qml"
-            itemLoader.source = ""
+            text: "No"
+            onClicked: {
+                loader.item.enabled = true
+                loader.source = "MainMenu.qml"
+                loaderForExitWindow.source = ""
+            }
+        }
 
-           }
-       }
-
- }
+    }
 }
 
 

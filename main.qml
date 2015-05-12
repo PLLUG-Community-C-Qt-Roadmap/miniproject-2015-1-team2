@@ -3,34 +3,19 @@ import QtQuick.Window 2.2
 
 Window {
 
+    visible: true
+    width: 360
+    height: 360
+
     FontLoader {
         id: pacmanFont
         source: "qrc:/font/Font/PAC-FONT.TTF"
     }
 
-    FontLoader {
-        id: inputPacmanFont
-        source: "qrc:/font/Font/kirbyss.ttf"
-    }
-
-    // Loads main menu on start
+    // Loads main menu and menu items
     Loader {
-        id : mainMenuLoader
+        id : loader
         source : "MainMenu.qml"
-        onLoaded: {
-            item.show()
-        }
-
-    }
-
-    // Loads menu items
-    Loader {
-        id : itemLoader
-
-        onLoaded: {
-            item.show()
-        }
-
     }
 
 }

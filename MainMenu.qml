@@ -1,7 +1,7 @@
 import QtQuick 2.4
 import QtQuick.Window 2.2
 
-Window {
+Rectangle {
     id: mainWindow
     visible: true
     color: "black"
@@ -9,6 +9,11 @@ Window {
     height: 360
 
     property alias mmItem: mmItem
+
+    Loader {
+
+        id: loaderForExitWindow
+    }
 
     Item {
         id: mmItem
@@ -30,9 +35,7 @@ Window {
 
                 onClicked: {
 
-                    itemLoader.source = "NewGame.qml"
-                    itemLoader.item.show()
-                    mainMenuLoader.source = ""
+                    loader.source = "NewGame.qml"
                 }
             }
 
@@ -42,8 +45,7 @@ Window {
 
                 onClicked: {
 
-                    itemLoader.source = "Options.qml"
-                    mainMenuLoader.source = ""
+                    loader.source = "Options.qml"
                 }
             }
 
@@ -53,8 +55,7 @@ Window {
 
                 onClicked: {
 
-                    itemLoader.source = "HighScores.qml"
-                    mainMenuLoader.source = ""
+                    loader.source = "HighScores.qml"
                 }
             }
 
@@ -64,9 +65,7 @@ Window {
 
                 onClicked: {
 
-                    itemLoader.source = "History.qml"
-                    itemLoader.item.show()
-                    mainMenuLoader.source = ""
+                    loader.source = "History.qml"
                 }
             }
 
@@ -76,8 +75,8 @@ Window {
                  text: "Exit"
 
                  onClicked: {
-                     itemLoader.source = "Exit.qml"
-                     itemLoader.item.show()
+                     loader.item.enabled = false
+                     loaderForExitWindow.source = "Exit.qml"
                  }
 
              }

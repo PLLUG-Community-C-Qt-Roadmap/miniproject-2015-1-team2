@@ -4,12 +4,17 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.3
 
-Window {
+Rectangle {
     id: newGameWindow
 
     width: 360
     height: 360
     color: "black"
+
+    FontLoader {
+        id: inputPacmanFont
+        source: "qrc:/font/Font/kirbyss.ttf"
+    }
 
     Rectangle{
         id: rectBackground
@@ -128,8 +133,7 @@ Window {
 
                 text: "Back"
                 onClicked: {
-                    mainMenuLoader.source = "MainMenu.qml"
-                    itemLoader.source = ""
+                    loader.source = "MainMenu.qml"
                 }
             }
             x: (parent.width/2) - (buttonBack.width/2)

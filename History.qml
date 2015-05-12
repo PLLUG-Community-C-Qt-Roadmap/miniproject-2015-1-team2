@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.0
 
 
 
-Window{
+Rectangle{
 
     id: history
     color: "black"
@@ -92,8 +92,7 @@ Window{
                 text: "Back"
                 onClicked: {
 
-                    mainMenuLoader.source = "MainMenu.qml"
-                    itemLoader.source = ""
+                    loader.source = "MainMenu.qml"
                 }
             }
         }
