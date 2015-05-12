@@ -18,5 +18,10 @@ Window {
         source : "MainMenu.qml"
     }
 
+    // Loader only for Exit!
+    Loader {
+
+        id: loaderForExitWindow
+    }
 }
 

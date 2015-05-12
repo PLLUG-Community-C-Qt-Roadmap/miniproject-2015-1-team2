@@ -10,11 +10,6 @@ Rectangle {
 
     property alias mmItem: mmItem
 
-    Loader {
-
-        id: loaderForExitWindow
-    }
-
     Item {
         id: mmItem
         anchors.fill: parent
