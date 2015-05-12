@@ -49,6 +49,7 @@ Item {
             running: false
 
             onStopped: {
+                revnum.running = true
                 baseButton.clicked()
             }
         }
@@ -68,6 +69,13 @@ Item {
             from: 0
             to: txt.width + 50
             duration: 1000
+            running: false
+        }
+        NumberAnimation on width {
+            id: revnum
+            from: txt.width + 50
+            to: 0
+            duration: 1
             running: false
         }
     }

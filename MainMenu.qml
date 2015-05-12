@@ -8,8 +8,10 @@ Window {
     width: 360
     height: 360
 
-    Item {
+    property alias mmItem: mmItem
 
+    Item {
+        id: mmItem
         anchors.fill: parent
 
         LogoItem {
@@ -74,16 +76,11 @@ Window {
                  text: "Exit"
 
                  onClicked: {
-
                      itemLoader.source = "Exit.qml"
                      itemLoader.item.show()
-                     mainMenuLoader.source = ""
                  }
 
              }
-
-
-
         }
 
     }

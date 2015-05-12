@@ -9,6 +9,7 @@ Window {
     color: "black"
     width: 200
     height: 100
+    flags: Qt.FramelessWindowHint
 
     Text
     {
@@ -32,7 +33,6 @@ Window {
 
         text: "yes"
         onClicked:{
-             mainMenuLoader.source = "MainMenu.qml"
              itemLoader.source = ""
              mainMenuLoader.source = ""
             }
@@ -49,11 +49,13 @@ Window {
 
         text: "No"
         onClicked: {
-        mainMenuLoader.source = "MainMenu.qml"
-        itemLoader.source = ""
+            mainMenuLoader.item.mmItem.enabled = true
+            mainMenuLoader.source = "MainMenu.qml"
+            itemLoader.source = ""
 
            }
        }
+
  }
 }
 
