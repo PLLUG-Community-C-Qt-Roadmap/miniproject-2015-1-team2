@@ -10,6 +10,8 @@ Rectangle {
     width: 200
     height: 100
 
+    anchors.centerIn: parent
+
     Text {
         text: "Are you sure?"
         color: "red"
@@ -32,8 +34,7 @@ Rectangle {
 
             text: "yes"
             onClicked:{
-                 loaderForExitWindow.source = ""
-                 loader.source = ""
+                 mainWindow.close()
             }
         }
     }

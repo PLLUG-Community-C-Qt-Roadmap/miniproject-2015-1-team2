@@ -2,7 +2,7 @@ import QtQuick 2.4
 import QtQuick.Window 2.2
 
 Rectangle {
-    id: mainWindow
+    id: mainMenu
     visible: true
     color: "black"
     width: 360
