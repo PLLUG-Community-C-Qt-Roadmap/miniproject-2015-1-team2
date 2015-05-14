@@ -56,11 +56,11 @@ Rectangle {
 
             ItemForButton {
 
-                text: "History"
+                text: "Legend"
 
                 onClicked: {
 
-                    loader.source = "History.qml"
+                    loader.source = "Legend.qml"
                 }
             }
 
