@@ -12,6 +12,11 @@ Rectangle {
 
     anchors.centerIn: parent
 
+    border {
+        color: "white"
+        width: 1
+    }
+
     Text {
         text: "Are you sure?"
         color: "red"

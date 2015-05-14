@@ -10,90 +10,117 @@ Rectangle {
     color: "black"
 
     Text {
+        id : optionsLabel
         color: "red"
         font.family: pacmanFont.name
         font.pointSize: 20
-        x: parent.width/2-80
-        y: 20
+        anchors.horizontalCenter: options.horizontalCenter
         text: "Options"
-        }
-
-    Column {
-
-        anchors{
-
-            left: parent.left
-            leftMargin: 20
-            verticalCenter: parent.verticalCenter
-        }
-        spacing: 20
-
-        OptionsLevelItem {
-
-                x : someText.x
-                y : someText.y - 40
-
-        }
-
-        Row {
-            spacing: 20
-
-            Text {
-                id: someText
-                color: "yellow"
-                font.family: pacmanFont.name
-                font.pointSize: 15
-                text: "Sound"
-            }
-
-            CheckBox {
-                checked: true
-            }
-        }
-
-        Row {
-            spacing: 20
-
-            Text {
-                color: "yellow"
-                font.family: pacmanFont.name
-                font.pointSize: 15
-                text: "Volume"
-            }
-
-            Slider {
-                value: 0.5
-            }
-
-        }
-
-        Row {
-            spacing: 20
-
-            Text {
-
-
-                color: "yellow"
-                font.family: pacmanFont.name
-                font.pointSize: 15
-                text: "FullScreen"
-            }
-
-            CheckBox {
-                    checked: true
-            }
-        }
-
     }
 
-    Item {
-            ItemForButton {
-                text: "Back"
-                onClicked: {
-                    loader.source = "MainMenu.qml"
-                }
-            }
-            x: parent.width/2-30
-            y: parent.height/2 + 100
+    Text {
+        id : difficultyLabel
+        color: "yellow"
+        font.family: pacmanFont.name
+        font.pointSize: 15
+        text: "Difficulty"
+
+        x: 5
+        y: optionsLabel.height + 30
+    }
+
+    OptionsLevelItem {
+
+        x : options.width - width - 5
+        y: difficultyLabel.y
+    }
+
+    Text {
+        id : musicLabel
+        color: "yellow"
+        font.family: pacmanFont.name
+        font.pointSize: 15
+        text: "Music"
+
+        x: 5
+        y: difficultyLabel.y + 40
+    }
+
+    CheckBox {
+
+        checked: true
+
+        x : options.width - width - 5
+        y: musicLabel.y
+    }
+
+    Text {
+        id : soundEffectsLabel
+        color: "yellow"
+        font.family: pacmanFont.name
+        font.pointSize: 15
+        text: "Sound Effects"
+
+        x: 5
+        y: musicLabel.y + 40
+    }
+
+    CheckBox {
+
+        checked: true
+
+        x : options.width - width - 5
+        y: soundEffectsLabel.y
+    }
+
+    Text {
+        id : volumeLabel
+        color: "yellow"
+        font.family: pacmanFont.name
+        font.pointSize: 15
+        text: "Volume"
+
+        x: 5
+        y: soundEffectsLabel.y + 40
+    }
+
+    Slider {
+
+        value: 0.5
+
+        x : options.width - width - 5
+        y: volumeLabel.y
+    }
+
+    Text {
+        id : fullscreenLabel
+        color: "yellow"
+        font.family: pacmanFont.name
+        font.pointSize: 15
+        text: "Sound Effects"
+
+        x: 5
+        y: volumeLabel.y + 40
+    }
+
+    CheckBox {
+
+        checked: true
+
+        x : options.width - width - 5
+        y: fullscreenLabel.y
+    }
+
+    ItemForButton {
+        text: "Back"
+
+        anchors.horizontalCenter: options.horizontalCenter
+        anchors.bottom: options.bottom
+        anchors.bottomMargin: 30
+
+        onClicked: {
+            loader.source = "MainMenu.qml"
         }
+    }
+
 }

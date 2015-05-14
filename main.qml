@@ -21,7 +21,7 @@ Window {
 
     // Loader only for Exit!
     Loader {
-
+        anchors.centerIn: parent
         id: loaderForExitWindow
     }
 }
