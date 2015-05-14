@@ -7,190 +7,171 @@ Item {
     property alias level : difficultyText.text
 
     height: 20
+    width: 140
 
     Row {
 
 
-        Text {
-            id: labelForLevel
-            color: "yellow"
-            font.family: pacmanFont.name
-            font.pointSize: 15
-            text: "Difficulty"
-        }
+        Rectangle {
 
-        Item {
+            id: triangleContainer
 
-            id : comboBox
+            width : 30
+            height: 30
+            color : "black"
 
-            x: labelForLevel.x + 200
+            signal clicked()
 
-            Row {
+            Image {
 
+                id: triangle
 
-                Rectangle {
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
 
-                    id: triangleContainer
+                cache: false
 
-                    width : 30
-                    height: 30
-                    color : "black"
+                width : parent.width
+                height: parent.height
 
-                    signal clicked()
+                source: "qrc:/images/Images/Triangle.png"
+            }
 
-                    Image {
+            MouseArea {
 
-                        id: triangle
+                id: rectangleMouseArea
 
-                        anchors.right: parent.right
-                        anchors.verticalCenter: parent.verticalCenter
+                anchors.fill: parent
+                hoverEnabled: true
 
-                        cache: false
+                onEntered: {
 
-                        width : parent.width
-                        height: parent.height
-
-                        source: "qrc:/images/Images/Triangle.png"
-                    }
-
-                    MouseArea {
-
-                        id: rectangleMouseArea
-
-                        anchors.fill: parent
-                        hoverEnabled: true
-
-                        onEntered: {
-
-                             triangle.source =
-                                "qrc:/images/Images/Yellow_Triangle.png"
-                        }
-
-                        onExited: {
-
-                            triangle.source =
-                                "qrc:/images/Images/Triangle.png"
-                        }
-
-                        onPressed: {
-
-                            triangle.width = parent.width - 5
-                            triangle.height = parent.height - 5
-                            }
-
-                        onReleased: {
-
-                            triangle.width = parent.width
-                            triangle.height = parent.height
-                        }
-
-                        onClicked: {
-
-                            triangleContainer.clicked()
-                        }
-
-                    }
+                     triangle.source =
+                        "qrc:/images/Images/Yellow_Triangle.png"
                 }
 
-                Rectangle {
+                onExited: {
 
-                    id: difficulty
-
-                    color: "black"
-
-                    property var levels : ["Easy", "Normal", "Hard"]
-                    property int currentLevel : 0
-
-                    width : 80
-                    height: 30
-
-                    border {
-                        color: "white"
-                        width: 1
-                    }
-
-                    Text {
-
-                        id: difficultyText
-
-                        text: difficulty.levels[difficulty.currentLevel]
-                        font.family: pacmanFont.name
-                        color: "white"
-                        font.pointSize: 8
-                        anchors.centerIn: parent
-                    }
+                    triangle.source =
+                        "qrc:/images/Images/Triangle.png"
                 }
 
+                onPressed: {
 
-                Rectangle {
-
-                    id: reverseTriangleContainer
-
-                    width : 30
-                    height: 30
-
-                    signal clicked()
-
-                    color : "black"
-
-                    Image {
-
-                        id: reverseTriangle
-
-                        width : parent.width
-                        height: parent.height
-
-                        anchors.left: parent.left
-                        anchors.verticalCenter: parent.verticalCenter
-
-                        cache: false
-
-                        source: "qrc:/images/Images/Triangle.png"
-                        mirror: true
+                    triangle.width = parent.width - 5
+                    triangle.height = parent.height - 5
                     }
 
-                    MouseArea {
+                onReleased: {
 
-                        id: reverseRectangleMouseArea
+                    triangle.width = parent.width
+                    triangle.height = parent.height
+                }
 
-                        anchors.fill: parent
-                        hoverEnabled: true
+                onClicked: {
 
-                        onEntered: {
-
-                             reverseTriangle.source =
-                                "qrc:/images/Images/Yellow_Triangle.png"
-                        }
-
-                        onExited: {
-
-                            reverseTriangle.source =
-                                "qrc:/images/Images/Triangle.png"
-                        }
-
-                        onPressed: {
-
-                            reverseTriangle.width = parent.width - 5
-                            reverseTriangle.height = parent.height - 5
-                            }
-
-                        onReleased: {
-
-                            reverseTriangle.width = parent.width
-                            reverseTriangle.height = parent.height
-                        }
-
-                        onClicked: {
-
-                            reverseTriangleContainer.clicked()
-                        }
-
-
-                    }
-
+                    triangleContainer.clicked()
                 }
 
             }
+        }
+
+        Rectangle {
+
+            id: difficulty
+
+            color: "black"
+
+            property var levels : ["Easy", "Normal", "Hard"]
+            property int currentLevel : 0
+
+            width : 80
+            height: 30
+
+            border {
+                color: "white"
+                width: 1
+            }
+
+            Text {
+
+                id: difficultyText
+
+                text: difficulty.levels[difficulty.currentLevel]
+                font.family: pacmanFont.name
+                color: "white"
+                font.pointSize: 8
+                anchors.centerIn: parent
+            }
+        }
+
+
+        Rectangle {
+
+            id: reverseTriangleContainer
+
+            width : 30
+            height: 30
+
+            signal clicked()
+
+            color : "black"
+
+            Image {
+
+                id: reverseTriangle
+
+                width : parent.width
+                height: parent.height
+
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+
+                cache: false
+
+                source: "qrc:/images/Images/Triangle.png"
+                mirror: true
+            }
+
+            MouseArea {
+
+                id: reverseRectangleMouseArea
+
+                anchors.fill: parent
+                hoverEnabled: true
+
+                onEntered: {
+
+                     reverseTriangle.source =
+                        "qrc:/images/Images/Yellow_Triangle.png"
+                }
+
+                onExited: {
+
+                    reverseTriangle.source =
+                        "qrc:/images/Images/Triangle.png"
+                }
+
+                onPressed: {
+
+                    reverseTriangle.width = parent.width - 5
+                    reverseTriangle.height = parent.height - 5
+                    }
+
+                onReleased: {
+
+                    reverseTriangle.width = parent.width
+                    reverseTriangle.height = parent.height
+                }
+
+                onClicked: {
+
+                    reverseTriangleContainer.clicked()
+                }
+
+
+            }
+
         }
 
     }
