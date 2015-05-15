@@ -50,6 +50,7 @@ Item {
 
             onStopped: {
                 revnum.running = true
+                sprite.visible = false
                 baseButton.clicked()
             }
         }

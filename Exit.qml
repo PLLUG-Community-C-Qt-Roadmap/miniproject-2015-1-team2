@@ -7,7 +7,7 @@ Rectangle {
 
     id:exit
     color: "black"
-    width: 200
+    width: 250
     height: 100
 
     anchors.centerIn: parent
@@ -31,7 +31,7 @@ Rectangle {
 
         id:yes
         x: parent.width/3 - 25
-        y: parent.height - 25
+        y: parent.height - 35
 
 
 
@@ -47,7 +47,7 @@ Rectangle {
     Item{
         id:no
         x: parent.width/1.5 - 15
-        y: parent.height - 25
+        y: parent.height - 35
 
 
        ItemForButton{

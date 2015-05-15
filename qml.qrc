@@ -11,6 +11,9 @@
         <file>NewGame.qml</file>
         <file>Exit.qml</file>
         <file>Legend.qml</file>
+        <file>Game.qml</file>
+        <file>ItemForGhost.qml</file>
+        <file>KillGhosts.qml</file>
     </qresource>
     <qresource prefix="/font">
         <file>Font/PAC-FONT.TTF</file>
@@ -24,5 +27,6 @@
         <file>Images/pinkGhost.png</file>
         <file>Images/blueGhost.png</file>
         <file>Images/yellowGhost.png</file>
+        <file>Images/pacman_characters.png</file>
     </qresource>
 </RCC>

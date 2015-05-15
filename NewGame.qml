@@ -108,7 +108,7 @@ Rectangle {
                     duration: 500
                     easing {type: Easing.InOutQuad;}
                 }
-                loops: Animation.Infinite
+                loops: Animation.Infinite 
             }
 
             MouseArea {
@@ -122,6 +122,10 @@ Rectangle {
                 onExited: {
                     sequentialOpacity.stop()
                     buttonPlay.opacity = 1
+                }
+
+                onClicked: {
+                    loader.source = "Game.qml"
                 }
             }
         }
