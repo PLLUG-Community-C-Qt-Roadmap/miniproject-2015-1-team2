@@ -8,20 +8,15 @@ Settings::Settings(QObject *parent) : QObject(parent)
 
 Settings::~Settings()
 {
-
+    delete mSettings;
 }
 
-Settings::loadSettings()
+void Settings::loadSettings()
 {
 
 }
 
-Settings::saveSettings()
-{
-
-}
-
-Settings::applySettings()
+void Settings::saveSettings()
 {
 
 }

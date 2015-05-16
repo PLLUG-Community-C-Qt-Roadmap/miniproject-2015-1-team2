@@ -19,8 +19,8 @@ public:
     Q_PROPERTY(int volume READ volume WRITE setVolume NOTIFY volumeChanged)
     Q_PROPERTY(QString difficulty READ difficulty WRITE setDifficulty NOTIFY difficultyChanged)
 
-    Q_INVOKABLE loadSettings();
-    Q_INVOKABLE saveSettings();
+    Q_INVOKABLE void loadSettings();
+    Q_INVOKABLE void saveSettings();
 
     bool music() const;
     bool fullscreen() const;
