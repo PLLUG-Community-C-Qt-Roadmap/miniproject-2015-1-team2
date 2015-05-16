@@ -14,6 +14,7 @@
         <file>Game.qml</file>
         <file>ItemForGhost.qml</file>
         <file>KillGhosts.qml</file>
+        <file>Eaten_ghosts.qml</file>
     </qresource>
     <qresource prefix="/font">
         <file>Font/PAC-FONT.TTF</file>

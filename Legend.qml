@@ -24,15 +24,10 @@ Rectangle{
 
         }
 
-    Row{
-        anchors.centerIn: parent
     Column
     {
-
-
-
-
             spacing: 5
+            anchors.centerIn: parent
             Text
             {
 
@@ -141,13 +136,14 @@ Rectangle{
         }
 
 
-}
 
 
-    Item{
+
+        Item{
         id: back
-        x: parent.width/2 - 35
-        y: parent.height - 75
+        x: parent.width/3 - 35
+        y: parent.height - 70
+
             ItemForButton
             {
                 text: "Back"
@@ -158,16 +154,22 @@ Rectangle{
             }
         }
 
+        Item{
+        id: next
+        x: parent.width/1.5 - 35
+        y: parent.height - 70
+            ItemForButton
+            {
+                text: "Next"
+                onClicked: {
+
+                    loader.source = "Eaten_ghosts.qml"
+                }
+            }
+        }
+    }
 
 
 
-
-
-
-
-
-
-
-}
 
 
