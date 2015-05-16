@@ -57,15 +57,27 @@ Rectangle{
                         font.pointSize: 10
                     }
 
-                    Image {
 
-                        id: blinky
-                        y: -7.5
-                        width : 30
-                        height: 30
 
-                        source: "qrc:/images/Images/redGhost.png"
-                    }
+                    SpriteSequence {
+                            id: sprite
+                            y: -7.5
+                            width: 30
+                            height: 30
+                            interpolate: false
+                            goalSprite: "sp1"
+                            Sprite {
+                                id: sp1
+                                name: "sp1"
+                                source: "qrc:/images/Images/pacman_sprite.png"
+                                frameCount: 2
+                                frameWidth: 20
+                                frameHeight: 20
+                                frameX: 0
+                                frameY: 161
+                                duration: 1000
+                            }
+                        }
                 }
 
                 Row{
@@ -81,15 +93,24 @@ Rectangle{
                         font.pointSize: 10
                     }
 
-                    Image {
-
-                        y: -7.5
-                        width : 30
-                        height: 30
-                        source: "qrc:/images/Images/redGhost.png"
-                    }
+                    SpriteSequence {
+                            y: -7.5
+                            width: 30
+                            height: 30
+                            interpolate: false
+                            goalSprite: "sp1"
+                            Sprite {
+                                name: "sp1"
+                                source: "qrc:/images/Images/pacman_sprite.png"
+                                frameCount: 2
+                                frameWidth: 20
+                                frameHeight: 20
+                                frameX: 0
+                                frameY: 161
+                                duration: 1000
+                            }
                 }
-
+                }
 
                 Row{
 
@@ -104,20 +125,27 @@ Rectangle{
                         font.pointSize: 10
                     }
 
-                    Image {
+                    SpriteSequence {
 
-
-                        y: -7.5
-                        width : 30
-                        height: 30
-                        source: "qrc:/images/Images/redGhost.png"
-                    }
+                            y: -7.5
+                            width: 30
+                            height: 30
+                            interpolate: false
+                            goalSprite: "sp1"
+                            Sprite {
+                                name: "sp1"
+                                source: "qrc:/images/Images/pacman_sprite.png"
+                                frameCount: 2
+                                frameWidth: 20
+                                frameHeight: 20
+                                frameX: 0
+                                frameY: 161
+                                duration: 1000
+                            }
+                }
                 }
 
-
                 Row{
-
-
 
                     Text
                     {
@@ -128,12 +156,22 @@ Rectangle{
                         font.pointSize: 10
                     }
 
-                    Image {
-
-                        y: -7.5
-                        width : 30
-                        height: 30
-                        source: "qrc:/images/Images/redGhost.png"
+                    SpriteSequence {
+                            y: -7.5
+                            width: 30
+                            height: 30
+                            interpolate: false
+                            goalSprite: "sp1"
+                            Sprite {
+                                name: "sp1"
+                                source: "qrc:/images/Images/pacman_sprite.png"
+                                frameCount: 2
+                                frameWidth: 20
+                                frameHeight: 20
+                                frameX: 0
+                                frameY: 161
+                                duration: 1000
+                            }
                     }
                 }
 
