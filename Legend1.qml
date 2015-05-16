@@ -23,20 +23,23 @@ Rectangle{
             y: 20
 
         }
+        Text
+               {
+
+                   text: "Character / Nickname"
+                   color: "white"
+                   font.family: pacmanFont.name
+                   font.pointSize: 12
+                   x: parent.width/2 - width/2
+                   y: 67
+
+               }
 
     Column
     {
             spacing: 5
             anchors.centerIn: parent
-            Text
-            {
 
-                text: "      Character / Nickname \n \n"
-                font.family: pacmanFont.name
-                color: "white"
-                font.bold: true
-                font.pointSize: 10
-            }
 
 
             Row
