@@ -39,5 +39,6 @@
         <file>Images/Strawberry.png</file>
         <file>Images/Orange.png</file>
         <file>Images/Key.png</file>
+        <file>Images/Yellow_Triangle.png</file>
     </qresource>
 </RCC>

@@ -138,7 +138,7 @@ Rectangle {
         color: "yellow"
         font.family: pacmanFont.name
         font.pointSize: 15
-        text: "Sound Effects"
+        text: "Fullscreen"
 
         x: 5
         y: volumeLabel.y + 40
