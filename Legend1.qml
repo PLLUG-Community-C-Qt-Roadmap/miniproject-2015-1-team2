@@ -163,7 +163,7 @@ Rectangle{
                 text: "Next"
                 onClicked: {
 
-                    loader.source = "Eaten_ghosts.qml"
+                    loader.source = "Legend2.qml"
                 }
             }
         }

@@ -60,7 +60,7 @@ Rectangle {
 
                 onClicked: {
 
-                    loader.source = "Legend.qml"
+                    loader.source = "Legend1.qml"
                 }
             }
 
