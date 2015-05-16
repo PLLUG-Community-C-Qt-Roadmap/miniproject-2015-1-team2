@@ -10,10 +10,12 @@
         <file>MainMenu.qml</file>
         <file>NewGame.qml</file>
         <file>Exit.qml</file>
-        <file>Legend.qml</file>
+        <file>Legend1.qml</file>
         <file>Game.qml</file>
         <file>ItemForGhost.qml</file>
         <file>KillGhosts.qml</file>
+        <file>Legend2.qml</file>
+        <file>Legend3.qml</file>
     </qresource>
     <qresource prefix="/font">
         <file>Font/PAC-FONT.TTF</file>
@@ -28,5 +30,14 @@
         <file>Images/blueGhost.png</file>
         <file>Images/yellowGhost.png</file>
         <file>Images/pacman_characters.png</file>
+        <file>Images/pacman_sprite.png</file>
+        <file>Images/Apple.png</file>
+        <file>Images/Bell.png</file>
+        <file>Images/Cherry.png</file>
+        <file>Images/Galaxian-boss.png</file>
+        <file>Images/Grape.png</file>
+        <file>Images/Strawberry.png</file>
+        <file>Images/Orange.png</file>
+        <file>Images/Key.png</file>
     </qresource>
 </RCC>
