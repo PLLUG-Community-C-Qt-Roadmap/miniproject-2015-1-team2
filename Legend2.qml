@@ -6,7 +6,7 @@ import QtQuick.Layouts 1.0
 
 Rectangle{
 
-    id: history
+    id: legend2
     color: "black"
     width: 360
     height: 360
@@ -210,7 +210,7 @@ Rectangle{
                 text: "Next"
                 onClicked: {
 
-                    loader.source = "Legend2.qml"
+                    loader.source = "Legend3.qml"
                 }
             }
         }

@@ -6,7 +6,7 @@ import QtQuick.Layouts 1.0
 
 Rectangle{
 
-    id: history
+    id: legend1
     color: "black"
     width: 360
     height: 360
