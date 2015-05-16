@@ -28,5 +28,6 @@
         <file>Images/blueGhost.png</file>
         <file>Images/yellowGhost.png</file>
         <file>Images/pacman_characters.png</file>
+        <file>Images/pacman_sprite.png</file>
     </qresource>
 </RCC>
