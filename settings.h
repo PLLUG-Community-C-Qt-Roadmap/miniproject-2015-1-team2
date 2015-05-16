@@ -17,7 +17,7 @@ public:
     Q_PROPERTY(bool soundEffects READ soundEffects WRITE setSoundEffects NOTIFY soundEffectsChanged)
     Q_PROPERTY(bool fullscreen READ fullscreen WRITE setFullscreen NOTIFY fullscreenChanged)
     Q_PROPERTY(int volume READ volume WRITE setVolume NOTIFY volumeChanged)
-    Q_PROPERTY(QString difficulty READ difficulty WRITE setDifficulty NOTIFY difficultyChanged)
+    Q_PROPERTY(int difficulty READ difficulty WRITE setDifficulty NOTIFY difficultyChanged)
 
     Q_INVOKABLE void loadSettings();
     Q_INVOKABLE void saveSettings();
@@ -26,14 +26,14 @@ public:
     bool fullscreen() const;
     bool soundEffects() const;
     int volume() const;
-    QString difficulty() const;
+    int difficulty() const;
 
 private:
     bool mMusic;
     bool mSoundEffects;
     bool mFullscreen;
     int mVolume;
-    QString mDifficulty;
+    int mDifficulty;
 
 signals:
 
@@ -41,7 +41,7 @@ signals:
     void soundEffectsChanged(bool soundEffects);
     void fullscreenChanged(bool fullscreen);
     void volumeChanged(int volume);
-    void difficultyChanged(QString difficulty);
+    void difficultyChanged(int difficulty);
 
 public slots:
 
@@ -49,7 +49,7 @@ public slots:
     void setSoundEffects(bool soundEffects);
     void setFullscreen(bool fullscreen);
     void setVolume(int volume);
-    void setDifficulty(QString difficulty);
+    void setDifficulty(int difficulty);
 };
 
 #endif // SETTINGS_H

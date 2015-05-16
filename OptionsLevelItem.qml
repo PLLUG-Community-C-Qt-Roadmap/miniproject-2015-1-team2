@@ -4,7 +4,9 @@ Item {
 
     id : levelItem
 
-    property alias level : difficultyText.text
+    property alias level : difficulty.currentLevel
+
+    signal difficultyChanged(int currentLevel)
 
     height: 20
     width: 140
@@ -83,7 +85,7 @@ Item {
             color: "black"
 
             property var levels : ["Easy", "Normal", "Hard"]
-            property int currentLevel : 0
+            property int currentLevel
 
             width : 80
             height: 30
@@ -188,10 +190,12 @@ Item {
             }
             else
             {
-                difficulty.currentLevel = difficulty.currentLevel -1
+                difficulty.currentLevel = difficulty.currentLevel - 1
             }
 
             difficultyText.text = difficulty.levels[difficulty.currentLevel]
+
+            levelItem.difficultyChanged(difficulty.currentLevel)
 
         }
 
@@ -213,6 +217,8 @@ Item {
             }
 
             difficultyText.text = difficulty.levels[difficulty.currentLevel]
+
+            levelItem.difficultyChanged(difficulty.currentLevel)
 
         }
 

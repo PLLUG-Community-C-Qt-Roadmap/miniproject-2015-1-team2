@@ -9,6 +9,13 @@ Rectangle {
     height: 360
     color: "black"
 
+    signal optionsClosed()
+    signal difficultyChanged(int changedLevel)
+    signal volumeChanged(int changedVolume)
+    signal fullscreenChanged(bool changedFullscreen)
+    signal musicChanged(bool changedMusic)
+    signal soundEffectsChanged(bool changedSoundEffects)
+
     Text {
         id : optionsLabel
         color: "red"
@@ -31,8 +38,17 @@ Rectangle {
 
     OptionsLevelItem {
 
+        id: levelComboBox
+
         x : options.width - width - 5
         y: difficultyLabel.y
+
+        level: settings.difficulty
+
+        onDifficultyChanged: {
+
+            options.difficultyChanged(currentLevel)
+        }
     }
 
     Text {
@@ -48,10 +64,17 @@ Rectangle {
 
     CheckBox {
 
-        checked: true
+        id: musicCheckBox
 
         x : options.width - width - 5
         y: musicLabel.y
+
+        checked : settings.music
+
+        onCheckedChanged: {
+
+            options.musicChanged(musicCheckBox.checked)
+        }
     }
 
     Text {
@@ -66,11 +89,17 @@ Rectangle {
     }
 
     CheckBox {
-
-        checked: true
+        id: soundEffectsCheckBox
 
         x : options.width - width - 5
         y: soundEffectsLabel.y
+
+        checked : settings.soundEffects
+
+        onCheckedChanged: {
+
+            options.soundEffectsChanged(soundEffectsCheckBox.checked)
+        }
     }
 
     Text {
@@ -85,11 +114,23 @@ Rectangle {
     }
 
     Slider {
-
-        value: 0.5
+        id: volumeSlider
 
         x : options.width - width - 5
         y: volumeLabel.y
+
+        minimumValue: 0
+        maximumValue: 100
+        stepSize: 1
+
+        value : settings.volume
+
+        updateValueWhileDragging : true
+
+        onValueChanged: {
+
+            options.volumeChanged(volumeSlider.value)
+        }
     }
 
     Text {
@@ -104,11 +145,17 @@ Rectangle {
     }
 
     CheckBox {
-
-        checked: true
+        id: fullscreenCheckBox
 
         x : options.width - width - 5
         y: fullscreenLabel.y
+
+        checked: settings.fullscreen
+
+        onCheckedChanged: {
+
+            options.fullscreenChanged(fullscreenCheckBox.checked)
+        }
     }
 
     ItemForButton {
@@ -119,6 +166,7 @@ Rectangle {
         anchors.bottomMargin: 30
 
         onClicked: {
+            options.optionsClosed()
             loader.source = "MainMenu.qml"
         }
     }

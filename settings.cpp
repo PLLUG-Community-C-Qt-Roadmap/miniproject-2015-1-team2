@@ -1,6 +1,5 @@
 #include "settings.h"
 #include <QSettings>
-#include <QDebug>
 
 Settings::Settings(QObject *parent) : QObject(parent)
 {    
@@ -21,7 +20,7 @@ void Settings::loadSettings()
     bool lSoundEffects = lSettings.value("soundEffects", true).toBool();
     bool lFullscreen = lSettings.value("fullscreen", true).toBool();
     int lVolume = lSettings.value("volume", 50).toInt();
-    QString lDifficulty = lSettings.value("difficulty", "Normal").toString();
+    int lDifficulty = lSettings.value("difficulty", 1).toInt();
 
     setMusic(lMusic);
     setSoundEffects(lSoundEffects);
@@ -32,7 +31,15 @@ void Settings::loadSettings()
 
 void Settings::saveSettings()
 {
+    QSettings lSettings(QSettings::NativeFormat, QSettings::UserScope, "PLLUG", "Pacman");
 
+    lSettings.beginGroup("options");
+
+    lSettings.setValue("music", music());
+    lSettings.setValue("soundEffects", soundEffects());
+    lSettings.setValue("fullscreen", fullscreen());
+    lSettings.setValue("volume", volume());
+    lSettings.setValue("difficulty", difficulty());
 }
 
 bool Settings::music() const
@@ -55,7 +62,7 @@ int Settings::volume() const
     return mVolume;
 }
 
-QString Settings::difficulty() const
+int Settings::difficulty() const
 {
     return mDifficulty;
 }
@@ -105,7 +112,7 @@ void Settings::setVolume(int volume)
 
 }
 
-void Settings::setDifficulty(QString difficulty)
+void Settings::setDifficulty(int difficulty)
 {
     if(mDifficulty == difficulty)
     {

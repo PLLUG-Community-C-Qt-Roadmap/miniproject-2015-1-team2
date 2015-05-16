@@ -9,10 +9,6 @@ Window {
     height: 360
     id: mainWindow
 
-    property alias loaderItem : loader.item
-
-    signal optionsLoaded()
-
     FontLoader {
         id: pacmanFont
         source: "qrc:/font/Font/PAC-FONT.TTF"
@@ -29,15 +25,39 @@ Window {
         id : loader
         source : "MainMenu.qml"
 
-        onLoaded: {
+        Connections{
+            target : loader.item
 
-            if(source.toString().localeCompare("Options.qml"))
-            {
-               mainWindow.optionsLoaded()
+            onOptionsClosed: {
+
+                settings.saveSettings()
+            }
+
+            onDifficultyChanged: {
+
+                settings.setDifficulty(changedLevel)
+            }
+
+            onVolumeChanged: {
+
+                settings.setVolume(changedVolume)
+            }
+
+            onFullscreenChanged: {
+
+                settings.setFullscreen(changedFullscreen)
+            }
+
+            onMusicChanged: {
+
+                settings.setMusic(changedMusic)
+            }
+
+            onSoundEffectsChanged: {
+
+                settings.setSoundEffects(changedSoundEffects)
             }
         }
-
-
     }
 
     // Loader only for Exit!
