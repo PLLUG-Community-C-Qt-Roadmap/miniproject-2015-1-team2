@@ -34,7 +34,6 @@ private:
     bool mFullscreen;
     int mVolume;
     QString mDifficulty;
-    QSettings *mSettings;
 
 signals:
 

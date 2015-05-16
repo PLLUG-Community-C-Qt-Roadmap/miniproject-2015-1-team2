@@ -1,19 +1,33 @@
 #include "settings.h"
 #include <QSettings>
+#include <QDebug>
 
 Settings::Settings(QObject *parent) : QObject(parent)
-{
-    mSettings = new QSettings(QSettings::NativeFormat, QSettings::UserScope, "", "Pacman");
+{    
+    loadSettings();
 }
 
 Settings::~Settings()
 {
-    delete mSettings;
 }
 
 void Settings::loadSettings()
 {
+    QSettings lSettings(QSettings::NativeFormat, QSettings::UserScope, "PLLUG", "Pacman");
 
+    lSettings.beginGroup("options");
+
+    bool lMusic = lSettings.value("music", true).toBool();
+    bool lSoundEffects = lSettings.value("soundEffects", true).toBool();
+    bool lFullscreen = lSettings.value("fullscreen", true).toBool();
+    int lVolume = lSettings.value("volume", 50).toInt();
+    QString lDifficulty = lSettings.value("difficulty", "Normal").toString();
+
+    setMusic(lMusic);
+    setSoundEffects(lSoundEffects);
+    setFullscreen(lFullscreen);
+    setVolume(lVolume);
+    setDifficulty(lDifficulty);
 }
 
 void Settings::saveSettings()
