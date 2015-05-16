@@ -24,13 +24,25 @@ Rectangle{
 
         }
 
-
+    Row{
+        anchors.centerIn: parent
     Column
     {
-        anchors.centerIn: parent
+
+
 
 
             spacing: 5
+            Text
+            {
+
+                text: "      Character / Nickname \n \n"
+                font.family: pacmanFont.name
+                color: "white"
+                font.bold: true
+                font.pointSize: 10
+            }
+
 
             Row
             {
@@ -48,12 +60,13 @@ Rectangle{
                 Text
                 {
 
-                    text: " - Blinky"
+                    text: "  - shadow           'Blinky' "
                     font.family: pacmanFont.name
-                    color: "yellow"
+                    color: "red"
                     font.bold: true
-                    font.pointSize: 12
+                    font.pointSize: 10
                 }
+
 
             }
 
@@ -68,14 +81,15 @@ Rectangle{
                     source: "qrc:/images/Images/yellowGhost.png"
                 }
 
+
                 Text
                 {
 
-                    text: " - Clyde"
+                    text: "  - pockey           'Clyde' "
                     font.family: pacmanFont.name
                     color: "yellow"
                     font.bold: true
-                    font.pointSize: 12
+                    font.pointSize: 10
                 }
             }
 
@@ -94,11 +108,11 @@ Rectangle{
                 Text
                 {
 
-                    text: " - Pinky"
+                    text: "  - speedy            'Pinky' "
                     font.family: pacmanFont.name
-                    color: "yellow"
+                    color: "pink"
                     font.bold: true
-                    font.pointSize: 12
+                    font.pointSize: 10
                 }
             }
 
@@ -116,18 +130,18 @@ Rectangle{
                 Text
                 {
 
-                    text: " - Inky"
+                    text: "  - bashful            'Inky' "
                     font.family: pacmanFont.name
-                    color: "yellow"
+                    color: "#00FFFF"
                     font.bold: true
-                    font.pointSize: 12
+                    font.pointSize: 10
                 }
             }
 
         }
 
 
-
+}
 
 
     Item{
