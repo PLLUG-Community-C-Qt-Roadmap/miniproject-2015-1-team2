@@ -2,7 +2,9 @@
 #define SETTINGS_H
 
 #include <QObject>
-#include <QString>
+
+class QString;
+class QSettings;
 
 class Settings : public QObject
 {
@@ -11,9 +13,20 @@ public:
     explicit Settings(QObject *parent = 0);
     ~Settings();
 
-    loadSettings();
-    saveSettings();
-    applySettings();
+    Q_PROPERTY(bool music READ music WRITE setMusic NOTIFY musicChanged)
+    Q_PROPERTY(bool soundEffects READ soundEffects WRITE setSoundEffects NOTIFY soundEffectsChanged)
+    Q_PROPERTY(bool fullscreen READ fullscreen WRITE setFullscreen NOTIFY fullscreenChanged)
+    Q_PROPERTY(int volume READ volume WRITE setVolume NOTIFY volumeChanged)
+    Q_PROPERTY(QString difficulty READ difficulty WRITE setDifficulty NOTIFY difficultyChanged)
+
+    Q_INVOKABLE loadSettings();
+    Q_INVOKABLE saveSettings();
+
+    bool music() const;
+    bool fullscreen() const;
+    bool soundEffects() const;
+    int volume() const;
+    QString difficulty() const;
 
 private:
     bool mMusic;
@@ -21,6 +34,7 @@ private:
     bool mFullscreen;
     int mVolume;
     QString mDifficulty;
+    QSettings *mSettings;
 
 signals:
 
