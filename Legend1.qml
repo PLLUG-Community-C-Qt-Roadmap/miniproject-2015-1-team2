@@ -48,10 +48,9 @@ Rectangle{
                 Image {
 
                     id: blinky
-
+                    y: -7.5
                     width : 30
                     height: 30
-
                     source: "qrc:/images/Images/redGhost.png"
                 }
 
@@ -72,10 +71,9 @@ Rectangle{
                 Image {
 
                     id: clyde
-
+                    y: -7.5
                     width : 30
                     height: 30
-
                     source: "qrc:/images/Images/yellowGhost.png"
                 }
 
@@ -96,10 +94,9 @@ Rectangle{
                 Image {
 
                     id: pinky
-
+                    y: -7.5
                     width : 30
                     height: 30
-
                     source: "qrc:/images/Images/pinkGhost.png"
                 }
 
@@ -118,10 +115,9 @@ Rectangle{
                 Image {
 
                     id: inky
-
+                    y: -7.5
                     width : 30
                     height: 30
-
                     source: "qrc:/images/Images/blueGhost.png"
                 }
 

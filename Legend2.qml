@@ -49,10 +49,9 @@ Rectangle{
                 Row{
 
                     Text
-                    {
+                    {   id:subtext
 
-                        text: "1х"
-
+                        text: "1х "
                         color: "white"
                         font.bold: true
                         font.pointSize: 10
@@ -61,7 +60,7 @@ Rectangle{
                     Image {
 
                         id: blinky
-
+                        y: -7.5
                         width : 30
                         height: 30
 
@@ -76,8 +75,7 @@ Rectangle{
                     Text
                     {
 
-                        text: "2х"
-
+                        text: "2х "
                         color: "white"
                         font.bold: true
                         font.pointSize: 10
@@ -85,11 +83,9 @@ Rectangle{
 
                     Image {
 
-
-
+                        y: -7.5
                         width : 30
                         height: 30
-
                         source: "qrc:/images/Images/redGhost.png"
                     }
                 }
@@ -102,8 +98,7 @@ Rectangle{
                     Text
                     {
 
-                        text: "3х"
-
+                        text: "3х "
                         color: "white"
                         font.bold: true
                         font.pointSize: 10
@@ -112,10 +107,9 @@ Rectangle{
                     Image {
 
 
-
+                        y: -7.5
                         width : 30
                         height: 30
-
                         source: "qrc:/images/Images/redGhost.png"
                     }
                 }
@@ -128,8 +122,7 @@ Rectangle{
                     Text
                     {
 
-                        text: "4х"
-
+                        text: "4х "
                         color: "white"
                         font.bold: true
                         font.pointSize: 10
@@ -137,11 +130,9 @@ Rectangle{
 
                     Image {
 
-
-
+                        y: -7.5
                         width : 30
                         height: 30
-
                         source: "qrc:/images/Images/redGhost.png"
                     }
                 }
