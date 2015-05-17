@@ -24,46 +24,47 @@ Window {
     Loader {
         id : loader
         source : "MainMenu.qml"
-
-        Connections{
-            target : loader.item
-
-            onOptionsClosed: {
-
-                settings.saveSettings()
-            }
-
-            onDifficultyChanged: {
-
-                settings.setDifficulty(changedLevel)
-            }
-
-            onVolumeChanged: {
-
-                settings.setVolume(changedVolume)
-            }
-
-            onFullscreenChanged: {
-
-                settings.setFullscreen(changedFullscreen)
-            }
-
-            onMusicChanged: {
-
-                settings.setMusic(changedMusic)
-            }
-
-            onSoundEffectsChanged: {
-
-                settings.setSoundEffects(changedSoundEffects)
-            }
-        }
     }
 
     // Loader only for Exit!
     Loader {
         anchors.centerIn: parent
         id: loaderForExitWindow
+    }
+
+    Connections{
+
+        target : !loader.source.toString().localeCompare("Options.qml") ? loader.item : null
+
+        onOptionsClosed: {
+
+            settings.saveSettings()
+        }
+
+        onDifficultyChanged: {
+
+            settings.setDifficulty(changedLevel)
+        }
+
+        onVolumeChanged: {
+
+            settings.setVolume(changedVolume)
+        }
+
+        onFullscreenChanged: {
+
+            settings.setFullscreen(changedFullscreen)
+        }
+
+        onMusicChanged: {
+
+            settings.setMusic(changedMusic)
+        }
+
+        onSoundEffectsChanged: {
+
+            settings.setSoundEffects(changedSoundEffects)
+        }
     }
 }
 
