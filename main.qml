@@ -1,6 +1,7 @@
 import QtQuick 2.4
 import QtQuick.Window 2.2
 import PacmanSettings 1.0
+import QtMultimedia 5.0
 
 Window {
 
@@ -14,6 +15,12 @@ Window {
         source: "qrc:/font/Font/PAC-FONT.TTF"
     }
 
+    Audio {
+            id: gameMusic
+            source: "qrc:/music/Music/Dendy_Music.wav"
+            loops: Audio.Infinite
+    }
+
     // Contains settings for game
     Settings{
 
@@ -22,6 +29,7 @@ Window {
         Component.onCompleted: {
 
             mainWindow.visibility =  settings.fullscreen ? Window.FullScreen : Window.Windowed
+            settings.music ? gameMusic.play() : gameMusic.stop()
         }
     }
 
@@ -94,7 +102,7 @@ Window {
 
         onMusicChanged: {
 
-
+            settings.music ? gameMusic.play() : gameMusic.stop()
         }
 
         onSoundEffectsChanged: {

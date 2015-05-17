@@ -29,4 +29,7 @@
         <file>Images/pacman_sprite.png</file>
         <file>Images/Yellow_Triangle.png</file>
     </qresource>
+    <qresource prefix="/music">
+        <file>Music/Dendy_Music.wav</file>
+    </qresource>
 </RCC>
