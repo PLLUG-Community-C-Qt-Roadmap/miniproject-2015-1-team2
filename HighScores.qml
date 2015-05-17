@@ -7,27 +7,25 @@ Rectangle {
     color: "black"
     id: highscores
 
-    Item {
-        anchors.fill: parent
+
+
         Text {
             text: "High scores"
-            //anchors.horizontalCenter: parent.horizontalCenter
-            x: 5
+            anchors.horizontalCenter: parent.horizontalCenter
             y: 5
             font.family: pacmanFont.name
             font.pointSize: 30
             color: "red"
          }
         Text {
-            //anchors.horizontalCenter: parent
-            text: "Top players"
-            x: 75
-            y: 75
+             anchors.horizontalCenter: parent.horizontalCenter
+             text: "Top players"
+             y: 75
              color: "yellow"
              font.family: pacmanFont.name
              font.pointSize: 16
            }
-    }
+
 
     ListModel
     {
@@ -39,33 +37,55 @@ Rectangle {
         ListElement { name: "Player" ; score: "500" }
     }
 
+Rectangle{
 
-    ListView {
-        anchors.fill: parent
-        model: highscoresModel
-        delegate: highscoresDelegate
+    Rectangle{
+        height: 70
+        Image{
+      source: "qrc:images/Images/pashalka.png"
+        }
     }
 
+    anchors.centerIn: parent
+    color: "red"
+    height: 130
+    width: 300
+    ListView {
+
+        id:myListView
+        model: highscoresModel
+        delegate: highscoresDelegate
+        width: parent.width
+        height: parent.height
+    }
+}
     Component {
             id: highscoresDelegate
-
+            Rectangle{
+                color:"black"
+                height: text.height + 10
+                width: myListView.width
                 Row{
+
+                        anchors.horizontalCenter: parent.horizontalCenter
                         spacing: 40
 
                         Text {
+                            id:text
                             text: name;
-                            font.pixelSize: 20
+                            font.pointSize: 12
                             font.family: pacmanFont.name
                             color: "yellow"
                         }
                         Text {
                             text: score;
                             font.pixelSize: 20
-                            color: "white"
+                            color: "red"
                         }
                    }
-            }
 
+            }
+}
 
 
         Item {

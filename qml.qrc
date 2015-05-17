@@ -27,6 +27,7 @@
         <file>Images/Start.png</file>
         <file>Images/pacman_sprite.png</file>
         <file>Images/Yellow_Triangle.png</file>
+        <file>Images/pashalka.png</file>
     </qresource>
     <qresource prefix="/music">
         <file>Music/Dendy_Music.wav</file>
