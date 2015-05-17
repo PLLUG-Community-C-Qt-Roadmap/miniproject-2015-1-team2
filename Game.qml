@@ -96,5 +96,14 @@ Rectangle {
         x: 100
         y: 100
     }
-
+    Item {
+            ItemForButton {
+                text: "Back"
+                onClicked: {
+                    loader.source = "MainMenu.qml"
+                }
+            }
+            x: 6
+            y: 330
+    }
 }
