@@ -48,13 +48,21 @@ Rectangle{
                     Row
                     {
 
-                        Image
-                        {
-                            id: cherry
-                            y: -7.5
-                            width : 30
-                            height: 30
-                            source: "qrc:/images/Images/Cherry.png"
+                        SpriteSequence {
+                                y: -7.5
+                                width: 30
+                                height: 30
+                                interpolate: false
+                                goalSprite: "cherry"
+                                Sprite {
+                                    name: "cherry"
+                                    source: "qrc:/images/Images/pacman_sprite.png"
+                                    frameCount: 1
+                                    frameWidth: 20
+                                    frameHeight: 20
+                                    frameX: 170
+                                    frameY: 160
+                                }
                         }
                         Text
                         {
@@ -69,14 +77,23 @@ Rectangle{
 
                     Row
                     {
-                        Image
-                        {
-                            id: strawberry
-                            y: -7.5
-                            width : 30
-                            height: 30
-                            source: "qrc:/images/Images/Strawberry.png"
+                        SpriteSequence {
+                                y: -7.5
+                                width: 30
+                                height: 30
+                                interpolate: false
+                                goalSprite: "strawberry"
+                                Sprite {
+                                    name: "strawberry"
+                                    source: "qrc:/images/Images/pacman_sprite.png"
+                                    frameCount: 1
+                                    frameWidth: 20
+                                    frameHeight: 20
+                                    frameX: 170
+                                    frameY: 180
+                                }
                         }
+
                         Text
                         {
 
@@ -89,13 +106,21 @@ Rectangle{
 
                     Row
                     {
-                        Image {
-
-                            id: orange
-                            y: -7.5
-                            width : 30
-                            height: 30
-                            source: "qrc:/images/Images/Orange.png"
+                        SpriteSequence {
+                                y: -7.5
+                                width: 30
+                                height: 30
+                                interpolate: false
+                                goalSprite: "peach"
+                                Sprite {
+                                    name: "peach"
+                                    source: "qrc:/images/Images/pacman_sprite.png"
+                                    frameCount: 1
+                                    frameWidth: 20
+                                    frameHeight: 20
+                                    frameX: 170
+                                    frameY: 200
+                                }
                         }
                         Text
                         {
@@ -109,13 +134,21 @@ Rectangle{
 
                     Row
                     {
-                        Image
-                        {
-                            id: apple
-                            y: -7.5
-                            width : 30
-                            height: 30
-                            source: "qrc:/images/Images/Apple.png"
+                        SpriteSequence {
+                                y: -7.5
+                                width: 30
+                                height: 30
+                                interpolate: false
+                                goalSprite: "apple"
+                                Sprite {
+                                    name: "apple"
+                                    source: "qrc:/images/Images/pacman_sprite.png"
+                                    frameCount: 1
+                                    frameWidth: 20
+                                    frameHeight: 20
+                                    frameX: 170
+                                    frameY: 220
+                                }
                         }
                         Text
                         {
@@ -130,16 +163,23 @@ Rectangle{
 
             Column
             {
-                id: scoresForFruits
                 Row
                 {
-                    Image
-                    {
-                        id: galaxianBoss
-                        y: -7.5
-                        width : 30
-                        height: 30
-                        source: "qrc:/images/Images/Galaxian-boss.png"
+                    SpriteSequence {
+                            y: -7.5
+                            width: 30
+                            height: 30
+                            interpolate: false
+                            goalSprite: "galaxianBoss"
+                            Sprite {
+                                name: "cherry"
+                                source: "qrc:/images/Images/pacman_sprite.png"
+                                frameCount: 1
+                                frameWidth: 20
+                                frameHeight: 20
+                                frameX: 210
+                                frameY: 180
+                            }
                     }
                     Text
                     {
@@ -153,13 +193,21 @@ Rectangle{
 
                 Row
                 {
-                    Image
-                    {
-                        id: bell
-                        y: -7.5
-                        width : 30
-                        height: 30
-                        source: "qrc:/images/Images/Bell.png"
+                    SpriteSequence {
+                            y: -7.5
+                            width: 30
+                            height: 30
+                            interpolate: false
+                            goalSprite: "bell"
+                            Sprite {
+                                name: "cherry"
+                                source: "qrc:/images/Images/pacman_sprite.png"
+                                frameCount: 1
+                                frameWidth: 20
+                                frameHeight: 20
+                                frameX: 210
+                                frameY: 200
+                            }
                     }
                     Text
                     {
@@ -173,13 +221,21 @@ Rectangle{
 
                 Row
                 {
-                    Image
-                    {
-                        id: key
-                        y: -7.5
-                        width : 30
-                        height: 30
-                        source: "qrc:/images/Images/Key.png"
+                    SpriteSequence {
+                            y: -7.5
+                            width: 30
+                            height: 30
+                            interpolate: false
+                            goalSprite: "key"
+                            Sprite {
+                                name: "key"
+                                source: "qrc:/images/Images/pacman_sprite.png"
+                                frameCount: 1
+                                frameWidth: 20
+                                frameHeight: 20
+                                frameX: 210
+                                frameY: 220
+                            }
                     }
                     Text
                     {
@@ -190,6 +246,7 @@ Rectangle{
                         font.pointSize: 10
                     }
                 }
+
 
 
             }

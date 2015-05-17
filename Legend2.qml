@@ -75,7 +75,7 @@ Rectangle{
                                 frameHeight: 20
                                 frameX: 0
                                 frameY: 161
-                                duration: 00
+                                duration: 300
                             }
                         }
                 }
@@ -102,7 +102,7 @@ Rectangle{
                             Sprite {
                                 name: "sp1"
                                 source: "qrc:/images/Images/pacman_sprite.png"
-                                frameCount: 1
+                                frameCount: 2
                                 frameWidth: 20
                                 frameHeight: 20
                                 frameX: 0
