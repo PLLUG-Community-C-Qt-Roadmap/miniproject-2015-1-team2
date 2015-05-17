@@ -5,8 +5,7 @@ Rectangle {
     id: mainMenu
     visible: true
     color: "black"
-    width: 360
-    height: 360
+    anchors.fill: parent
 
     property alias mmItem: mmItem
 
