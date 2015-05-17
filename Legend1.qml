@@ -45,13 +45,22 @@ Rectangle{
             Row
             {
 
-                Image {
-
-                    id: blinky
-                    y: -7.5
-                    width : 30
-                    height: 30
-                    source: "qrc:/images/Images/redGhost.png"
+                SpriteSequence {
+                        y: -7.5
+                        width: 30
+                        height: 30
+                        interpolate: false
+                        goalSprite: "blinky"
+                        Sprite {
+                            name: "blinky"
+                            source: "qrc:/images/Images/pacman_sprite.png"
+                            frameCount: 8
+                            frameWidth: 20
+                            frameHeight: 20
+                            frameX: 0
+                            frameY: 80
+                            duration: 300
+                        }
                 }
 
                 Text
@@ -68,16 +77,24 @@ Rectangle{
             }
 
             Row{
-                Image {
 
-                    id: clyde
-                    y: -7.5
-                    width : 30
-                    height: 30
-                    source: "qrc:/images/Images/yellowGhost.png"
-                }
-
-
+                SpriteSequence {
+                        y: -7.5
+                        width: 30
+                        height: 30
+                        interpolate: false
+                        goalSprite: "clyde"
+                        Sprite {
+                            name: "clyde"
+                            source: "qrc:/images/Images/pacman_sprite.png"
+                            frameCount: 8
+                            frameWidth: 20
+                            frameHeight: 20
+                            frameX: 0
+                            frameY: 140
+                            duration: 300
+                        }
+                    }
                 Text
                 {
 
@@ -91,14 +108,24 @@ Rectangle{
 
 
             Row{
-                Image {
-
-                    id: pinky
-                    y: -7.5
-                    width : 30
-                    height: 30
-                    source: "qrc:/images/Images/pinkGhost.png"
+                SpriteSequence {
+                        y: -7.5
+                        width: 30
+                        height: 30
+                        interpolate: false
+                        goalSprite: "pinky"
+                        Sprite {
+                            name: "pinky"
+                            source: "qrc:/images/Images/pacman_sprite.png"
+                            frameCount: 8
+                            frameWidth: 20
+                            frameHeight: 20
+                            frameX: 0
+                            frameY: 100
+                            duration: 300
+                        }
                 }
+
 
                 Text
                 {
@@ -112,13 +139,22 @@ Rectangle{
             }
 
             Row{
-                Image {
-
-                    id: inky
-                    y: -7.5
-                    width : 30
-                    height: 30
-                    source: "qrc:/images/Images/blueGhost.png"
+                SpriteSequence {
+                        y: -7.5
+                        width: 30
+                        height: 30
+                        interpolate: false
+                        goalSprite: "inky"
+                        Sprite {
+                            name: "inky"
+                            source: "qrc:/images/Images/pacman_sprite.png"
+                            frameCount: 8
+                            frameWidth: 20
+                            frameHeight: 20
+                            frameX: 0
+                            frameY: 120
+                            duration: 300
+                        }
                 }
 
                 Text

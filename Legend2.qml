@@ -75,7 +75,7 @@ Rectangle{
                                 frameHeight: 20
                                 frameX: 0
                                 frameY: 161
-                                duration: 1000
+                                duration: 300
                             }
                         }
                 }
@@ -107,7 +107,7 @@ Rectangle{
                                 frameHeight: 20
                                 frameX: 0
                                 frameY: 161
-                                duration: 1000
+                                duration: 300
                             }
                 }
                 }
@@ -140,7 +140,7 @@ Rectangle{
                                 frameHeight: 20
                                 frameX: 0
                                 frameY: 161
-                                duration: 1000
+                                duration: 300
                             }
                 }
                 }
@@ -170,7 +170,7 @@ Rectangle{
                                 frameHeight: 20
                                 frameX: 0
                                 frameY: 161
-                                duration: 1000
+                                duration: 300
                             }
                     }
                 }
