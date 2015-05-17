@@ -19,7 +19,7 @@ Rectangle {
             color: "red"
          }
         Text {
-            anchors.horizontalCenter: parent
+            //anchors.horizontalCenter: parent
             text: "Top players"
             x: 75
             y: 75
@@ -28,65 +28,45 @@ Rectangle {
              font.pointSize: 16
            }
     }
-    Grid
+
+    ListModel
     {
-        id: highScoreGrid
-        rows: 10
-        columns: 2
-        anchors.centerIn: parent
-        columnSpacing: 75
-        rowSpacing: 5
-
-        Text
-        {
-            text: "Player1"
-            color: "red"
-            font.bold: true
-            font.pointSize: 12
-
-        }
-
-        Text
-        {
-
-            text: "150"
-            color: "red"
-            font.bold: true
-            font.pointSize: 12
-        }
-
-        Text
-        {
-            text: "Player2"
-            color: "yellow"
-            font.bold: true
-            font.pointSize: 12
-        }
-
-        Text
-        {
-            text: "150"
-            color: "yellow"
-            font.bold: true
-            font.pointSize: 12
-        }
-        Text
-        {
-            text: "Player3"
-            color: "yellow"
-            font.bold: true
-            font.pointSize: 12
-        }
-
-        Text
-        {
-            text: "150"
-            color: "yellow"
-            font.bold: true
-            font.pointSize: 12
-        }
-
+        id: highscoresModel
+        ListElement { name: "Player" ; score: "100" }
+        ListElement { name: "Player" ; score: "200" }
+        ListElement { name: "Player" ; score: "300" }
+        ListElement { name: "Player" ; score: "400" }
+        ListElement { name: "Player" ; score: "500" }
     }
+
+
+    ListView {
+        anchors.fill: parent
+        model: highscoresModel
+        delegate: highscoresDelegate
+    }
+
+    Component {
+            id: highscoresDelegate
+
+                Row{
+                        spacing: 40
+
+                        Text {
+                            text: name;
+                            font.pixelSize: 20
+                            font.family: pacmanFont.name
+                            color: "yellow"
+                        }
+                        Text {
+                            text: score;
+                            font.pixelSize: 20
+                            color: "white"
+                        }
+                   }
+            }
+
+
 
         Item {
             ItemForButton {
