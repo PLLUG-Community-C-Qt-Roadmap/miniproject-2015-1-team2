@@ -16,15 +16,16 @@ Item {
 
     AnimatedSprite {
         id: ghostAnim
-        source: "qrc:images/Images/pacman_characters.png"
+        source: "qrc:/images/Images/pacman_sprite.png"
         anchors.centerIn: parent
-        frameHeight: 128
-        frameWidth: 128
+        frameHeight: 20
+        frameWidth: 20
         running: true
         frameCount: 8
-        width: 128
-        height: 128
-        scale: 0.3
+        frameX: 0
+        width: 20
+        height: 20
+        scale: 1.5
     }
 
     PropertyAnimation {
@@ -42,4 +43,5 @@ Item {
         loops: 1
         running: false
     }
+
 }

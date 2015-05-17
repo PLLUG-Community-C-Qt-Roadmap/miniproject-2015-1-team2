@@ -47,10 +47,10 @@ Rectangle {
     }
 
     ItemForGhost {
-        id: red
+        id: blinky
         x:50
         y:50
-        frameY: 512
+        frameY: 80
         speed: 100
         timeX: 1000
         x1Anim: 50
@@ -59,10 +59,10 @@ Rectangle {
     }
 
     ItemForGhost {
-        id: green
+        id: pinky
         x:300
         y:50
-        frameY: 640
+        frameY: 100
         speed: 200
         timeY: 1200
         y1Anim: 50
@@ -70,10 +70,10 @@ Rectangle {
         animY: true
     }
     ItemForGhost {
-        id: blue
+        id: inky
         x:50
         y:300
-        frameY: 768
+        frameY: 120
         speed: 150
         timeY: 1500
         y1Anim: 300
@@ -81,10 +81,10 @@ Rectangle {
         animY: true
     }
     ItemForGhost {
-        id: purple
+        id: clyde
         x:300
         y:300
-        frameY: 896
+        frameY: 140
         speed: 300
         timeX: 3000
         x1Anim: 300
@@ -104,7 +104,7 @@ Rectangle {
                     settings.music ? gameMusic.play() : gameMusic.stop()
                 }
             }
-            x: 6
-            y: 330
+            x: 35
+            y: game.height - 30
     }
 }
