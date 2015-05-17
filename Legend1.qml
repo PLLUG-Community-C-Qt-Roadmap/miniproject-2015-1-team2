@@ -59,7 +59,7 @@ Rectangle{
                             frameHeight: 20
                             frameX: 0
                             frameY: 80
-                            duration: 300
+                            frameDuration: 300
                         }
                 }
 
@@ -92,7 +92,7 @@ Rectangle{
                             frameHeight: 20
                             frameX: 0
                             frameY: 140
-                            duration: 300
+                            frameDuration: 300
                         }
                     }
                 Text
@@ -122,7 +122,7 @@ Rectangle{
                             frameHeight: 20
                             frameX: 0
                             frameY: 100
-                            duration: 300
+                            frameDuration: 300
                         }
                 }
 
@@ -153,7 +153,7 @@ Rectangle{
                             frameHeight: 20
                             frameX: 0
                             frameY: 120
-                            duration: 300
+                            frameDuration: 300
                         }
                 }
 
