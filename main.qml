@@ -44,6 +44,8 @@ Window {
         Connections{
             target : loader.item
 
+            ignoreUnknownSignals: true
+
             onOptionsClosed: {
 
                 settings.saveSettings()
