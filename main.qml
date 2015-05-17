@@ -30,6 +30,7 @@ Window {
 
             mainWindow.visibility =  settings.fullscreen ? Window.FullScreen : Window.Windowed
             settings.music ? gameMusic.play() : gameMusic.stop()
+            gameMusic.volume = settings.volume / 100
         }
     }
 
@@ -97,7 +98,7 @@ Window {
 
         onVolumeChanged: {
 
-
+            gameMusic.volume = settings.volume / 100
         }
 
         onMusicChanged: {
