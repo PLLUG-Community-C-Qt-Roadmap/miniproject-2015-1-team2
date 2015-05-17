@@ -25,7 +25,6 @@
         <file>PacmanSprite.png</file>
         <file>Images/Triangle.png</file>
         <file>Images/Start.png</file>
-        <file>Images/pacman_characters.png</file>
         <file>Images/pacman_sprite.png</file>
         <file>Images/Yellow_Triangle.png</file>
     </qresource>
