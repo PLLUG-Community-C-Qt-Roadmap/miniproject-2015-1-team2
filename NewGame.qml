@@ -126,6 +126,7 @@ Rectangle {
 
                 onClicked: {
                     loader.source = "Game.qml"
+                    gameMusic.stop()
                 }
             }
         }
