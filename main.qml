@@ -18,12 +18,53 @@ Window {
     Settings{
 
         id: settings
+
+        Component.onCompleted: {
+
+            mainWindow.visibility =  settings.fullscreen ? Window.FullScreen : Window.Windowed
+        }
     }
 
     // Loads main menu and menu items
     Loader {
         id : loader
         source : "MainMenu.qml"
+
+        anchors.fill: parent
+
+        Connections{
+            target : loader.item
+
+            onOptionsClosed: {
+
+                settings.saveSettings()
+            }
+
+            onDifficultyChanged: {
+
+                settings.setDifficulty(changedLevel)
+            }
+
+            onVolumeChanged: {
+
+                settings.setVolume(changedVolume)
+            }
+
+            onFullscreenChanged: {
+
+                settings.setFullscreen(changedFullscreen)
+            }
+
+            onMusicChanged: {
+
+                settings.setMusic(changedMusic)
+            }
+
+            onSoundEffectsChanged: {
+
+                settings.setSoundEffects(changedSoundEffects)
+            }
+        }
     }
 
     // Loader only for Exit!
@@ -32,38 +73,33 @@ Window {
         id: loaderForExitWindow
     }
 
-    Connections{
+    Connections {
 
-        target : !loader.source.toString().localeCompare("Options.qml") ? loader.item : null
+        target : settings
 
-        onOptionsClosed: {
+        onFullscreenChanged: {
 
-            settings.saveSettings()
+            mainWindow.visibility =  settings.fullscreen ? Window.FullScreen : Window.Windowed
         }
 
         onDifficultyChanged: {
 
-            settings.setDifficulty(changedLevel)
+
         }
 
         onVolumeChanged: {
 
-            settings.setVolume(changedVolume)
-        }
 
-        onFullscreenChanged: {
-
-            settings.setFullscreen(changedFullscreen)
         }
 
         onMusicChanged: {
 
-            settings.setMusic(changedMusic)
+
         }
 
         onSoundEffectsChanged: {
 
-            settings.setSoundEffects(changedSoundEffects)
+
         }
     }
 }
