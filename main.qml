@@ -37,7 +37,8 @@ Window {
     Audio {
         id: introMusic
         source:"qrc:/music/Music/pacman_beginning.wav"
-        loops: Audio.Infinite
+        loops:0;
+
     }
 
 
