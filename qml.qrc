@@ -31,5 +31,11 @@
     </qresource>
     <qresource prefix="/music">
         <file>Music/Dendy_Music.wav</file>
+        <file>Music/pacman_beginning.wav</file>
+        <file>Music/pacman_chomp.wav</file>
+        <file>Music/pacman_death.wav</file>
+        <file>Music/pacman_eatfruit.wav</file>
+        <file>Music/pacman_eatghost.wav</file>
+        <file>Music/pacman_extrapac.wav</file>
     </qresource>
 </RCC>

@@ -21,6 +21,7 @@ Window {
             loops: Audio.Infinite
     }
 
+
     // Contains settings for game
     Settings{
 
@@ -33,6 +34,12 @@ Window {
             gameMusic.volume = settings.volume / 100
         }
     }
+    Audio {
+        id: introMusic
+        source:"qrc:/music/Music/pacman_beginning.wav"
+        loops: Audio.Infinite
+    }
+
 
     // Loads main menu and menu items
     Loader {

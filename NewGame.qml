@@ -127,6 +127,7 @@ Rectangle {
                 onClicked: {
                     loader.source = "Game.qml"
                     gameMusic.stop()
+                    introMusic.play()
                 }
             }
         }
@@ -139,6 +140,8 @@ Rectangle {
                 text: "Back"
                 onClicked: {
                     loader.source = "MainMenu.qml"
+                    introMusic.stop()
+                    gameMusic.play()
                 }
             }
             x: (parent.width/2) - (buttonBack.width/2)
