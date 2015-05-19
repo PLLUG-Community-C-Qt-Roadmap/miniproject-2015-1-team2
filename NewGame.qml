@@ -127,7 +127,7 @@ Rectangle {
                 onClicked: {
                     loader.source = "Game.qml"
                     gameMusic.stop()
-                    introMusic.play()
+                    settings.soundEffects ? introMusic.play() : introMusic.stop()
                 }
             }
         }
@@ -139,7 +139,6 @@ Rectangle {
 
                 text: "Back"
                 onClicked: {
-                    introMusic.stop()
                     loader.source = "MainMenu.qml"
                     gameMusic.play()
                 }
