@@ -21,6 +21,12 @@ Window {
             loops: Audio.Infinite
     }
 
+    Audio {
+        id: introMusic
+        source:"qrc:/music/Music/pacman_beginning.wav"
+        loops:0;
+
+    }
 
     // Contains settings for game
     Settings{
@@ -32,15 +38,9 @@ Window {
             mainWindow.visibility =  settings.fullscreen ? Window.FullScreen : Window.Windowed
             settings.music ? gameMusic.play() : gameMusic.stop()
             gameMusic.volume = settings.volume / 100
+            introMusic.volume = settings.volume / 100
         }
     }
-    Audio {
-        id: introMusic
-        source:"qrc:/music/Music/pacman_beginning.wav"
-        loops:0;
-
-    }
-
 
     // Loads main menu and menu items
     Loader {
