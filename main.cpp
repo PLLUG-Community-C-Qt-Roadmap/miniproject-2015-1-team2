@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include "settings.h"
 #include <QQuickView>
+#include "tileset.h"
 
 int main(int argc, char *argv[])
 {
@@ -12,6 +13,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
+    TileSet t;
 
     return app.exec();
 }

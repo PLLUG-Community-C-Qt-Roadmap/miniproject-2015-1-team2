@@ -3,7 +3,8 @@ TEMPLATE = app
 QT += qml quick
 
 SOURCES += main.cpp \
-    settings.cpp
+    settings.cpp \
+    tileset.cpp
 
 RC_ICONS = Pacman.ico
 
@@ -16,4 +17,5 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-    settings.h
+    settings.h \
+    tileset.h
