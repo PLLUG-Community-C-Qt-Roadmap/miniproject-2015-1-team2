@@ -11,36 +11,49 @@ Rectangle {
         ItemForButton {
             text:"Up"
             onClicked: {
-
+                sprite.rotation =  270
+                sprite.y -= 6
             }
-            x: 300
-            y: 300
+            x: 150
+            y: 280
         }
     }
 
     Item {
         ItemForButton {
            text:"Down"
+           onClicked: {
+               sprite.rotation = 90
+               sprite.y += 6
+           }
+        x: 150
+        y: 320
         }
-        x: 300
-        y: 340
     }
 
 
     Item {
         ItemForButton {
             text:"Right"
+            onClicked: {
+                sprite.rotation = 0
+                sprite.x += 6
+            }
         }
-        x: 260
-        y: 340
+        x: 180
+        y: 300
     }
 
     Item {
         ItemForButton {
             text:"Left"
+            onClicked: {
+                sprite.rotation = 180
+                sprite.x -= 6
+            }
         }
-        x: 380
-        y: 340
+        x: 120
+        y: 300
     }
     Item {
         id: sprite
@@ -62,14 +75,6 @@ Rectangle {
             frameDuration: 18
             width: 32
             height: 32
-        }
-
-        MouseArea{
-            anchors.fill: parent
-            onClicked: {
-                sprite.rotation =  270
-                sprite.y -= 6
-            }
         }
     }
 
@@ -148,11 +153,11 @@ Rectangle {
         sprite.y += 6
     }
     Keys.onLeftPressed: {
-        sprite.rotation = 0
+        sprite.rotation = 180
         sprite.x -= 6
     }
     Keys.onRightPressed: {
-        sprite.rotation = 180
+        sprite.rotation = 0
         sprite.x += 6
     }
     focus: true
