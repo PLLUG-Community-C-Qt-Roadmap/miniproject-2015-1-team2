@@ -56,15 +56,6 @@ void MapHandler::readInTmxFile(QString tmxFile)
                  tileset.setLastgid();
                  tileset.setTileAmountWidth();
 
-                           qDebug(QString::number(tileset.firstgid()).toStdString().c_str());
-                           qDebug(tileset.name().toStdString().c_str());
-                           qDebug(QString::number(tileset.tileWidth()).toStdString().c_str());
-                           qDebug(QString::number(tileset.tileHeight()).toStdString().c_str());
-                          qDebug(tileset.source().toStdString().c_str());
-                          qDebug(QString::number(tileset.imageWidth()).toStdString().c_str());
-                          qDebug(QString::number(tileset.imageHeight()).toStdString().c_str());
-
-
                  mTilesets.append(tileset);
 
              }
