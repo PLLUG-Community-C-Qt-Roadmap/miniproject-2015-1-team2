@@ -7,8 +7,45 @@ Rectangle {
     height: 360
     color: "black"
 
+    Item{
+        ItemForButton {
+            text:"Up"
+            onClicked: {
+
+            }
+            x: 300
+            y: 300
+        }
+    }
+
+    Item {
+        ItemForButton {
+           text:"Down"
+        }
+        x: 300
+        y: 340
+    }
+
+
+    Item {
+        ItemForButton {
+            text:"Right"
+        }
+        x: 260
+        y: 340
+    }
+
+    Item {
+        ItemForButton {
+            text:"Left"
+        }
+        x: 380
+        y: 340
+    }
     Item {
         id: sprite
+        width: 32
+        height: 32
         x: game.width/2
         y: game.height/2
         visible: true
@@ -17,7 +54,7 @@ Rectangle {
         AnimatedSprite {
             id: eating
             source: "qrc:images/PacmanSprite.png"
-            anchors.centerIn: parent
+            anchors.fill: sprite
             frameHeight: 32
             frameWidth: 32
             running: true
@@ -25,24 +62,14 @@ Rectangle {
             frameDuration: 18
             width: 32
             height: 32
-            focus: true
         }
 
-        Keys.onUpPressed: {
-            rotation: 270
-            y -= 6
-        }
-        Keys.onDownPressed:{
-            rotation: 90
-            y += 6
-        }
-        Keys.onLeftPressed: {
-            rotation: 0
-            x -= 6
-        }
-        Keys.onRightPressed: {
-            rotation: 180
-            x += 6
+        MouseArea{
+            anchors.fill: parent
+            onClicked: {
+                sprite.rotation =  270
+                sprite.y -= 6
+            }
         }
     }
 
@@ -55,6 +82,7 @@ Rectangle {
         timeX: 1000
         x1Anim: 50
         x2Anim: 300
+        frameX: 120
         animX: true
     }
 
@@ -67,6 +95,7 @@ Rectangle {
         timeY: 1200
         y1Anim: 50
         y2Anim: 300
+        frameX: 40
         animY: true
     }
     ItemForGhost {
@@ -78,6 +107,7 @@ Rectangle {
         timeY: 1500
         y1Anim: 300
         y2Anim: 50
+        frameX: 0
         animY: true
     }
     ItemForGhost {
@@ -89,6 +119,7 @@ Rectangle {
         timeX: 3000
         x1Anim: 300
         x2Anim: 50
+        frameX: 80
         animX: true
     }
 
@@ -107,4 +138,22 @@ Rectangle {
             x: 35
             y: game.height - 30
     }
+
+    Keys.onUpPressed: {
+        sprite.rotation =  270
+        sprite.y -= 6
+    }
+    Keys.onDownPressed:{
+        sprite.rotation = 90
+        sprite.y += 6
+    }
+    Keys.onLeftPressed: {
+        sprite.rotation = 0
+        sprite.x -= 6
+    }
+    Keys.onRightPressed: {
+        sprite.rotation = 180
+        sprite.x += 6
+    }
+    focus: true
 }

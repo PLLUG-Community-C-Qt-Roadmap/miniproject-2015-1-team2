@@ -4,6 +4,7 @@ Item {
     id: ghost
     visible: true
     property alias frameY: ghostAnim.frameY
+    property alias frameX: ghostAnim.frameX
     property alias speed: ghostAnim.frameDuration
     property alias x1Anim: ghostX.from
     property alias x2Anim: ghostX.to
@@ -21,8 +22,7 @@ Item {
         frameHeight: 20
         frameWidth: 20
         running: true
-        frameCount: 8
-        frameX: 0
+        frameCount: 2
         width: 20
         height: 20
         scale: 1.5
