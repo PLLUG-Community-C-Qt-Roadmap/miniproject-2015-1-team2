@@ -4,7 +4,8 @@ QT += qml quick
 
 SOURCES += main.cpp \
     settings.cpp \
-    tileset.cpp
+    tileset.cpp \
+    maphandler.cpp
 
 RC_ICONS = Pacman.ico
 
@@ -18,4 +19,5 @@ include(deployment.pri)
 
 HEADERS += \
     settings.h \
-    tileset.h
+    tileset.h \
+    maphandler.h
