@@ -18,7 +18,7 @@ void Settings::loadSettings()
 
     bool lMusic = lSettings.value("music", true).toBool();
     bool lSoundEffects = lSettings.value("soundEffects", true).toBool();
-    bool lFullscreen = lSettings.value("fullscreen", true).toBool();
+    bool lFullscreen = lSettings.value("fullscreen", false).toBool();
     int lVolume = lSettings.value("volume", 50).toInt();
     int lDifficulty = lSettings.value("difficulty", 1).toInt();
 
@@ -69,58 +69,46 @@ int Settings::difficulty() const
 
 void Settings::setMusic(bool music)
 {
-    if(mMusic == music)
+    if(mMusic != music)
     {
-        return;
+        mMusic = music;
+        emit musicChanged(music);
     }
-
-    mMusic = music;
-    emit musicChanged(music);
 }
 
 void Settings::setSoundEffects(bool soundEffects)
 {
-    if(mSoundEffects == soundEffects)
+    if(mSoundEffects != soundEffects)
     {
-        return;
+        mSoundEffects = soundEffects;
+        emit soundEffectsChanged(soundEffects);
     }
-
-    mSoundEffects = soundEffects;
-    emit soundEffectsChanged(soundEffects);
 }
 
 void Settings::setFullscreen(bool fullscreen)
 {
-    if(mFullscreen == fullscreen)
+    if(mFullscreen != fullscreen)
     {
-        return;
+        mFullscreen = fullscreen;
+        emit fullscreenChanged(fullscreen);
     }
-
-    mFullscreen = fullscreen;
-    emit fullscreenChanged(fullscreen);
 }
 
 void Settings::setVolume(int volume)
 {
-    if(mVolume == volume)
+    if(mVolume != volume)
     {
-        return;
+        mVolume = volume;
+        emit volumeChanged(volume);
     }
-
-    mVolume = volume;
-    emit volumeChanged(volume);
-
 }
 
 void Settings::setDifficulty(int difficulty)
 {
-    if(mDifficulty == difficulty)
+    if(mDifficulty != difficulty)
     {
-        return;
+        mDifficulty = difficulty;
+        emit difficultyChanged(difficulty);
     }
-
-    mDifficulty = difficulty;
-    emit difficultyChanged(difficulty);
-
 }
 
