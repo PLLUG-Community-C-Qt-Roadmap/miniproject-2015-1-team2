@@ -1,6 +1,7 @@
 import QtQuick 2.4
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.2
+import QtQuick.Layouts 1.1
 
 Rectangle {
 
@@ -16,154 +17,137 @@ Rectangle {
     signal musicChanged(bool changedMusic)
     signal soundEffectsChanged(bool changedSoundEffects)
 
+
     Text {
         id : optionsLabel
         color: "red"
-        font.family: pacmanFont.name
-        font.pointSize: 20
-        anchors.horizontalCenter: options.horizontalCenter
+        font {
+            family: pacmanFont.name
+            pointSize: 20
+        }
+        anchors.horizontalCenter: parent.horizontalCenter
         text: "Options"
     }
 
-    Text {
-        id : difficultyLabel
-        color: "yellow"
-        font.family: pacmanFont.name
-        font.pointSize: 15
-        text: "Difficulty"
-
-        x: 5
-        y: optionsLabel.height + 30
-    }
-
-    OptionsLevelItem {
-
-        id: levelComboBox
-
-        x : options.width - width - 5
-        y: difficultyLabel.y
-
-        level: settings.difficulty
-
-        onDifficultyChanged: {
-
-            options.difficultyChanged(currentLevel)
+    GridLayout {
+        id: gridLayout
+        columns: 2
+        rows: 5
+        rowSpacing: 25
+        columnSpacing: 90
+        anchors {
+            centerIn: parent
+            left: parent.left
+            right: parent.right
         }
-    }
 
-    Text {
-        id : musicLabel
-        color: "yellow"
-        font.family: pacmanFont.name
-        font.pointSize: 15
-        text: "Music"
-
-        x: 5
-        y: difficultyLabel.y + 40
-    }
-
-    CheckBox {
-
-        id: musicCheckBox
-
-        x : options.width - width - 5
-        y: musicLabel.y
-
-        checked : settings.music
-
-        onCheckedChanged: {
-
-            options.musicChanged(musicCheckBox.checked)
+        Text {
+            id : difficultyLabel
+            color: "yellow"
+            font {
+                family: pacmanFont.name
+                pointSize: 15
+            }
+            text: "Difficulty"
         }
-    }
 
-    Text {
-        id : soundEffectsLabel
-        color: "yellow"
-        font.family: pacmanFont.name
-        font.pointSize: 15
-        text: "Sound Effects"
+        OptionsLevelItem {
+            id: levelComboBox
+            level: settings.difficulty
 
-        x: 5
-        y: musicLabel.y + 40
-    }
-
-    CheckBox {
-        id: soundEffectsCheckBox
-
-        x : options.width - width - 5
-        y: soundEffectsLabel.y
-
-        checked : settings.soundEffects
-
-        onCheckedChanged: {
-
-            options.soundEffectsChanged(soundEffectsCheckBox.checked)
+            onDifficultyChanged: {
+                options.difficultyChanged(currentLevel)
+            }
         }
-    }
 
-    Text {
-        id : volumeLabel
-        color: "yellow"
-        font.family: pacmanFont.name
-        font.pointSize: 15
-        text: "Volume"
-
-        x: 5
-        y: soundEffectsLabel.y + 40
-    }
-
-    Slider {
-        id: volumeSlider
-
-        x : options.width - width - 5
-        y: volumeLabel.y
-
-        minimumValue: 0
-        maximumValue: 100
-        stepSize: 1
-
-        value : settings.volume
-
-        updateValueWhileDragging : true
-
-        onValueChanged: {
-
-            options.volumeChanged(volumeSlider.value)
+        Text {
+            id : musicLabel
+            color: "yellow"
+            font {
+                family: pacmanFont.name
+                pointSize: 15
+            }
+            text: "Music"
         }
-    }
 
-    Text {
-        id : fullscreenLabel
-        color: "yellow"
-        font.family: pacmanFont.name
-        font.pointSize: 15
-        text: "Fullscreen"
+        CheckBox {
+            id: musicCheckBox
+            checked : settings.music
 
-        x: 5
-        y: volumeLabel.y + 40
-    }
+            onCheckedChanged: {
+                options.musicChanged(musicCheckBox.checked)
+            }
+        }
 
-    CheckBox {
-        id: fullscreenCheckBox
+        Text {
+            id : soundEffectsLabel
+            color: "yellow"
+            font {
+                family: pacmanFont.name
+                pointSize: 15
+            }
+            text: "Sound Effects"
+        }
 
-        x : options.width - width - 5
-        y: fullscreenLabel.y
+        CheckBox {
+            id: soundEffectsCheckBox
+            checked : settings.soundEffects
 
-        checked: settings.fullscreen
+            onCheckedChanged: {
+                options.soundEffectsChanged(soundEffectsCheckBox.checked)
+            }
+        }
 
-        onCheckedChanged: {
+        Text {
+            id : volumeLabel
+            color: "yellow"
+            font {
+                family: pacmanFont.name
+                pointSize: 15
+            }
+            text: "Volume"
+        }
 
-            options.fullscreenChanged(fullscreenCheckBox.checked)
+        Slider {
+            id: volumeSlider
+            minimumValue: 0
+            maximumValue: 100
+            stepSize: 1
+            value : settings.volume
+            updateValueWhileDragging : true
+
+            onValueChanged: {
+                options.volumeChanged(volumeSlider.value)
+            }
+        }
+
+        Text {
+            id : fullscreenLabel
+            color: "yellow"
+            font {
+                family: pacmanFont.name
+                pointSize: 15
+            }
+            text: "Fullscreen"
+        }
+
+        CheckBox {
+            id: fullscreenCheckBox
+            checked: settings.fullscreen
+
+            onCheckedChanged: {
+                options.fullscreenChanged(fullscreenCheckBox.checked)
+            }
         }
     }
 
     ItemForButton {
         text: "Back"
-
-        anchors.horizontalCenter: options.horizontalCenter
-        anchors.bottom: options.bottom
-        anchors.bottomMargin: 30
+        anchors {
+            horizontalCenter: options.horizontalCenter
+            bottom: options.bottom
+            bottomMargin: 30
+        }
 
         onClicked: {
             options.optionsClosed()
