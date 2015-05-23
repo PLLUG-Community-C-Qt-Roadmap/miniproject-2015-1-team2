@@ -12,6 +12,7 @@ Window {
 
     Image {
         source: "qrc:/images/Images/field.png"
+
         anchors.fill: parent
 
         GridView{
