@@ -2,6 +2,13 @@ TEMPLATE = app
 
 QT += qml quick
 
+unix {
+    QMAKE_CXXFLAGS += -std=c++14
+}
+win32 {
+    CONFIG += c++14
+}
+
 SOURCES += main.cpp \
     settings.cpp \
     tile.cpp \
