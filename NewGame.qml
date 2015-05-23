@@ -125,7 +125,7 @@ Rectangle {
                 }
 
                 onClicked: {
-                    loader.source = "Game.qml"
+                    loader.source = "GameMap.qml"
                     gameMusic.stop()
                     settings.soundEffects ? introMusic.play() : introMusic.stop()
                 }

@@ -16,6 +16,8 @@
         <file>KillGhosts.qml</file>
         <file>Legend2.qml</file>
         <file>Legend3.qml</file>
+        <file>FieldCollisionAndObjects.js</file>
+        <file>GameMap.qml</file>
     </qresource>
     <qresource prefix="/font">
         <file>Font/PAC-FONT.TTF</file>
@@ -28,6 +30,9 @@
         <file>Images/pacman_sprite.png</file>
         <file>Images/Yellow_Triangle.png</file>
         <file>Images/pashalka.png</file>
+        <file>Images/dot.png</file>
+        <file>Images/energizer.png</file>
+        <file>Images/field.png</file>
     </qresource>
     <qresource prefix="/music">
         <file>Music/Dendy_Music.wav</file>
