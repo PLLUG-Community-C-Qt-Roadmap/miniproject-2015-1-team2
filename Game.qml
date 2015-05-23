@@ -75,7 +75,28 @@ Rectangle {
             frameDuration: 18
             width: 32
             height: 32
+
+//            Component.onCompleted: {
+//                eating.start();
+//            }
+
+//            onRunningChanged: {
+//                console.log("Stopped!");
+//                eating.running ? true : eating.start();
+//            }
         }
+
+        NumberAnimation on x {
+            id: pacman
+            to: sprite.x + 10
+            duration: 1000
+
+            onStopped: {
+
+                sprite.x >= 210 ? console.log("Stopped!") : pacman.start()
+            }
+        }
+
     }
 
     ItemForGhost {
