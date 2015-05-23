@@ -12,7 +12,8 @@ win32 {
 SOURCES += main.cpp \
     settings.cpp \
     tile.cpp \
-    field.cpp
+    field.cpp \
+    startup.cpp
 
 RC_ICONS = Pacman.ico
 
@@ -27,4 +28,5 @@ include(deployment.pri)
 HEADERS += \
     settings.h \
     tile.h \
-    field.h
+    field.h \
+    startup.h
