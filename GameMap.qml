@@ -11,7 +11,7 @@ Window {
     color: "black"
 
     Image {
-        source: "qrc:/field"
+        source: "qrc:images/Images/field.png"
         anchors.fill: parent
 
         GridView{
@@ -32,7 +32,7 @@ Window {
 
                 Image{
                     anchors.fill: parent
-                    source: TileField.tileHasDot(index) ? "qrc:/dot" : TileField.tileHasEnergizer(index) ? "qrc:/energizer" : ""
+                    source: TileField.tileHasDot(index) ? "qrc:images/Images/dot.png" : TileField.tileHasEnergizer(index) ? "qrc:images/Images/energizer.png" : ""
                     visible: !TileField.tileIsWall(index) || !TileField.tileIsEmptyPass(index)
                 }
             }
