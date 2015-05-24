@@ -44,6 +44,7 @@ Rectangle {
             text:"Up"
             onClicked: {
                 sprite.rotation =  270
+                eating.running = true
                 up.running = true
                 down.running = false
                 left.running = false
@@ -59,6 +60,7 @@ Rectangle {
            text:"Down"
            onClicked: {
                sprite.rotation = 90
+               eating.running = true
                up.running = false
                down.running = true
                left.running = false
@@ -90,6 +92,7 @@ Rectangle {
             text:"Left"
             onClicked: {
                 sprite.rotation = 180
+                eating.running = true
                 up.running = false
                 down.running = false
                 left.running = true
@@ -169,7 +172,6 @@ Rectangle {
             duration: 3000
             running: false
         }
-
     }
 
     ItemForGhost {
@@ -232,14 +234,26 @@ Rectangle {
                 down.running = false
                 left.running = false
                 right.running = false
-                inky.animX = false
-                inky.animY = false
-                pinky.animX = false
-                pinky.animY = false
-                blinky.animX = false
-                blinky.animY = false
-                clyde.animX = false
-                clyde.animY = false
+
+                inky.moveUp = false
+                inky.moveDown = false
+                inky.moveLeft = false
+                inky.moveRight = false
+
+                pinky.moveUp = false
+                pinky.moveDown = false
+                pinky.moveLeft = false
+                pinky.moveRight = false
+
+                blinky.moveUp = false
+                blinky.moveDown = false
+                blinky.moveLeft = false
+                blinky.moveRight = false
+
+                clyde.moveUp = false
+                clyde.moveDown = false
+                clyde.moveLeft = false
+                clyde.moveRight = false
             }
         }
         x:20
