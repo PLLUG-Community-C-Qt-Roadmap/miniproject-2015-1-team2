@@ -6,8 +6,8 @@ import QtMultimedia 5.0
 Window {
 
     visible: true
-    width: 360
-    height: 360
+    width: 448
+    height: 496
     id: mainWindow
 
     FontLoader {
