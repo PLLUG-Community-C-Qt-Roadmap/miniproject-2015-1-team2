@@ -96,5 +96,25 @@ void Field::setTilesGrid(const QVariantList &fieldArray)
 
 int Field::checkPacmanState(const int pPacX, const int pPacY, const QString pDirection)
 {
+    // Index of pacman's tile in mTilesGrid
+    int lIndex;
+
+    if(!pDirection.compare("right"))
+    {
+        // TODO
+    }
+    else if(!pDirection.compare("left"))
+    {
+        // TODO
+    }
+    else if(!pDirection.compare("up"))
+    {
+        // TODO
+    }
+    else if(!pDirection.compare("down"))
+    {
+        // TODO
+    }
+
 //    int row = qRound(pPacY / 16);
 }
