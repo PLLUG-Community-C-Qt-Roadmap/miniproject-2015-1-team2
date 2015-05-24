@@ -100,8 +100,11 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString pDir
     int fieldWidth = 28;
     int tileWidth = 16, tileHeight = 16;
 
+    int pacRow = ceil(pPacY * 1.0 / tileHeight);
+    int pacColumn = ceil(pPacX * 1.0 / tileWidth);
+
     // Index of pacman's tile in mTilesGrid
-    int lIndex = ceil(pPacY/tileHeight) * fieldWidth - (fieldWidth - ceil(pPacX/tileWidth));
+    int lIndex = (pacRow - 1) * fieldWidth + pacColumn;
 
     int pacmanStep = 4;
     int newPacX = pPacX;
@@ -111,10 +114,9 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString pDir
         newPacX -= pacmanStep;
 
         //cannot go to next right tile - it does not exist
-        if(1 == (lIndex % fieldWidth))
+        if(1 == pacColumn)
         {
-            int columnNumber = (lIndex - fieldWidth) % fieldWidth;
-            int tileCenterX = columnNumber * tileWidth - (tileWidth / 2);
+            int tileCenterX = tileWidth / 2;
 
             if(newPacX < tileCenterX)
             {
@@ -128,8 +130,8 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString pDir
         else
         {
             int nextTileIndex = lIndex - 1;
-            int columnNumber = abs(nextTileIndex - fieldWidth) % fieldWidth;
-            int tileCenterX = columnNumber * tileWidth - (tileWidth / 2);
+            int nextColumnNum = pacColumn - 1;
+            int tileCenterX = nextColumnNum * tileWidth - (tileWidth / 2);
 
             //pacman still will be at same tile
             if(newPacX > tileCenterX)
@@ -153,11 +155,10 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString pDir
     {
         newPacX += pacmanStep;
 
-        //cannot go to next left tile - it does not exist
-        if(0 == (lIndex % fieldWidth))
+        //cannot go to next right tile - it does not exist
+        if(fieldWidth == pacColumn)
         {
-            int columnNumber = abs(lIndex - fieldWidth) % fieldWidth;
-            int tileCenterX = columnNumber * tileWidth - (tileWidth / 2);
+            int tileCenterX = fieldWidth * tileWidth - (tileWidth / 2);
 
             if(newPacX > tileCenterX)
             {
@@ -171,8 +172,8 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString pDir
         else
         {
             int nextTileIndex = lIndex + 1;
-            int columnNumber = (nextTileIndex - fieldWidth) % fieldWidth;
-            int tileCenterX = columnNumber * tileWidth - (tileWidth / 2);
+            int nextColumnNum = pacColumn + 1;
+            int tileCenterX = nextColumnNum * tileWidth - (tileWidth / 2);
 
             //pacman still will be at same tile
             if(newPacX < tileCenterX)
