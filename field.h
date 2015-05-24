@@ -22,6 +22,7 @@ public:
 
     Q_INVOKABLE void clearObject(int index);
     Q_INVOKABLE void setTilesGrid(const QVariantList& fieldArray);
+    Q_INVOKABLE int checkPacmanState(const int pPacX, const int pPacY, const QString pDirection);
 
 private:
     void initializeTilesGrid();

@@ -8,6 +8,9 @@ Rectangle {
     height: 496
     color: "black"
 
+    property int pacmanSpawnX : 0
+    property int pacmanSpawnY : 14 * 16 - 4
+
     // Map implemantation
     Image {
         source: "qrc:/images/Images/field.png"
@@ -101,12 +104,12 @@ Rectangle {
     }
     Item {
         id: sprite
-        width: 32
-        height: 32
-        x: game.width/2
-        y: game.height/2
+        width: 24
+        height: 24
+        x: game.pacmanSpawnX
+        y: game.pacmanSpawnY
         visible: true
-        rotation: 180
+        rotation: 0
         property alias eating: eating.frameDuration
 
         AnimatedSprite {
@@ -118,8 +121,8 @@ Rectangle {
             running: true
             frameCount: 18
             frameDuration: 18
-            width: 32
-            height: 32
+            width: 24
+            height: 24
 
 //            Component.onCompleted: {
 //                eating.start();
@@ -142,6 +145,12 @@ Rectangle {
             }
         }*/
 
+        Component.onCompleted: {
+
+            console.log(sprite.x)
+            console.log(sprite.y)
+        }
+
         NumberAnimation on y {
             id: up
             to: sprite.y - 300
@@ -160,14 +169,14 @@ Rectangle {
             id: left
             to: sprite.x - 300
             duration: 3000
-            running: true
+            running: false
         }
 
         NumberAnimation on x {
             id: right
             to: sprite.x + 300
             duration: 3000
-            running: false
+            running: true
         }
 
     }

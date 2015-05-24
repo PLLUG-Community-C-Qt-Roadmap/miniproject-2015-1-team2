@@ -93,3 +93,8 @@ void Field::setTilesGrid(const QVariantList &fieldArray)
         }
     }
 }
+
+int Field::checkPacmanState(const int pPacX, const int pPacY, const QString pDirection)
+{
+//    int row = qRound(pPacY / 16);
+}
