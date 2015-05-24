@@ -17,7 +17,6 @@
         <file>Legend2.qml</file>
         <file>Legend3.qml</file>
         <file>FieldCollisionAndObjects.js</file>
-        <file>GameMap.qml</file>
     </qresource>
     <qresource prefix="/font">
         <file>Font/PAC-FONT.TTF</file>
