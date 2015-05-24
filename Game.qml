@@ -195,16 +195,39 @@ Rectangle {
         y: 100
     }
     Item {
-            ItemForButton {
-                text: "Back"
-                onClicked: {
-                    loader.source = "MainMenu.qml"
-                    introMusic.stop()
-                    settings.music ? gameMusic.play() : gameMusic.stop()
-                }
+        ItemForButton {
+            text: "Back"
+            onClicked: {
+                loader.source = "MainMenu.qml"
+                introMusic.stop()
+                settings.music ? gameMusic.play() : gameMusic.stop()
             }
-            x: 35
-            y: game.height - 30
+        }
+        x: 35
+        y: game.height - 30
+    }
+
+    Item {
+        ItemForButton {
+            text: "Pause"
+            onClicked: {
+                introMusic.stop()
+                up.running = false
+                down.running = false
+                left.running = false
+                right.running = false
+                inky.animX = false
+                inky.animY = false
+                pinky.animX = false
+                pinky.animY = false
+                blinky.animX = false
+                blinky.animY = false
+                clyde.animX = false
+                clyde.animY = false
+            }
+        }
+        x:20
+        y: 20
     }
 
     Keys.onUpPressed: {
