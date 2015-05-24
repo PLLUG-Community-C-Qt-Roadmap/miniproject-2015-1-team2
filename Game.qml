@@ -12,7 +12,10 @@ Rectangle {
             text:"Up"
             onClicked: {
                 sprite.rotation =  270
-                sprite.y -= 6
+                up.running = true
+                down.running = false
+                left.running = false
+                right.running = false
             }
             x: 150
             y: 280
@@ -24,7 +27,10 @@ Rectangle {
            text:"Down"
            onClicked: {
                sprite.rotation = 90
-               sprite.y += 6
+               up.running = false
+               down.running = true
+               left.running = false
+               right.running = false
            }
         x: 150
         y: 320
@@ -37,7 +43,10 @@ Rectangle {
             text:"Right"
             onClicked: {
                 sprite.rotation = 0
-                sprite.x += 6
+                up.running = false
+                down.running = false
+                left.running = false
+                right.running = true
             }
         }
         x: 180
@@ -49,7 +58,10 @@ Rectangle {
             text:"Left"
             onClicked: {
                 sprite.rotation = 180
-                sprite.x -= 6
+                up.running = false
+                down.running = false
+                left.running = true
+                right.running = false
             }
         }
         x: 120
@@ -62,6 +74,7 @@ Rectangle {
         x: game.width/2
         y: game.height/2
         visible: true
+        rotation: 180
         property alias eating: eating.frameDuration
 
         AnimatedSprite {
@@ -86,7 +99,7 @@ Rectangle {
 //            }
         }
 
-        NumberAnimation on x {
+       /*` NumberAnimation on x {
             id: pacman
             to: sprite.x + 10
             duration: 1000
@@ -95,6 +108,34 @@ Rectangle {
 
                 sprite.x >= 210 ? console.log("Stopped!") : pacman.start()
             }
+        }*/
+
+        NumberAnimation on y {
+            id: up
+            to: sprite.y - 300
+            duration: 3000
+            running: false
+        }
+
+        NumberAnimation on y {
+            id: down
+            to: sprite.y + 300
+            duration: 3000
+            running: false
+        }
+
+        NumberAnimation on x {
+            id: left
+            to: sprite.x - 300
+            duration: 3000
+            running: true
+        }
+
+        NumberAnimation on x {
+            id: right
+            to: sprite.x + 300
+            duration: 3000
+            running: false
         }
 
     }
@@ -168,19 +209,31 @@ Rectangle {
 
     Keys.onUpPressed: {
         sprite.rotation =  270
-        sprite.y -= 6
+        up.running = true
+        down.running = false
+        left.running = false
+        right.running = false
     }
     Keys.onDownPressed:{
         sprite.rotation = 90
-        sprite.y += 6
+        up.running = false
+        down.running = true
+        left.running = false
+        right.running = false
     }
     Keys.onLeftPressed: {
         sprite.rotation = 180
-        sprite.x -= 6
+        up.running = false
+        down.running = false
+        left.running = true
+        right.running = false
     }
     Keys.onRightPressed: {
         sprite.rotation = 0
-        sprite.x += 6
+        up.running = false
+        down.running = false
+        left.running = false
+        right.running = true
     }
     focus: true
 }

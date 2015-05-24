@@ -1,8 +1,8 @@
 #include "tile.h"
 
 Tile::Tile():
-    mIsWall {false},
-    mObject {TileObject::None}
+    mIsWall (false),
+    mObject (TileObject::None)
 {
 }
 
