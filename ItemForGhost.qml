@@ -7,14 +7,10 @@ Item {
     property alias frameX: ghostAnim.frameX
     property alias running: ghostAnim.running
     property alias speed: ghostAnim.frameDuration
-    property alias x1Anim: ghostX.from
-    property alias x2Anim: ghostX.to
-    property alias animX: ghostX.running
-    property alias y1Anim: ghostY.from
-    property alias y2Anim: ghostY.to
-    property alias animY: ghostY.running
-    property alias timeY: ghostY.duration
-    property alias timeX: ghostX.duration
+    property alias moveUp: up.running
+    property alias moveDown: down.running
+    property alias moveLeft: left.running
+    property alias moveRight: right.running
 
     AnimatedSprite {
         id: ghostAnim
@@ -29,19 +25,31 @@ Item {
         scale: 1.5
     }
 
-    PropertyAnimation {
-        id: ghostX
-        target: ghost
-        properties: "x"
-        loops: 1
+    NumberAnimation on y {
+        id: up
+        to: ghost.y - 200
+        duration: 3000
         running: false
     }
 
-    PropertyAnimation {
-        id: ghostY
-        target: ghost
-        properties: "y"
-        loops: 1
+    NumberAnimation on y {
+        id: down
+        to: ghost.y + 200
+        duration: 3000
+        running: false
+    }
+
+    NumberAnimation on x {
+        id: left
+        to: ghost.x - 200
+        duration: 3000
+        running: false
+    }
+
+    NumberAnimation on x {
+        id: right
+        to: ghost.x + 200
+        duration: 3000
         running: false
     }
 
