@@ -116,7 +116,7 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString pDir
             int columnNumber = (lIndex - fieldWidth) % fieldWidth;
             int tileCenterX = columnNumber * tileWidth - (tileWidth / 2);
 
-            if(pPacX < tileCenterX)
+            if(newPacX < tileCenterX)
             {
                 return 1;
             }
@@ -132,7 +132,7 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString pDir
             int tileCenterX = columnNumber * tileWidth - (tileWidth / 2);
 
             //pacman still will be at same tile
-            if(pPacX > tileCenterX)
+            if(newPacX > tileCenterX)
             {
                 return 2;
             }
@@ -159,7 +159,7 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString pDir
             int columnNumber = abs(lIndex - fieldWidth) % fieldWidth;
             int tileCenterX = columnNumber * tileWidth - (tileWidth / 2);
 
-            if(pPacX > tileCenterX)
+            if(newPacX > tileCenterX)
             {
                 return 1;
             }
@@ -175,7 +175,7 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString pDir
             int tileCenterX = columnNumber * tileWidth - (tileWidth / 2);
 
             //pacman still will be at same tile
-            if(pPacX < tileCenterX)
+            if(newPacX < tileCenterX)
             {
                 return 2;
             }
