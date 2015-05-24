@@ -5,6 +5,7 @@ Item {
     visible: true
     property alias frameY: ghostAnim.frameY
     property alias frameX: ghostAnim.frameX
+    property alias running: ghostAnim.running
     property alias speed: ghostAnim.frameDuration
     property alias x1Anim: ghostX.from
     property alias x2Anim: ghostX.to
@@ -21,7 +22,7 @@ Item {
         anchors.centerIn: parent
         frameHeight: 20
         frameWidth: 20
-        running: true
+        running: false
         frameCount: 2
         width: 20
         height: 20
