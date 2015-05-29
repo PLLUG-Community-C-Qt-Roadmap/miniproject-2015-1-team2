@@ -109,7 +109,9 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString pDir
     }
     else if(!pDirection.compare("up"))
     {
-        // TODO
+        int lRow = qRound(qreal(pPacY / 16));
+        int lCol = qRound(qreal(pPacX / 16));
+        lIndex = 28 * lRow + lCol;
     }
     else if(!pDirection.compare("down"))
     {
