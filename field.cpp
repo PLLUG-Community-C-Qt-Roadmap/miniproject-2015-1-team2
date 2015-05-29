@@ -1,6 +1,7 @@
 #include "field.h"
 #include "tile.h"
 
+#include <math.h>
 #include <iostream>
 #include <QVariant>
 
@@ -96,16 +97,102 @@ void Field::setTilesGrid(const QVariantList &fieldArray)
 
 int Field::checkPacmanState(const int pPacX, const int pPacY, const QString pDirection)
 {
+    int fieldWidth = 28;
+    int tileWidth = 16, tileHeight = 16;
+
+    int pacRow = ceil(pPacY * 1.0 / tileHeight);
+    int pacColumn = ceil(pPacX * 1.0 / tileWidth);
+
     // Index of pacman's tile in mTilesGrid
-    int lIndex;
+    int lIndex = (pacRow - 1) * fieldWidth + pacColumn;
+
+    int pacmanStep = 4;
+    int newPacX = pPacX;
 
     if(!pDirection.compare("right"))
     {
-        // TODO
+        newPacX -= pacmanStep;
+
+        //cannot go to next right tile - it does not exist
+        if(1 == pacColumn)
+        {
+            int tileCenterX = tileWidth / 2;
+
+            if(newPacX < tileCenterX)
+            {
+                return 1;
+            }
+            else
+            {
+                return 2;
+            }
+        }
+        else
+        {
+            int nextTileIndex = lIndex - 1;
+            int nextColumnNum = pacColumn - 1;
+            int tileCenterX = nextColumnNum * tileWidth - (tileWidth / 2);
+
+            //pacman still will be at same tile
+            if(newPacX > tileCenterX)
+            {
+                return 2;
+            }
+            else
+            {
+                if(tileIsWall(nextTileIndex))
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 2;
+                }
+            }
+        }
     }
     else if(!pDirection.compare("left"))
     {
-        // TODO
+        newPacX += pacmanStep;
+
+        //cannot go to next right tile - it does not exist
+        if(fieldWidth == pacColumn)
+        {
+            int tileCenterX = fieldWidth * tileWidth - (tileWidth / 2);
+
+            if(newPacX > tileCenterX)
+            {
+                return 1;
+            }
+            else
+            {
+                return 2;
+            }
+        }
+        else
+        {
+            int nextTileIndex = lIndex + 1;
+            int nextColumnNum = pacColumn + 1;
+            int tileCenterX = nextColumnNum * tileWidth - (tileWidth / 2);
+
+            //pacman still will be at same tile
+            if(newPacX < tileCenterX)
+            {
+                return 2;
+            }
+            else
+            {
+                if(tileIsWall(nextTileIndex))
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 2;
+                }
+            }
+        }
+
     }
     else if(!pDirection.compare("up"))
     {
