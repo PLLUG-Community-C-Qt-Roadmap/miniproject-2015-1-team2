@@ -6,6 +6,8 @@
 #include <QVariant>
 
 const int cFieldSize = 28 * 31;
+const int cFieldRows = 31;
+const int cFieldCols = 28;
 
 Field::Field(QObject *parent):
     QObject(parent),
@@ -102,6 +104,7 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString pDir
 
     int pacRow = ceil(pPacY * 1.0 / tileHeight);
     int pacColumn = ceil(pPacX * 1.0 / tileWidth);
+    int pacIndex;
 
     // Index of pacman's tile in mTilesGrid
     int lIndex = (pacRow - 1) * fieldWidth + pacColumn;
@@ -196,8 +199,21 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString pDir
     }
     else if(!pDirection.compare("up"))
     {
-        int lRow = qRound(qreal(pPacY / 16));
-        int lCol = qRound(qreal(pPacX / 16));
+        float lPacRow = (pPacY * 1.0) / (tileHeight * 1.0);
+        int lPacCol = pPacX / tileWidth;
+
+        // Determinating of pacRow
+        if((lPacRow - (pPacY / tileHeight)) == 0.5)
+        {
+            pacRow = pPacY / tileHeight;
+        }
+        else
+        {
+            pacRow = qRound(qreal(lPacRow));
+        }
+
+        pacColumn = lPacCol;
+
         lIndex = 28 * lRow + lCol;
     }
     else if(!pDirection.compare("down"))
@@ -205,5 +221,6 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString pDir
         // TODO
     }
 
-//    int row = qRound(pPacY / 16);
+    // Index of tile, where our Pacman stands
+    pacIndex = pacRow * cFieldCols + pacColumn;
 }
