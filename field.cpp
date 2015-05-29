@@ -118,7 +118,7 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString pDir
         int lPacRow = pPacY / tileHeight;
         float lPacCol = (pPacX * 1.0) / (tileWidth * 1.0);
 
-        pacColumn = qRound(qreal(lPacCol)) - 1;
+        pacColumn = round(lPacCol) - 1;
         if(pacColumn < 0)
         {
             pacColumn = 0;
@@ -169,6 +169,22 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString pDir
     }
     else if(!pDirection.compare("left"))
     {
+        float lPacCol = (pPacX * 1.0) / (tileWidth * 1.0);
+        int lPacRow = pPacY / tileHeight;
+
+        // Determinating of pacColumn
+        if((lPacCol - (pPacX / tileWidth)) == 0.5)
+        {
+            pacColumn = pPacX / tileWidth;
+        }
+        else
+        {
+            pacColumn = round(lPacCol);
+        }
+
+        pacRow = lPacRow;
+        pacIndex = getIndex(pacRow, pacColumn);
+
 //        newPacX += pacmanStep;
 
 //        //cannot go to next right tile - it does not exist
@@ -222,7 +238,7 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString pDir
         }
         else
         {
-            pacRow = qRound(qreal(lPacRow));
+            pacRow = round(lPacRow);
         }
 
         pacColumn = lPacCol;
@@ -233,7 +249,7 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString pDir
         float lPacRow = (pPacY * 1.0) / (tileHeight * 1.0);
         int lPacCol = pPacX / tileWidth;
 
-        pacRow = qRound(qreal(lPacRow)) - 1;
+        pacRow = round(lPacRow) - 1;
         if(pacRow < 0)
         {
             pacRow = 0;
