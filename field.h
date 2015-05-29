@@ -27,6 +27,7 @@ public:
 private:
     void initializeTilesGrid();
     void setTileProperty(int index, TileObject tileObject, bool isWall = false);
+    int getIndex(int row, int col);
 
 private:
     std::vector <Tile *> mTilesGrid;
