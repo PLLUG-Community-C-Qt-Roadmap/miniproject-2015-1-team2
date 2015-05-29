@@ -213,12 +213,19 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString pDir
         }
 
         pacColumn = lPacCol;
-
-        lIndex = 28 * lRow + lCol;
     }
     else if(!pDirection.compare("down"))
     {
-        // TODO
+        float lPacRow = (pPacY * 1.0) / (tileHeight * 1.0);
+        int lPacCol = pPacX / tileWidth;
+
+        pacRow = qRound(qreal(lPacRow)) - 1;
+        if(pacRow < 0)
+        {
+            pacRow = 0;
+        }
+
+        pacColumn = lPacCol;
     }
 
     // Index of tile, where our Pacman stands
