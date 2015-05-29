@@ -28,6 +28,7 @@ private:
     void initializeTilesGrid();
     void setTileProperty(int index, TileObject tileObject, bool isWall = false);
     int getIndex(int row, int col);
+    int getNextIndex(int index, const QString &pDirection);
 
 private:
     std::vector <Tile *> mTilesGrid;

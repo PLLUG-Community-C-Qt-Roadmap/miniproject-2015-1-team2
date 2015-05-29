@@ -74,10 +74,44 @@ void Field::setTileProperty(int index, TileObject tileObject, bool isWall)
     mTilesGrid[index]->setType(tileObject);
 }
 
-// Index of tile, where our Pacman stands
+// Returns index of tile, where our Pacman stands
 int Field::getIndex(int row, int col)
 {
     return row * cFieldCols + col;
+}
+
+// Returns index of tile, that is next after tile's index.
+// Returns negative number, if next tile doesn't exist.
+int Field::getNextIndex(int index, const QString &pDirection)
+{
+    int rNextIndex;
+
+    if(!pDirection.compare("right"))
+    {
+        rNextIndex = index + 1;
+        if(rNextIndex == cFieldCols)
+        {
+            rNextIndex = -1;
+        }
+    }
+    else if(!pDirection.compare("left"))
+    {
+        rNextIndex = index - 1;
+    }
+    else if(!pDirection.compare("up"))
+    {
+        rNextIndex = index - cFieldCols;
+    }
+    else if(!pDirection.compare("down"))
+    {
+        rNextIndex = index + cFieldCols;
+        if(rNextIndex >= cFieldSize)
+        {
+            rNextIndex = -1;
+        }
+    }
+
+    return rNextIndex;
 }
 
 void Field::setTilesGrid(const QVariantList &fieldArray)
