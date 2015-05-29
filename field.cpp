@@ -4,10 +4,13 @@
 #include <math.h>
 #include <iostream>
 #include <QVariant>
+#include <QDebug>
 
 const int cFieldSize = 28 * 31;
 const int cFieldRows = 31;
 const int cFieldCols = 28;
+const int cMapEmpty = 0;
+const int cMapWall = 1;
 
 Field::Field(QObject *parent):
     QObject(parent),
@@ -137,7 +140,7 @@ void Field::setTilesGrid(const QVariantList &fieldArray)
     }
 }
 
-int Field::checkPacmanState(const int pPacX, const int pPacY, const QString pDirection)
+int Field::checkPacmanState(const int pPacX, const int pPacY, const QString &pDirection)
 {
     int tileWidth = 16;
     int tileHeight = 16;
@@ -291,5 +294,20 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString pDir
 
         pacColumn = lPacCol;
         pacIndex = getIndex(pacRow, pacColumn);
+    }
+
+    // Determinating nextIndex
+    nextIndex = getNextIndex(pacIndex, pDirection);
+
+    qDebug() << "row: " << pacRow << " col " << pacColumn;
+    qDebug() << "index: " << pacIndex << " next " << nextIndex;
+
+    if(tileIsWall(nextIndex))
+    {
+        return cMapWall;
+    }
+    else
+    {
+        return cMapEmpty;
     }
 }

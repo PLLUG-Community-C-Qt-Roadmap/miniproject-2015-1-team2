@@ -8,7 +8,7 @@ Rectangle {
     height: 496
     color: "black"
 
-    property int pacmanSpawnX : 0
+    property int pacmanSpawnX : 4
     property int pacmanSpawnY : 14 * 16 - 4
 
     // Map implemantation
@@ -150,36 +150,61 @@ Rectangle {
 
         Component.onCompleted: {
 
-            console.log(sprite.x)
-            console.log(sprite.y)
+            console.log(sprite.x + 4)
+            console.log(sprite.y + 4)
+            right.start()
         }
 
         NumberAnimation on y {
             id: up
-            to: sprite.y - 300
-            duration: 3000
+            to: sprite.y - 4
+            duration: 500
             running: false
+
+            onStopped: {
+
+                TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, "up") === 1 ? console.log("Stopped!") :
+                                                                         up.start();
+            }
         }
 
         NumberAnimation on y {
             id: down
-            to: sprite.y + 300
-            duration: 3000
+            to: sprite.y + 4
+            duration: 500
             running: false
+
+            onStopped: {
+
+                TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, "down") === 1 ? console.log("Stopped!") :
+                                                                         down.start();
+            }
         }
 
         NumberAnimation on x {
             id: left
-            to: sprite.x - 300
-            duration: 3000
+            to: sprite.x - 4
+            duration: 500
             running: false
+
+            onStopped: {
+
+                TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, "left") === 1 ? console.log("Stopped!") :
+                                                                         left.start();
+            }
         }
 
         NumberAnimation on x {
             id: right
-            to: sprite.x + 300
-            duration: 3000
-            running: true
+            to: sprite.x + 4
+            duration: 500
+            running: false
+
+            onStopped: {
+
+                TileField.checkPacmanState(sprite.x + 12, sprite.y + 4, "right") === 1 ? console.log("Stopped!") :
+                                                                         right.start();
+            }
         }
     }
 
