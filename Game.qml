@@ -42,69 +42,62 @@ Rectangle {
         }
     }
 
-    Item{
-        ItemForButton {
-            text:"Up"
-            onClicked: {
-                sprite.rotation =  270
-                eating.running = true
-                up.running = true
-                down.running = false
-                left.running = false
-                right.running = false
-            }
-            x: 150
-            y: 280
+    ItemForButton {
+        text:"Up"
+        onClicked: {
+            sprite.rotation =  270
+            eating.running = true
+            up.running = true
+            down.running = false
+            left.running = false
+            right.running = false
         }
+        x: 150
+        y: 280
     }
 
-    Item {
-        ItemForButton {
-           text:"Down"
-           onClicked: {
-               sprite.rotation = 90
-               eating.running = true
-               up.running = false
-               down.running = true
-               left.running = false
-               right.running = false
-           }
+    ItemForButton {
+        text:"Down"
+        onClicked: {
+            sprite.rotation = 90
+            eating.running = true
+            up.running = false
+            down.running = true
+            left.running = false
+            right.running = false
+        }
         x: 150
         y: 320
-        }
     }
 
-
-    Item {
-        ItemForButton {
-            text:"Right"
-            onClicked: {
-                sprite.rotation = 0
-                up.running = false
-                down.running = false
-                left.running = false
-                right.running = true
-            }
+    ItemForButton {
+        text:"Right"
+        onClicked: {
+            sprite.rotation = 0
+            up.running = false
+            down.running = false
+            left.running = false
+            right.running = true
         }
+
         x: 180
         y: 300
     }
 
-    Item {
-        ItemForButton {
-            text:"Left"
-            onClicked: {
-                sprite.rotation = 180
-                eating.running = true
-                up.running = false
-                down.running = false
-                left.running = true
-                right.running = false
-            }
+    ItemForButton {
+        text:"Left"
+        onClicked: {
+            sprite.rotation = 180
+            eating.running = true
+            up.running = false
+            down.running = false
+            left.running = true
+            right.running = false
         }
         x: 120
         y: 300
     }
+
     Item {
         id: sprite
         width: 24
@@ -127,126 +120,102 @@ Rectangle {
             width: 24
             height: 24
 
-//            Component.onCompleted: {
-//                eating.start();
-//            }
-
-//            onRunningChanged: {
-//                console.log("Stopped!");
-//                eating.running ? true : eating.start();
-//            }
-        }
-
-       /*` NumberAnimation on x {
-            id: pacman
-            to: sprite.x + 10
-            duration: 1000
-
-            onStopped: {
-
-                sprite.x >= 210 ? console.log("Stopped!") : pacman.start()
+            Component.onCompleted: {
+                right.start()
             }
-        }*/
 
-        Component.onCompleted: {
+            NumberAnimation on y {
+                id: up
+                to: sprite.y - 4
+                duration: 500
+                running: false
 
-            console.log(sprite.x + 4)
-            console.log(sprite.y + 4)
-            right.start()
-        }
+                onStopped: {
 
-        NumberAnimation on y {
-            id: up
-            to: sprite.y - 4
-            duration: 500
-            running: false
-
-            onStopped: {
-
-                TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, "up") === 1 ? console.log("Stopped!") :
-                                                                         up.start();
+                    TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, "up") === 1 ?
+                                console.log("Stopped!") : up.start();
+                }
             }
-        }
 
-        NumberAnimation on y {
-            id: down
-            to: sprite.y + 4
-            duration: 500
-            running: false
+            NumberAnimation on y {
+                id: down
+                to: sprite.y + 4
+                duration: 500
+                running: false
 
-            onStopped: {
+                onStopped: {
 
-                TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, "down") === 1 ? console.log("Stopped!") :
-                                                                         down.start();
+                    TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, "down") === 1 ?
+                                console.log("Stopped!") : down.start();
+                }
             }
-        }
 
-        NumberAnimation on x {
-            id: left
-            to: sprite.x - 4
-            duration: 500
-            running: false
+            NumberAnimation on x {
+                id: left
+                to: sprite.x - 4
+                duration: 500
+                running: false
 
-            onStopped: {
+                onStopped: {
 
-                TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, "left") === 1 ? console.log("Stopped!") :
-                                                                         left.start();
+                    TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, "left") === 1 ?
+                                console.log("Stopped!") : left.start();
+                }
+            }
+
+            NumberAnimation on x {
+                id: right
+                to: sprite.x + 4
+                duration: 500
+                running: false
+
+                onStopped: {
+
+                    TileField.checkPacmanState(sprite.x + 12, sprite.y + 4, "right") === 1 ?
+                                console.log("Stopped!") : right.start();
+                }
             }
         }
 
-        NumberAnimation on x {
-            id: right
-            to: sprite.x + 4
-            duration: 500
-            running: false
-
-            onStopped: {
-
-                TileField.checkPacmanState(sprite.x + 12, sprite.y + 4, "right") === 1 ? console.log("Stopped!") :
-                                                                         right.start();
-            }
+        ItemForGhost {
+            id: blinky
+            x: game.width / 2 - 30
+            y: game.height / 2 - 25
+            frameX: 0
+            frameY: 80
+            speed: 100
         }
-    }
 
-    ItemForGhost {
-        id: blinky
-        x: game.width / 2 - 30
-        y: game.height / 2 - 25
-        frameX: 0
-        frameY: 80
-        speed: 100
-    }
+        ItemForGhost {
+            id: pinky
+            x: game.width / 2 + 30
+            y: game.height / 2 - 25
+            frameX: 0
+            frameY: 100
+            speed: 200
+        }
+        ItemForGhost {
+            id: inky
+            x: game.width / 2 - 30
+            y: game.height / 2 - 5
+            frameX: 0
+            frameY: 120
+            speed: 150
+        }
+        ItemForGhost {
+            id: clyde
+            x: game.width / 2 + 30
+            y: game.height / 2 - 5
+            frameX: 0
+            frameY: 140
+            speed: 300
+        }
 
-    ItemForGhost {
-        id: pinky
-        x: game.width / 2 + 30
-        y: game.height / 2 - 25
-        frameX: 0
-        frameY: 100
-        speed: 200
-    }
-    ItemForGhost {
-        id: inky
-        x: game.width / 2 - 30
-        y: game.height / 2 - 5
-        frameX: 0
-        frameY: 120
-        speed: 150
-    }
-    ItemForGhost {
-        id: clyde
-        x: game.width / 2 + 30
-        y: game.height / 2 - 5
-        frameX: 0
-        frameY: 140
-        speed: 300   
-    }
+        KillGhosts {
+            x: 100
+            y: 100
+        }
 
-    KillGhosts {
-        x: 100
-        y: 100
-    }
-    Item {
         ItemForButton {
             text: "Back"
             onClicked: {
@@ -254,12 +223,10 @@ Rectangle {
                 introMusic.stop()
                 settings.music ? gameMusic.play() : gameMusic.stop()
             }
+            x: 35
+            y: game.height - 30
         }
-        x: 35
-        y: game.height - 30
-    }
 
-    Item {
         ItemForButton {
             text: "Pause"
             onClicked: {
@@ -289,38 +256,38 @@ Rectangle {
                 clyde.moveLeft = false
                 clyde.moveRight = false
             }
+            x:20
+            y: 20
         }
-        x:20
-        y: 20
-    }
 
-    Keys.onUpPressed: {
-        sprite.rotation =  270
-        up.running = true
-        down.running = false
-        left.running = false
-        right.running = false
+        Keys.onUpPressed: {
+            sprite.rotation =  270
+            up.running = true
+            down.running = false
+            left.running = false
+            right.running = false
+        }
+        Keys.onDownPressed:{
+            sprite.rotation = 90
+            up.running = false
+            down.running = true
+            left.running = false
+            right.running = false
+        }
+        Keys.onLeftPressed: {
+            sprite.rotation = 180
+            up.running = false
+            down.running = false
+            left.running = true
+            right.running = false
+        }
+        Keys.onRightPressed: {
+            sprite.rotation = 0
+            up.running = false
+            down.running = false
+            left.running = false
+            right.running = true
+        }
+        focus: true
     }
-    Keys.onDownPressed:{
-        sprite.rotation = 90
-        up.running = false
-        down.running = true
-        left.running = false
-        right.running = false
-    }
-    Keys.onLeftPressed: {
-        sprite.rotation = 180
-        up.running = false
-        down.running = false
-        left.running = true
-        right.running = false
-    }
-    Keys.onRightPressed: {
-        sprite.rotation = 0
-        up.running = false
-        down.running = false
-        left.running = false
-        right.running = true
-    }
-    focus: true
 }

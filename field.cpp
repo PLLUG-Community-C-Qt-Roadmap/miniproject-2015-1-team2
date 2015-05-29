@@ -123,18 +123,18 @@ void Field::setTilesGrid(const QVariantList &fieldArray)
     {
         switch (fieldArray[index].toInt())
         {
-            case 1:
-                setTileProperty(index, TileObject::None, true);
+        case 1:
+            setTileProperty(index, TileObject::None, true);
             break;
-            case 2:
-                setTileProperty(index, TileObject::Dot);
+        case 2:
+            setTileProperty(index, TileObject::Dot);
             break;
-            case 3:
-                setTileProperty(index, TileObject::Energizer);
+        case 3:
+            setTileProperty(index, TileObject::Energizer);
             break;
-            case 0:
-            default:
-                setTileProperty(index, TileObject::None);
+        case 0:
+        default:
+            setTileProperty(index, TileObject::None);
             break;
         }
     }
@@ -147,7 +147,6 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString &pDi
     int pacRow;
     int pacColumn;
     int pacIndex;
-    // nextIndex contains index of cell, that is next after Pacman's cell index
     int nextIndex;
 
     if(!pDirection.compare("right"))
@@ -164,45 +163,45 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString &pDi
         pacRow = lPacRow;
         pacIndex = getIndex(pacRow, pacColumn);
 
-//        newPacX -= pacmanStep;
+        //        newPacX -= pacmanStep;
 
-//        //cannot go to next right tile - it does not exist
-//        if(1 == pacColumn)
-//        {
-//            int tileCenterX = tileWidth / 2;
+        //        //cannot go to next right tile - it does not exist
+        //        if(1 == pacColumn)
+        //        {
+        //            int tileCenterX = tileWidth / 2;
 
-//            if(newPacX < tileCenterX)
-//            {
-//                return 1;
-//            }
-//            else
-//            {
-//                return 2;
-//            }
-//        }
-//        else
-//        {
-//            int nextTileIndex = lIndex - 1;
-//            int nextColumnNum = pacColumn - 1;
-//            int tileCenterX = nextColumnNum * tileWidth - (tileWidth / 2);
+        //            if(newPacX < tileCenterX)
+        //            {
+        //                return 1;
+        //            }
+        //            else
+        //            {
+        //                return 2;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            int nextTileIndex = lIndex - 1;
+        //            int nextColumnNum = pacColumn - 1;
+        //            int tileCenterX = nextColumnNum * tileWidth - (tileWidth / 2);
 
-//            //pacman still will be at same tile
-//            if(newPacX > tileCenterX)
-//            {
-//                return 2;
-//            }
-//            else
-//            {
-//                if(tileIsWall(nextTileIndex))
-//                {
-//                    return 1;
-//                }
-//                else
-//                {
-//                    return 2;
-//                }
-//            }
-//        }
+        //            //pacman still will be at same tile
+        //            if(newPacX > tileCenterX)
+        //            {
+        //                return 2;
+        //            }
+        //            else
+        //            {
+        //                if(tileIsWall(nextTileIndex))
+        //                {
+        //                    return 1;
+        //                }
+        //                else
+        //                {
+        //                    return 2;
+        //                }
+        //            }
+        //        }
     }
     else if(!pDirection.compare("left"))
     {
@@ -222,45 +221,45 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString &pDi
         pacRow = lPacRow;
         pacIndex = getIndex(pacRow, pacColumn);
 
-//        newPacX += pacmanStep;
+        //        newPacX += pacmanStep;
 
-//        //cannot go to next right tile - it does not exist
-//        if(cFieldCols == pacColumn)
-//        {
-//            int tileCenterX = cFieldCols * tileWidth - (tileWidth / 2);
+        //        //cannot go to next right tile - it does not exist
+        //        if(cFieldCols == pacColumn)
+        //        {
+        //            int tileCenterX = cFieldCols * tileWidth - (tileWidth / 2);
 
-//            if(newPacX > tileCenterX)
-//            {
-//                return 1;
-//            }
-//            else
-//            {
-//                return 2;
-//            }
-//        }
-//        else
-//        {
-//            int nextTileIndex = lIndex + 1;
-//            int nextColumnNum = pacColumn + 1;
-//            int tileCenterX = nextColumnNum * tileWidth - (tileWidth / 2);
+        //            if(newPacX > tileCenterX)
+        //            {
+        //                return 1;
+        //            }
+        //            else
+        //            {
+        //                return 2;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            int nextTileIndex = lIndex + 1;
+        //            int nextColumnNum = pacColumn + 1;
+        //            int tileCenterX = nextColumnNum * tileWidth - (tileWidth / 2);
 
-//            //pacman still will be at same tile
-//            if(newPacX < tileCenterX)
-//            {
-//                return 2;
-//            }
-//            else
-//            {
-//                if(tileIsWall(nextTileIndex))
-//                {
-//                    return 1;
-//                }
-//                else
-//                {
-//                    return 2;
-//                }
-//            }
-//        }
+        //            //pacman still will be at same tile
+        //            if(newPacX < tileCenterX)
+        //            {
+        //                return 2;
+        //            }
+        //            else
+        //            {
+        //                if(tileIsWall(nextTileIndex))
+        //                {
+        //                    return 1;
+        //                }
+        //                else
+        //                {
+        //                    return 2;
+        //                }
+        //            }
+        //        }
 
     }
     else if(!pDirection.compare("up"))
@@ -298,9 +297,6 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString &pDi
 
     // Determinating nextIndex
     nextIndex = getNextIndex(pacIndex, pDirection);
-
-    qDebug() << "row: " << pacRow << " col " << pacColumn;
-    qDebug() << "index: " << pacIndex << " next " << nextIndex;
 
     if(tileIsWall(nextIndex))
     {
