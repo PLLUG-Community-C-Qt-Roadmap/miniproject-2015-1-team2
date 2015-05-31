@@ -74,6 +74,7 @@ Rectangle {
         text:"Right"
         onClicked: {
             sprite.rotation = 0
+            eating.running = true
             up.running = false
             down.running = false
             left.running = false
@@ -123,171 +124,177 @@ Rectangle {
             Component.onCompleted: {
                 right.start()
             }
+        }
 
-            NumberAnimation on y {
-                id: up
-                to: sprite.y - 4
-                duration: 500
-                running: false
+        NumberAnimation on y {
+            id: up
+            to: sprite.y - 4
+            duration: 100
+            running: false
 
-                onStopped: {
+            onStopped: {
 
-                    TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, "up") === 1 ?
-                                console.log("Stopped!") : up.start();
-                }
-            }
-
-            NumberAnimation on y {
-                id: down
-                to: sprite.y + 4
-                duration: 500
-                running: false
-
-                onStopped: {
-
-                    TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, "down") === 1 ?
-                                console.log("Stopped!") : down.start();
-                }
-            }
-
-            NumberAnimation on x {
-                id: left
-                to: sprite.x - 4
-                duration: 500
-                running: false
-
-                onStopped: {
-
-                    TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, "left") === 1 ?
-                                console.log("Stopped!") : left.start();
-                }
-            }
-
-            NumberAnimation on x {
-                id: right
-                to: sprite.x + 4
-                duration: 500
-                running: false
-
-                onStopped: {
-
-                    TileField.checkPacmanState(sprite.x + 12, sprite.y + 4, "right") === 1 ?
-                                console.log("Stopped!") : right.start();
-                }
+                TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, "up") === 1 ?
+                            console.log("Stopped!") : up.start();
             }
         }
 
-        ItemForGhost {
-            id: blinky
-            x: game.width / 2 - 30
-            y: game.height / 2 - 25
-            frameX: 0
-            frameY: 80
-            speed: 100
-        }
+        NumberAnimation on y {
+            id: down
+            to: sprite.y + 4
+            duration: 100
+            running: false
 
-        ItemForGhost {
-            id: pinky
-            x: game.width / 2 + 30
-            y: game.height / 2 - 25
-            frameX: 0
-            frameY: 100
-            speed: 200
-        }
-        ItemForGhost {
-            id: inky
-            x: game.width / 2 - 30
-            y: game.height / 2 - 5
-            frameX: 0
-            frameY: 120
-            speed: 150
-        }
-        ItemForGhost {
-            id: clyde
-            x: game.width / 2 + 30
-            y: game.height / 2 - 5
-            frameX: 0
-            frameY: 140
-            speed: 300
-        }
+            onStopped: {
 
-        KillGhosts {
-            x: 100
-            y: 100
-        }
-
-        ItemForButton {
-            text: "Back"
-            onClicked: {
-                loader.source = "MainMenu.qml"
-                introMusic.stop()
-                settings.music ? gameMusic.play() : gameMusic.stop()
+                TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, "down") === 1 ?
+                            console.log("Stopped!") : down.start();
             }
-            x: 35
-            y: game.height - 30
         }
 
-        ItemForButton {
-            text: "Pause"
-            onClicked: {
-                introMusic.stop()
-                up.running = false
-                down.running = false
-                left.running = false
-                right.running = false
+        NumberAnimation on x {
+            id: left
+            to: sprite.x - 4
+            duration: 100
+            running: false
 
-                inky.moveUp = false
-                inky.moveDown = false
-                inky.moveLeft = false
-                inky.moveRight = false
+            onStopped: {
 
-                pinky.moveUp = false
-                pinky.moveDown = false
-                pinky.moveLeft = false
-                pinky.moveRight = false
-
-                blinky.moveUp = false
-                blinky.moveDown = false
-                blinky.moveLeft = false
-                blinky.moveRight = false
-
-                clyde.moveUp = false
-                clyde.moveDown = false
-                clyde.moveLeft = false
-                clyde.moveRight = false
+                TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, "left") === 1 ?
+                            console.log("Stopped!") : left.start();
             }
-            x:20
-            y: 20
         }
 
-        Keys.onUpPressed: {
-            sprite.rotation =  270
-            up.running = true
-            down.running = false
-            left.running = false
-            right.running = false
+        NumberAnimation on x {
+            id: right
+            to: sprite.x + 4
+            duration: 100
+            running: false
+
+            onStopped: {
+
+                TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, "right") === 1 ?
+                            console.log("Stopped!") : right.start();
+            }
         }
-        Keys.onDownPressed:{
-            sprite.rotation = 90
-            up.running = false
-            down.running = true
-            left.running = false
-            right.running = false
-        }
-        Keys.onLeftPressed: {
-            sprite.rotation = 180
-            up.running = false
-            down.running = false
-            left.running = true
-            right.running = false
-        }
-        Keys.onRightPressed: {
-            sprite.rotation = 0
-            up.running = false
-            down.running = false
-            left.running = false
-            right.running = true
-        }
-        focus: true
     }
+
+    ItemForGhost {
+        id: blinky
+        x: game.width / 2 - 30
+        y: game.height / 2 - 25
+        frameX: 0
+        frameY: 80
+        speed: 100
+    }
+
+    ItemForGhost {
+        id: pinky
+        x: game.width / 2 + 30
+        y: game.height / 2 - 25
+        frameX: 0
+        frameY: 100
+        speed: 200
+    }
+
+    ItemForGhost {
+        id: inky
+        x: game.width / 2 - 30
+        y: game.height / 2 - 5
+        frameX: 0
+        frameY: 120
+        speed: 150
+    }
+    ItemForGhost {
+        id: clyde
+        x: game.width / 2 + 30
+        y: game.height / 2 - 5
+        frameX: 0
+        frameY: 140
+        speed: 300
+    }
+
+
+    KillGhosts {
+        x: 100
+        y: 100
+    }
+
+    ItemForButton {
+        text: "Back"
+        onClicked: {
+            loader.source = "MainMenu.qml"
+            introMusic.stop()
+            settings.music ? gameMusic.play() : gameMusic.stop()
+        }
+        x: 35
+        y: game.height - 30
+    }
+
+    ItemForButton {
+        text: "Pause"
+        onClicked: {
+            introMusic.stop()
+            up.running = false
+            down.running = false
+            left.running = false
+            right.running = false
+
+            inky.moveUp = false
+            inky.moveDown = false
+            inky.moveLeft = false
+            inky.moveRight = false
+
+            pinky.moveUp = false
+            pinky.moveDown = false
+            pinky.moveLeft = false
+            pinky.moveRight = false
+
+            blinky.moveUp = false
+            blinky.moveDown = false
+            blinky.moveLeft = false
+            blinky.moveRight = false
+
+            clyde.moveUp = false
+            clyde.moveDown = false
+            clyde.moveLeft = false
+            clyde.moveRight = false
+        }
+        x:20
+        y: 20
+    }
+
+    Keys.onUpPressed: {
+        sprite.rotation =  270
+        up.running = true
+        down.running = false
+        left.running = false
+        right.running = false
+    }
+
+    Keys.onDownPressed:{
+        sprite.rotation = 90
+        up.running = false
+        down.running = true
+        left.running = false
+        right.running = false
+    }
+
+    Keys.onLeftPressed: {
+        sprite.rotation = 180
+        up.running = false
+        down.running = false
+        left.running = true
+        right.running = false
+    }
+
+    Keys.onRightPressed: {
+        sprite.rotation = 0
+        up.running = false
+        down.running = false
+        left.running = false
+        right.running = true
+    }
+
+    focus: true
 }
