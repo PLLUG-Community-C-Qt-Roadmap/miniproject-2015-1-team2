@@ -23,19 +23,19 @@ Rectangle {
             anchors.fill: parent
             cellHeight: Field.tiles["tileheight"]
             cellWidth: Field.tiles["tilewidth"]
-            delegate: fieldDelegate
             model: TileField.tilesNumber()
-        }
-
-        Component {
-            id: fieldDelegate
-            Item {
+            delegate: Item {
                 width: idField.cellWidth;
                 height: idField.cellHeight
+                objectName: "objectOnMap" + model.index
 
                 Image{
+                    objectName: "myImg"
                     anchors.fill: parent
-                    source: TileField.tileHasDot(index) ? "qrc:/images/Images/dot.png" : TileField.tileHasEnergizer(index) ? "qrc:/images/Images/energizer.png" : ""
+                    cache: false
+                    source: TileField.tileHasDot(index) ?
+                                "qrc:/images/Images/dot.png" : TileField.tileHasEnergizer(index) ?
+                                    "qrc:/images/Images/energizer.png" : ""
                     visible: !TileField.tileIsWall(index) || !TileField.tileIsEmptyPass(index)
                 }
             }
@@ -108,6 +108,88 @@ Rectangle {
         visible: true
         rotation: 0
         property alias eating: eating.frameDuration
+        signal dotEaten()
+        signal energizerEaten()
+        signal fruitEaten()
+
+        function eatObject(index, rotation, objectType){
+            for(var i = index - 2; i < index + 100; ++i) {
+                var item = idField.contentItem.children[i];
+                if (!item.objectName.localeCompare("objectOnMap" + index)){
+                    for(var j = 0; j < idField.contentItem.children.length; ++j) {
+                        var image = item.children[j];
+                        if (!image.objectName.localeCompare("myImg")){
+                            image.visible = false
+                            switch(rotation){
+                            case "right":
+                                right.start();
+                                break;
+                            case "left":
+                                left.start();
+                                break;
+                            case "up":
+                                up.start();
+                                break;
+                            case "down":
+                                down.start();
+                                break;
+                            default:
+                                console.log("Bad input!!!");
+                            }
+
+                            break;
+                        }
+                    }
+                }
+            }
+
+            switch(objectType){
+            case "dot":
+                dotEaten()
+                break;
+            case "fruit":
+                fruitEaten()
+                break;
+            case "energizer":
+                energizerEaten()
+                break;
+            }
+        }
+
+        function checkPacmanState(rotation){
+            TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, rotation)
+            var result = TileField.operIndexList()
+            var oper = result[0]
+            var index = result[1]
+
+            switch(oper){
+            case 1:
+                switch(rotation){
+                case "right":
+                    right.start();
+                    break;
+                case "left":
+                    left.start();
+                    break;
+                case "up":
+                    up.start();
+                    break;
+                case "down":
+                    down.start();
+                    break;
+                }
+                break;
+            case 2:
+                sprite.eatObject(index, rotation, "dot")
+                break;
+            case 3:
+                sprite.eatObject(index, rotation, "energizer")
+                break;
+            case 4:
+                sprite.eatObject(index, rotation, "fruit")
+                break;
+            }
+        }
 
         AnimatedSprite {
             id: eating
@@ -133,9 +215,7 @@ Rectangle {
             running: false
 
             onStopped: {
-
-                TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, "up") === 1 ?
-                            console.log("Stopped!") : up.start();
+                sprite.checkPacmanState("up");
             }
         }
 
@@ -146,9 +226,7 @@ Rectangle {
             running: false
 
             onStopped: {
-
-                TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, "down") === 1 ?
-                            console.log("Stopped!") : down.start();
+                sprite.checkPacmanState("down");
             }
         }
 
@@ -159,9 +237,7 @@ Rectangle {
             running: false
 
             onStopped: {
-
-                TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, "left") === 1 ?
-                            console.log("Stopped!") : left.start();
+                sprite.checkPacmanState("left");
             }
         }
 
@@ -172,9 +248,7 @@ Rectangle {
             running: false
 
             onStopped: {
-
-                TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, "right") === 1 ?
-                            console.log("Stopped!") : right.start();
+                sprite.checkPacmanState("right");
             }
         }
     }

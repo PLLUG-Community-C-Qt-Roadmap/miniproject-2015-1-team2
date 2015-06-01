@@ -34,10 +34,11 @@ Rectangle {
         columns: 2
         rows: 5
         rowSpacing: 25
-        columnSpacing: 90
+        columnSpacing: 80
         anchors {
             centerIn: parent
             left: parent.left
+            leftMargin: 5
             right: parent.right
         }
 

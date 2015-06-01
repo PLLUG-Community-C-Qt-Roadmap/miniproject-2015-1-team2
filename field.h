@@ -22,16 +22,19 @@ public:
 
     Q_INVOKABLE void clearObject(int index);
     Q_INVOKABLE void setTilesGrid(const QVariantList& fieldArray);
-    Q_INVOKABLE int checkPacmanState(const int pPacX, const int pPacY, const QString &pDirection);
+    Q_INVOKABLE void checkPacmanState(const int pPacX, const int pPacY, const QString &pDirection);
+
+    Q_INVOKABLE QList<int> operIndexList() const;
 
 private:
-    void initializeTilesGrid();
-    void setTileProperty(int index, TileObject tileObject, bool isWall = false);
     int getIndex(int row, int col);
     int getNextIndex(int index, const QString &pDirection);
+    void initializeTilesGrid();
+    void setTileProperty(int index, TileObject tileObject, bool isWall = false);
 
 private:
     std::vector <Tile *> mTilesGrid;
+    QList<int> mOperIndexList;
 };
 
 #endif // FIELD_H

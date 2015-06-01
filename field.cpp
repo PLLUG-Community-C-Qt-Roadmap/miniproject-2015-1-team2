@@ -9,8 +9,12 @@
 const int cFieldSize = 28 * 31;
 const int cFieldRows = 31;
 const int cFieldCols = 28;
-const int cMapEmpty = 0;
-const int cMapWall = 1;
+const int cMapWall = 0;
+const int cMapEmpty = 1;
+const int cMapDot = 2;
+const int cMapEnergizer = 3;
+const int cMapFruit = 4;
+const int cNumbOfListItems = 2;
 
 Field::Field(QObject *parent):
     QObject(parent),
@@ -76,6 +80,10 @@ void Field::setTileProperty(int index, TileObject tileObject, bool isWall)
     mTilesGrid[index]->setWall(isWall);
     mTilesGrid[index]->setType(tileObject);
 }
+QList<int> Field::operIndexList() const
+{
+    return mOperIndexList;
+}
 
 // Returns index of tile, where our Pacman stands
 int Field::getIndex(int row, int col)
@@ -140,7 +148,7 @@ void Field::setTilesGrid(const QVariantList &fieldArray)
     }
 }
 
-int Field::checkPacmanState(const int pPacX, const int pPacY, const QString &pDirection)
+void Field::checkPacmanState(const int pPacX, const int pPacY, const QString &pDirection)
 {
     int tileWidth = 16;
     int tileHeight = 16;
@@ -148,6 +156,8 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString &pDi
     int pacColumn;
     int pacIndex;
     int nextIndex;
+
+    mOperIndexList.clear();
 
     if(!pDirection.compare("right"))
     {
@@ -300,10 +310,27 @@ int Field::checkPacmanState(const int pPacX, const int pPacY, const QString &pDi
 
     if(tileIsWall(nextIndex))
     {
-        return cMapWall;
+        mOperIndexList << cMapWall;
+    }
+    else if(tileHasDot(pacIndex))
+    {
+        mOperIndexList << cMapDot;
+        setTileProperty(pacIndex, TileObject::None);
+    }
+    else if(tileHasEnergizer(pacIndex))
+    {
+        mOperIndexList << cMapEnergizer;
+        setTileProperty(pacIndex, TileObject::None);
+    }
+    else if(tileHasFruit(pacIndex))
+    {
+        mOperIndexList << cMapFruit;
+        setTileProperty(pacIndex, TileObject::None);
     }
     else
     {
-        return cMapEmpty;
+        mOperIndexList << cMapEmpty;
     }
+
+    mOperIndexList << pacIndex;
 }
