@@ -140,6 +140,9 @@ void Field::setTilesGrid(const QVariantList &fieldArray)
         case 3:
             setTileProperty(index, TileObject::Energizer);
             break;
+        case 4:
+            setTileProperty(index, TileObject::Fruit);
+            break;
         case 0:
         default:
             setTileProperty(index, TileObject::None);
@@ -172,46 +175,6 @@ void Field::checkPacmanState(const int pPacX, const int pPacY, const QString &pD
 
         pacRow = lPacRow;
         pacIndex = getIndex(pacRow, pacColumn);
-
-        //        newPacX -= pacmanStep;
-
-        //        //cannot go to next right tile - it does not exist
-        //        if(1 == pacColumn)
-        //        {
-        //            int tileCenterX = tileWidth / 2;
-
-        //            if(newPacX < tileCenterX)
-        //            {
-        //                return 1;
-        //            }
-        //            else
-        //            {
-        //                return 2;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            int nextTileIndex = lIndex - 1;
-        //            int nextColumnNum = pacColumn - 1;
-        //            int tileCenterX = nextColumnNum * tileWidth - (tileWidth / 2);
-
-        //            //pacman still will be at same tile
-        //            if(newPacX > tileCenterX)
-        //            {
-        //                return 2;
-        //            }
-        //            else
-        //            {
-        //                if(tileIsWall(nextTileIndex))
-        //                {
-        //                    return 1;
-        //                }
-        //                else
-        //                {
-        //                    return 2;
-        //                }
-        //            }
-        //        }
     }
     else if(!pDirection.compare("left"))
     {
@@ -230,47 +193,6 @@ void Field::checkPacmanState(const int pPacX, const int pPacY, const QString &pD
 
         pacRow = lPacRow;
         pacIndex = getIndex(pacRow, pacColumn);
-
-        //        newPacX += pacmanStep;
-
-        //        //cannot go to next right tile - it does not exist
-        //        if(cFieldCols == pacColumn)
-        //        {
-        //            int tileCenterX = cFieldCols * tileWidth - (tileWidth / 2);
-
-        //            if(newPacX > tileCenterX)
-        //            {
-        //                return 1;
-        //            }
-        //            else
-        //            {
-        //                return 2;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            int nextTileIndex = lIndex + 1;
-        //            int nextColumnNum = pacColumn + 1;
-        //            int tileCenterX = nextColumnNum * tileWidth - (tileWidth / 2);
-
-        //            //pacman still will be at same tile
-        //            if(newPacX < tileCenterX)
-        //            {
-        //                return 2;
-        //            }
-        //            else
-        //            {
-        //                if(tileIsWall(nextTileIndex))
-        //                {
-        //                    return 1;
-        //                }
-        //                else
-        //                {
-        //                    return 2;
-        //                }
-        //            }
-        //        }
-
     }
     else if(!pDirection.compare("up"))
     {
@@ -315,17 +237,17 @@ void Field::checkPacmanState(const int pPacX, const int pPacY, const QString &pD
     else if(tileHasDot(pacIndex))
     {
         mOperIndexList << cMapDot;
-        setTileProperty(pacIndex, TileObject::None);
+        clearObject(pacIndex);
     }
     else if(tileHasEnergizer(pacIndex))
     {
         mOperIndexList << cMapEnergizer;
-        setTileProperty(pacIndex, TileObject::None);
+        clearObject(pacIndex);
     }
     else if(tileHasFruit(pacIndex))
     {
         mOperIndexList << cMapFruit;
-        setTileProperty(pacIndex, TileObject::None);
+        clearObject(pacIndex);
     }
     else
     {

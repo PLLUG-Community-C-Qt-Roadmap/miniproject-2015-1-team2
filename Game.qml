@@ -5,7 +5,7 @@ import "FieldCollisionAndObjects.js" as Field
 Rectangle {
     id: game
     width: 448
-    height: 496
+    height: 526
     color: "black"
 
     property int pacmanSpawnX : 4
@@ -15,12 +15,25 @@ Rectangle {
     Image {
         source: "qrc:/images/Images/field.png"
 
-        anchors.fill: parent
+        width: 448
+        height: 496
+        anchors{
+            right: parent.right
+            left: parent.left
+            top: parent.top
+        }
 
         GridView{
             id: idField
+            width: 448
+            height: 496
             interactive: false
-            anchors.fill: parent
+            anchors{
+                right: parent.right
+                left: parent.left
+                top: parent.top
+            }
+
             cellHeight: Field.tiles["tileheight"]
             cellWidth: Field.tiles["tilewidth"]
             model: TileField.tilesNumber()
@@ -35,10 +48,20 @@ Rectangle {
                     cache: false
                     source: TileField.tileHasDot(index) ?
                                 "qrc:/images/Images/dot.png" : TileField.tileHasEnergizer(index) ?
-                                    "qrc:/images/Images/energizer.png" : ""
+                                    "qrc:/images/Images/energizer.png" :
+                                    TileField.tileHasFruit(index) ? "qrc:/images/Images/fruit.png" : ""
                     visible: !TileField.tileIsWall(index) || !TileField.tileIsEmptyPass(index)
                 }
             }
+        }
+    }
+
+    GameScoreItem {
+        id: scoreItem
+
+        anchors {
+            bottom: parent.bottom
+            horizontalCenter: parent.horizontalCenter
         }
     }
 

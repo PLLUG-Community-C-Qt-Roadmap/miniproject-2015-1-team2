@@ -7,7 +7,7 @@ Window {
 
     visible: true
     width: 448
-    height: 496
+    height: 526
     id: mainWindow
 
     FontLoader {
