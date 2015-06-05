@@ -143,7 +143,7 @@ Rectangle {
         }
 
         function eatObject(index, rotation, objectType){
-            for(var i = index - 2; i < index + 100; ++i) {
+            for(var i = index - 1; i < index + 1; ++i) {
                 var item = idField.contentItem.children[i];
                 if (!item.objectName.localeCompare("objectOnMap" + index)){
                     for(var j = 0; j < idField.contentItem.children.length; ++j) {
@@ -175,15 +175,12 @@ Rectangle {
 
             switch(objectType){
             case "dot":
-                sprite.increaseScoreBy(10)
                 dotEaten()
                 break;
             case "fruit":
-                sprite.increaseScoreBy(200)
                 fruitEaten()
                 break;
             case "energizer":
-                sprite.increaseScoreBy(40)
                 energizerEaten()
                 break;
             }
@@ -404,4 +401,23 @@ Rectangle {
     }
 
     focus: true
+
+    Connections {
+        target: sprite
+
+        onDotEaten: {
+            sprite.increaseScoreBy(10)
+            settings.soundEffects ? dotEatenMusic.play() : dotEatenMusic.stop()
+        }
+
+        onEnergizerEaten: {
+            sprite.increaseScoreBy(40)
+            settings.soundEffects ? fruitEnergizerEatenMusic.play() : fruitEnergizerEatenMusic.stop()
+        }
+
+        onFruitEaten: {
+            sprite.increaseScoreBy(200)
+            settings.soundEffects ? fruitEnergizerEatenMusic.play() : fruitEnergizerEatenMusic.stop()
+        }
+    }
 }

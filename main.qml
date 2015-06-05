@@ -25,20 +25,31 @@ Window {
         id: introMusic
         source:"qrc:/music/Music/pacman_beginning.wav"
         loops:0;
+    }
 
+    Audio {
+        id: dotEatenMusic
+        source:"qrc:/music/Music/pacman_chomp.wav"
+        loops:0;
+    }
+
+    Audio {
+        id: fruitEnergizerEatenMusic
+        source:"qrc:/music/Music/pacman_eatfruit.wav"
+        loops:0;
     }
 
     // Contains settings for game
     Settings{
-
         id: settings
 
         Component.onCompleted: {
-
             mainWindow.visibility =  settings.fullscreen ? Window.FullScreen : Window.Windowed
             settings.music ? gameMusic.play() : gameMusic.stop()
             gameMusic.volume = settings.volume / 100
             introMusic.volume = settings.volume / 100
+            dotEatenMusic.volume = settings.volume / 100
+            fruitEnergizerEatenMusic.volume = settings.volume / 100
         }
     }
 
@@ -46,7 +57,6 @@ Window {
     Loader {
         id : loader
         source : "MainMenu.qml"
-
         anchors.fill: parent
 
         Connections{
@@ -55,32 +65,26 @@ Window {
             ignoreUnknownSignals: true
 
             onOptionsClosed: {
-
                 settings.saveSettings()
             }
 
             onDifficultyChanged: {
-
                 settings.setDifficulty(changedLevel)
             }
 
             onVolumeChanged: {
-
                 settings.setVolume(changedVolume)
             }
 
             onFullscreenChanged: {
-
                 settings.setFullscreen(changedFullscreen)
             }
 
             onMusicChanged: {
-
                 settings.setMusic(changedMusic)
             }
 
             onSoundEffectsChanged: {
-
                 settings.setSoundEffects(changedSoundEffects)
             }
         }
@@ -93,31 +97,25 @@ Window {
     }
 
     Connections {
-
         target : settings
 
         onFullscreenChanged: {
-
             mainWindow.visibility =  settings.fullscreen ? Window.FullScreen : Window.Windowed
         }
 
         onDifficultyChanged: {
 
-
         }
 
         onVolumeChanged: {
-
             gameMusic.volume = settings.volume / 100
         }
 
         onMusicChanged: {
-
             settings.music ? gameMusic.play() : gameMusic.stop()
         }
 
         onSoundEffectsChanged: {
-
 
         }
     }

@@ -18,7 +18,7 @@ Rectangle {
         color: "white"
         font {
             family: scoreFont.name
-            pointSize: 12
+            pointSize: 14
         }
         anchors.centerIn: parent
     }
