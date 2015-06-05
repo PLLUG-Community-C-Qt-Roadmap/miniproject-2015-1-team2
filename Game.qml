@@ -193,6 +193,22 @@ Rectangle {
             var index = result[1]
 
             switch(oper){
+            case 0:
+                switch(rotation){
+                case "right":
+                    right.stop();
+                    break;
+                case "left":
+                    left.stop();
+                    break;
+                case "up":
+                    up.stop();
+                    break;
+                case "down":
+                    down.stop();
+                    break;
+                }
+                break;
             case 1:
                 switch(rotation){
                 case "right":
@@ -244,6 +260,10 @@ Rectangle {
             duration: 100
             running: false
 
+            onStarted: {
+                sprite.checkPacmanState("up");
+            }
+
             onStopped: {
                 sprite.checkPacmanState("up");
             }
@@ -254,6 +274,10 @@ Rectangle {
             to: sprite.y + 4
             duration: 100
             running: false
+
+            onStarted: {
+                sprite.checkPacmanState("down");
+            }
 
             onStopped: {
                 sprite.checkPacmanState("down");
@@ -266,6 +290,10 @@ Rectangle {
             duration: 100
             running: false
 
+            onStarted: {
+                sprite.checkPacmanState("left");
+            }
+
             onStopped: {
                 sprite.checkPacmanState("left");
             }
@@ -276,6 +304,10 @@ Rectangle {
             to: sprite.x + 4
             duration: 100
             running: false
+
+            onStarted: {
+                sprite.checkPacmanState("right");
+            }
 
             onStopped: {
                 sprite.checkPacmanState("right");
@@ -316,12 +348,6 @@ Rectangle {
         frameX: 0
         frameY: 140
         speed: 300
-    }
-
-
-    KillGhosts {
-        x: 100
-        y: 100
     }
 
     ItemForButton {
