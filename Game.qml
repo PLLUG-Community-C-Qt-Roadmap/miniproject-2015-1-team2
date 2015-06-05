@@ -135,6 +135,13 @@ Rectangle {
         signal energizerEaten()
         signal fruitEaten()
 
+        function increaseScoreBy(number){
+
+            var newNumber = parseInt(scoreItem.scoreText, "10") + number
+            var s = "0000" + newNumber;
+            scoreItem.scoreText = s.substr(s.length-4);
+        }
+
         function eatObject(index, rotation, objectType){
             for(var i = index - 2; i < index + 100; ++i) {
                 var item = idField.contentItem.children[i];
@@ -168,12 +175,15 @@ Rectangle {
 
             switch(objectType){
             case "dot":
+                sprite.increaseScoreBy(10)
                 dotEaten()
                 break;
             case "fruit":
+                sprite.increaseScoreBy(200)
                 fruitEaten()
                 break;
             case "energizer":
+                sprite.increaseScoreBy(40)
                 energizerEaten()
                 break;
             }
