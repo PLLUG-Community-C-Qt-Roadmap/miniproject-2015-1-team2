@@ -413,6 +413,16 @@ Rectangle {
         onEnergizerEaten: {
             sprite.increaseScoreBy(40)
             settings.soundEffects ? fruitEnergizerEatenMusic.play() : fruitEnergizerEatenMusic.stop()
+            sprite.scale = 1.2
+            sprite.eating = 10
+            inky.frameX = 0
+            inky.frameY = 160
+            blinky.frameX = 0
+            blinky.frameY = 160
+            pinky.frameX = 0
+            pinky.frameY = 160
+            clyde.frameX = 0
+            clyde.frameY = 160
         }
 
         onFruitEaten: {
