@@ -70,8 +70,10 @@ Rectangle {
     ItemForButton {
         text:"Up"
         onClicked: {
-            game.needToTurn = true
-            game.prefferedRotation = "up"
+            if(game.currentRotation.localeCompare("up") !== 0){
+                game.needToTurn = true
+                game.prefferedRotation = "up"
+            }
             eating.running = true
             sprite.checkPacmanState()
         }
@@ -82,8 +84,10 @@ Rectangle {
     ItemForButton {
         text:"Down"
         onClicked: {
-            game.needToTurn = true
-            game.prefferedRotation = "down"
+            if(game.currentRotation.localeCompare("down") !== 0){
+                game.needToTurn = true
+                game.prefferedRotation = "down"
+            }
             eating.running = true
             sprite.checkPacmanState()
         }
@@ -94,8 +98,10 @@ Rectangle {
     ItemForButton {
         text:"Right"
         onClicked: {
-            game.needToTurn = true
-            game.prefferedRotation = "right"
+            if(game.currentRotation.localeCompare("right") !== 0){
+                game.needToTurn = true
+                game.prefferedRotation = "right"
+            }
             eating.running = true
             sprite.checkPacmanState()
         }
@@ -107,8 +113,10 @@ Rectangle {
     ItemForButton {
         text:"Left"
         onClicked: {
-            game.needToTurn = true
-            game.prefferedRotation = "left"
+            if(game.currentRotation.localeCompare("left") !== 0){
+                game.needToTurn = true
+                game.prefferedRotation = "left"
+            }
             eating.running = true
             sprite.checkPacmanState()
         }
@@ -139,15 +147,19 @@ Rectangle {
         function startAnimation(rotation){
             switch(rotation){
             case "right":
+                sprite.rotation =  0
                 right.start();
                 break;
             case "left":
+                sprite.rotation =  180
                 left.start();
                 break;
             case "up":
+                sprite.rotation =  270
                 up.start();
                 break;
             case "down":
+                sprite.rotation =  90
                 down.start();
                 break;
             }
@@ -170,7 +182,7 @@ Rectangle {
             }
         }
 
-        function eatObject(index, rotation, objectType){
+        function eatObject(index, objectType){
             for(var i = index - 1; i < index + 1; ++i) {
                 var item = idField.contentItem.children[i];
                 if (!item.objectName.localeCompare("objectOnMap" + index)){
@@ -185,7 +197,6 @@ Rectangle {
 
             switch(objectType){
             case "dot":
-                console.log("EAten!")
                 dotEaten()
                 break;
             case "fruit":
@@ -204,6 +215,79 @@ Rectangle {
             return false;
         }
 
+        function checkOperation(oper, rotation, index){
+
+            // const int cMapWall = 0;
+            // const int cMapEmpty = 1;
+            // const int cMapDot = 2;
+            // const int cMapEnergizer = 3;
+            // const int cMapFruit = 4;
+            // const int cMapDotAndWall = 5;
+            // const int cMapEnergizerAndWall = 6;
+            // const int cMapFruitAndWall = 7;
+
+            switch(oper){
+            case 0:
+                sprite.stopAnimation(rotation)
+                if(!game.needToTurn)
+                    game.currentRotation = "";
+                break;
+            case 1:
+                if(game.prefferedRotation.localeCompare(rotation) === 0){
+                    game.needToTurn = false
+                    game.prefferedRotation = ""
+                    game.currentRotation = rotation
+                }
+                sprite.startAnimation(rotation)
+                break;
+            case 2:
+                if(game.prefferedRotation.localeCompare(rotation) === 0){
+                    game.needToTurn = false
+                    game.prefferedRotation = ""
+                    game.currentRotation = rotation
+                }
+                sprite.eatObject(index, "dot")
+                sprite.startAnimation(rotation)
+                break;
+            case 3:
+                if(game.prefferedRotation.localeCompare(rotation) === 0){
+                    game.needToTurn = false
+                    game.prefferedRotation = ""
+                    game.currentRotation = rotation
+                }
+                sprite.eatObject(index, "energizer")
+                sprite.startAnimation(rotation)
+                break;
+            case 4:
+                if(game.prefferedRotation.localeCompare(rotation) === 0){
+                    game.needToTurn = false
+                    game.prefferedRotation = ""
+                    game.currentRotation = rotation
+                }
+                sprite.eatObject(index, "fruit")
+                sprite.startAnimation(rotation)
+                break;
+            case 5:
+                sprite.eatObject(index, "dot")
+                sprite.stopAnimation(rotation)
+                if(!game.needToTurn)
+                    currentRotation = ""
+                break;
+            case 6:
+                sprite.eatObject(index, "energizer")
+                sprite.stopAnimation(rotation)
+                if(!game.needToTurn)
+                    currentRotation = ""
+                break;
+            case 7:
+                sprite.eatObject(index, "fruit")
+                sprite.stopAnimation(rotation)
+                if(!game.needToTurn)
+                    currentRotation = ""
+                break;
+            }
+        }
+
         function checkPacmanState(){
             var rotation
             if(game.needToTurn)
@@ -216,85 +300,43 @@ Rectangle {
             var oper = result[0]
             var index = result[1]
 
-            console.log("oper: " + oper + " index: " + index)
-
             if(game.needToTurn){
-                if(oper === 1 || oper === 2 || oper === 3 || oper === 4){
-                    if(sprite.isInTileCenter()){
-                        game.needToTurn = false
-                        game.prefferedRotation = ""
-                        game.currentRotation = rotation
-                        switch(rotation){
-                        case "right":
-                            sprite.rotation =  0
-                            right.start()
-                            return;
-                        case "left":
-                            sprite.rotation =  180
-                            left.start()
-                            return;
-                        case "up":
-                            sprite.rotation =  270
-                            up.start()
-                            return;
-                        case "down":
-                            sprite.rotation = 90
-                            down.start()
-                            return;
-                        }
-                    }
-                }
+                if(sprite.isInTileCenter())
+                    console.log("needToTurn + isInTileCenter + oper: " + oper)
+                    sprite.checkOperation(oper, rotation, index);
+//                if(oper === 1 || oper === 2 || oper === 3 || oper === 4){
+//                    if(sprite.isInTileCenter()){
+//                        game.needToTurn = false
+//                        game.prefferedRotation = ""
+//                        game.currentRotation = rotation
+//                        switch(rotation){
+//                        case "right":
+//                            sprite.rotation =  0
+//                            right.start()
+//                            return;
+//                        case "left":
+//                            sprite.rotation =  180
+//                            left.start()
+//                            return;
+//                        case "up":
+//                            sprite.rotation =  270
+//                            up.start()
+//                            return;
+//                        case "down":
+//                            sprite.rotation = 90
+//                            down.start()
+//                            return;
+//                        }
+//                    }
+//                }
 
-                sprite.startAnimation(game.currentRotation)
+                TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, game.currentRotation)
+                var oper_ = TileField.operIndexList()[0]
+                var index_ = TileField.operIndexList()[1]
+                checkOperation(oper_, game.currentRotation, index_)
             }
-            else{
-
-                // const int cMapWall = 0;
-                // const int cMapEmpty = 1;
-                // const int cMapDot = 2;
-                // const int cMapEnergizer = 3;
-                // const int cMapFruit = 4;
-                // const int cMapDotAndWall = 5;
-                // const int cMapEnergizerAndWall = 6;
-                // const int cMapFruitAndWall = 7;
-
-                switch(oper){
-                case 0:
-                    sprite.stopAnimation(rotation)
-                    currentRotation = ""
-                    break;
-                case 1:
-                    sprite.startAnimation(rotation)
-                    break;
-                case 2:
-                    sprite.eatObject(index, rotation, "dot")
-                    sprite.startAnimation(rotation)
-                    break;
-                case 3:
-                    sprite.eatObject(index, rotation, "energizer")
-                    sprite.startAnimation(rotation)
-                    break;
-                case 4:
-                    sprite.eatObject(index, rotation, "fruit")
-                    sprite.startAnimation(rotation)
-                    break;
-                case 5:
-                    sprite.eatObject(index, rotation, "dot")
-                    sprite.stopAnimation(rotation)
-                    currentRotation = ""
-                    break;
-                case 6:
-                    sprite.eatObject(index, rotation, "energizer")
-                    sprite.stopAnimation(rotation)
-                    currentRotation = ""
-                    break;
-                case 7:
-                    sprite.eatObject(index, rotation, "fruit")
-                    sprite.stopAnimation(rotation)
-                    currentRotation = ""
-                    break;
-                }
-            }
+            else
+                checkOperation(oper, rotation, index)
         }
 
         AnimatedSprite {
