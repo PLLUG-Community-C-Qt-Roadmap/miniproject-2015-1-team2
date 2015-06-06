@@ -424,7 +424,7 @@ Rectangle {
     ItemForGhost {
         id: blinky
         x: game.width / 2 - 30
-        y: game.height / 2 - 25
+        y: game.height / 2 - 40
         frameX: 0
         frameY: 80
         speed: 100
@@ -433,7 +433,7 @@ Rectangle {
     ItemForGhost {
         id: pinky
         x: game.width / 2 + 30
-        y: game.height / 2 - 25
+        y: game.height / 2 - 40
         frameX: 0
         frameY: 100
         speed: 200
@@ -442,7 +442,7 @@ Rectangle {
     ItemForGhost {
         id: inky
         x: game.width / 2 - 30
-        y: game.height / 2 - 5
+        y: game.height / 2 - 20
         frameX: 0
         frameY: 120
         speed: 150
@@ -450,7 +450,7 @@ Rectangle {
     ItemForGhost {
         id: clyde
         x: game.width / 2 + 30
-        y: game.height / 2 - 5
+        y: game.height / 2 - 20
         frameX: 0
         frameY: 140
         speed: 300
@@ -591,6 +591,27 @@ Rectangle {
         right.running = true
     }
 
+    Item {
+        Timer {
+            id: timer
+            running: false
+            interval: 10000
+
+            onTriggered: {
+                sprite.scale = 1
+                sprite.eating = 18
+                blinky.frameX = 0
+                blinky.frameY = 80
+                pinky.frameX = 0
+                pinky.frameY = 100
+                inky.frameX = 0
+                inky.frameY = 120
+                clyde.frameX = 0
+                clyde.frameY = 140
+            }
+        }
+    }
+
     focus: true
 
     Connections {
@@ -606,6 +627,7 @@ Rectangle {
             settings.soundEffects ? fruitEnergizerEatenMusic.play() : fruitEnergizerEatenMusic.stop()
             sprite.scale = 1.2
             sprite.eating = 10
+            timer.start()
             inky.frameX = 0
             inky.frameY = 160
             blinky.frameX = 0
