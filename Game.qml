@@ -10,6 +10,9 @@ Rectangle {
 
     property int pacmanSpawnX : 4
     property int pacmanSpawnY : 14 * 16 - 4
+    property bool needToTurn : false
+    property string currentRotation: "right"
+    property string prefferedRotation: ""
 
     // Map implemantation
     Image {
@@ -58,7 +61,6 @@ Rectangle {
 
     GameScoreItem {
         id: scoreItem
-
         anchors {
             bottom: parent.bottom
             horizontalCenter: parent.horizontalCenter
@@ -68,12 +70,12 @@ Rectangle {
     GameButton {
         text:"Up"
         onClicked: {
-            sprite.rotation =  270
+            if(game.currentRotation.localeCompare("up") !== 0){
+                game.needToTurn = true
+                game.prefferedRotation = "up"
+            }
             eating.running = true
-            up.running = true
-            down.running = false
-            left.running = false
-            right.running = false
+            sprite.checkPacmanState()
         }
         x: 150
         y: 280
@@ -82,12 +84,12 @@ Rectangle {
     GameButton {
         text:"Down"
         onClicked: {
-            sprite.rotation = 90
+            if(game.currentRotation.localeCompare("down") !== 0){
+                game.needToTurn = true
+                game.prefferedRotation = "down"
+            }
             eating.running = true
-            up.running = false
-            down.running = true
-            left.running = false
-            right.running = false
+            sprite.checkPacmanState()
         }
         x: 150
         y: 320
@@ -96,12 +98,12 @@ Rectangle {
     GameButton {
         text:"Right"
         onClicked: {
-            sprite.rotation = 0
+            if(game.currentRotation.localeCompare("right") !== 0){
+                game.needToTurn = true
+                game.prefferedRotation = "right"
+            }
             eating.running = true
-            up.running = false
-            down.running = false
-            left.running = false
-            right.running = true
+            sprite.checkPacmanState()
         }
 
         x: 180
@@ -111,12 +113,12 @@ Rectangle {
     GameButton {
         text:"Left"
         onClicked: {
-            sprite.rotation = 180
+            if(game.currentRotation.localeCompare("left") !== 0){
+                game.needToTurn = true
+                game.prefferedRotation = "left"
+            }
             eating.running = true
-            up.running = false
-            down.running = false
-            left.running = true
-            right.running = false
+            sprite.checkPacmanState()
         }
         x: 120
         y: 300
@@ -142,32 +144,52 @@ Rectangle {
             scoreItem.scoreText = s.substr(s.length-4);
         }
 
-        function eatObject(index, rotation, objectType){
+        function startAnimation(rotation){
+            switch(rotation){
+            case "right":
+                sprite.rotation =  0
+                right.start();
+                break;
+            case "left":
+                sprite.rotation =  180
+                left.start();
+                break;
+            case "up":
+                sprite.rotation =  270
+                up.start();
+                break;
+            case "down":
+                sprite.rotation =  90
+                down.start();
+                break;
+            }
+        }
+
+        function stopAnimation(rotation){
+            switch(rotation){
+            case "right":
+                right.stop();
+                break;
+            case "left":
+                left.stop();
+                break;
+            case "up":
+                up.stop();
+                break;
+            case "down":
+                down.stop();
+                break;
+            }
+        }
+
+        function eatObject(index, objectType){
             for(var i = index - 1; i < index + 1; ++i) {
                 var item = idField.contentItem.children[i];
                 if (!item.objectName.localeCompare("objectOnMap" + index)){
-                    for(var j = 0; j < idField.contentItem.children.length; ++j) {
+                    for(var j = 0; j < item.children.length; ++j) {
                         var image = item.children[j];
                         if (!image.objectName.localeCompare("myImg")){
                             image.visible = false
-                            switch(rotation){
-                            case "right":
-                                right.start();
-                                break;
-                            case "left":
-                                left.start();
-                                break;
-                            case "up":
-                                up.start();
-                                break;
-                            case "down":
-                                down.start();
-                                break;
-                            default:
-                                console.log("Bad input!!!");
-                            }
-
-                            break;
                         }
                     }
                 }
@@ -186,55 +208,135 @@ Rectangle {
             }
         }
 
-        function checkPacmanState(rotation){
+        function isInTileCenter(){
+            console.log((sprite.x + 4) + " " + (sprite.y + 4))
+            if((sprite.x + 4) % 16 === 0 && (sprite.y + 4) % 16 === 0)
+                return true;
+            return false;
+        }
+
+        function checkOperation(oper, rotation, index){
+
+            // const int cMapWall = 0;
+            // const int cMapEmpty = 1;
+            // const int cMapDot = 2;
+            // const int cMapEnergizer = 3;
+            // const int cMapFruit = 4;
+            // const int cMapDotAndWall = 5;
+            // const int cMapEnergizerAndWall = 6;
+            // const int cMapFruitAndWall = 7;
+
+            switch(oper){
+            case 0:
+                sprite.stopAnimation(rotation)
+                if(!game.needToTurn)
+                    game.currentRotation = "";
+                break;
+            case 1:
+                if(game.prefferedRotation.localeCompare(rotation) === 0){
+                    game.needToTurn = false
+                    game.prefferedRotation = ""
+                    game.currentRotation = rotation
+                }
+                sprite.startAnimation(rotation)
+                break;
+            case 2:
+                if(game.prefferedRotation.localeCompare(rotation) === 0){
+                    game.needToTurn = false
+                    game.prefferedRotation = ""
+                    game.currentRotation = rotation
+                }
+                sprite.eatObject(index, "dot")
+                sprite.startAnimation(rotation)
+                break;
+            case 3:
+                if(game.prefferedRotation.localeCompare(rotation) === 0){
+                    game.needToTurn = false
+                    game.prefferedRotation = ""
+                    game.currentRotation = rotation
+                }
+                sprite.eatObject(index, "energizer")
+                sprite.startAnimation(rotation)
+                break;
+            case 4:
+                if(game.prefferedRotation.localeCompare(rotation) === 0){
+                    game.needToTurn = false
+                    game.prefferedRotation = ""
+                    game.currentRotation = rotation
+                }
+                sprite.eatObject(index, "fruit")
+                sprite.startAnimation(rotation)
+                break;
+            case 5:
+                sprite.eatObject(index, "dot")
+                sprite.stopAnimation(rotation)
+                if(!game.needToTurn)
+                    currentRotation = ""
+                break;
+            case 6:
+                sprite.eatObject(index, "energizer")
+                sprite.stopAnimation(rotation)
+                if(!game.needToTurn)
+                    currentRotation = ""
+                break;
+            case 7:
+                sprite.eatObject(index, "fruit")
+                sprite.stopAnimation(rotation)
+                if(!game.needToTurn)
+                    currentRotation = ""
+                break;
+            }
+        }
+
+        function checkPacmanState(){
+            var rotation
+            if(game.needToTurn)
+                rotation = game.prefferedRotation;
+            else
+                rotation = game.currentRotation;
+
             TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, rotation)
             var result = TileField.operIndexList()
             var oper = result[0]
             var index = result[1]
 
-            switch(oper){
-            case 0:
-                switch(rotation){
-                case "right":
-                    right.stop();
-                    break;
-                case "left":
-                    left.stop();
-                    break;
-                case "up":
-                    up.stop();
-                    break;
-                case "down":
-                    down.stop();
-                    break;
-                }
-                break;
-            case 1:
-                switch(rotation){
-                case "right":
-                    right.start();
-                    break;
-                case "left":
-                    left.start();
-                    break;
-                case "up":
-                    up.start();
-                    break;
-                case "down":
-                    down.start();
-                    break;
-                }
-                break;
-            case 2:
-                sprite.eatObject(index, rotation, "dot")
-                break;
-            case 3:
-                sprite.eatObject(index, rotation, "energizer")
-                break;
-            case 4:
-                sprite.eatObject(index, rotation, "fruit")
-                break;
+            if(game.needToTurn){
+                if(sprite.isInTileCenter())
+                    console.log("needToTurn + isInTileCenter + oper: " + oper)
+                    sprite.checkOperation(oper, rotation, index);
+//                if(oper === 1 || oper === 2 || oper === 3 || oper === 4){
+//                    if(sprite.isInTileCenter()){
+//                        game.needToTurn = false
+//                        game.prefferedRotation = ""
+//                        game.currentRotation = rotation
+//                        switch(rotation){
+//                        case "right":
+//                            sprite.rotation =  0
+//                            right.start()
+//                            return;
+//                        case "left":
+//                            sprite.rotation =  180
+//                            left.start()
+//                            return;
+//                        case "up":
+//                            sprite.rotation =  270
+//                            up.start()
+//                            return;
+//                        case "down":
+//                            sprite.rotation = 90
+//                            down.start()
+//                            return;
+//                        }
+//                    }
+//                }
+
+                TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, game.currentRotation)
+                var oper_ = TileField.operIndexList()[0]
+                var index_ = TileField.operIndexList()[1]
+                checkOperation(oper_, game.currentRotation, index_)
             }
+            else
+                checkOperation(oper, rotation, index)
         }
 
         AnimatedSprite {
@@ -260,13 +362,13 @@ Rectangle {
             duration: 100
             running: false
 
-            onStarted: {
-                sprite.checkPacmanState("up");
+            onStopped: {
+                sprite.checkPacmanState();
             }
 
-            onStopped: {
-                sprite.checkPacmanState("up");
-            }
+            //            onStopped: {
+            //                sprite.checkPacmanState("up");
+            //            }
         }
 
         NumberAnimation on y {
@@ -275,13 +377,13 @@ Rectangle {
             duration: 100
             running: false
 
-            onStarted: {
-                sprite.checkPacmanState("down");
+            onStopped: {
+                sprite.checkPacmanState();
             }
 
-            onStopped: {
-                sprite.checkPacmanState("down");
-            }
+            //            onStopped: {
+            //                sprite.checkPacmanState("down");
+            //            }
         }
 
         NumberAnimation on x {
@@ -290,13 +392,13 @@ Rectangle {
             duration: 100
             running: false
 
-            onStarted: {
-                sprite.checkPacmanState("left");
+            onStopped: {
+                sprite.checkPacmanState();
             }
 
-            onStopped: {
-                sprite.checkPacmanState("left");
-            }
+            //            onStopped: {
+            //                sprite.checkPacmanState("left");
+            //            }
         }
 
         NumberAnimation on x {
@@ -305,13 +407,13 @@ Rectangle {
             duration: 100
             running: false
 
-            onStarted: {
-                sprite.checkPacmanState("right");
+            onStopped: {
+                sprite.checkPacmanState();
             }
 
-            onStopped: {
-                sprite.checkPacmanState("right");
-            }
+            //            onStopped: {
+            //                sprite.checkPacmanState("right");
+            //            }
         }
     }
 
