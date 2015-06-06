@@ -65,7 +65,7 @@ Rectangle {
         }
     }
 
-    ItemForButton {
+    GameButton {
         text:"Up"
         onClicked: {
             sprite.rotation =  270
@@ -79,7 +79,7 @@ Rectangle {
         y: 280
     }
 
-    ItemForButton {
+    GameButton {
         text:"Down"
         onClicked: {
             sprite.rotation = 90
@@ -93,7 +93,7 @@ Rectangle {
         y: 320
     }
 
-    ItemForButton {
+    GameButton {
         text:"Right"
         onClicked: {
             sprite.rotation = 0
@@ -108,7 +108,7 @@ Rectangle {
         y: 300
     }
 
-    ItemForButton {
+    GameButton {
         text:"Left"
         onClicked: {
             sprite.rotation = 180
@@ -350,7 +350,7 @@ Rectangle {
         speed: 300
     }
 
-    ItemForButton {
+    GameButton {
         text: "Back"
         onClicked: {
             loader.source = "MainMenu.qml"
@@ -361,7 +361,7 @@ Rectangle {
         y: game.height - 30
     }
 
-    ItemForButton {
+    GameButton {
         text: "Pause"
         onClicked: {
             introMusic.stop()

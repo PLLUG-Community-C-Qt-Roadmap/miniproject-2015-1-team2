@@ -18,6 +18,7 @@
         <file>Legend3.qml</file>
         <file>FieldCollisionAndObjects.js</file>
         <file>GameScoreItem.qml</file>
+        <file>GameButton.qml</file>
     </qresource>
     <qresource prefix="/font">
         <file>Font/PAC-FONT.TTF</file>
