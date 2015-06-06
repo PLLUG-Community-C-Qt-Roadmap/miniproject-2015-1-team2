@@ -68,6 +68,7 @@ Rectangle {
     }
 
     GameButton {
+        id: gbUp
         text:"Up"
         onClicked: {
             if(game.currentRotation.localeCompare("up") !== 0){
@@ -82,6 +83,7 @@ Rectangle {
     }
 
     GameButton {
+        id: gbDown
         text:"Down"
         onClicked: {
             if(game.currentRotation.localeCompare("down") !== 0){
@@ -96,6 +98,7 @@ Rectangle {
     }
 
     GameButton {
+        id: gbRight
         text:"Right"
         onClicked: {
             if(game.currentRotation.localeCompare("right") !== 0){
@@ -111,6 +114,7 @@ Rectangle {
     }
 
     GameButton {
+        id: gbLeft
         text:"Left"
         onClicked: {
             if(game.currentRotation.localeCompare("left") !== 0){
@@ -453,6 +457,7 @@ Rectangle {
     }
 
     GameButton {
+        id: back
         text: "Back"
         onClicked: {
             loader.source = "MainMenu.qml"
@@ -466,31 +471,89 @@ Rectangle {
     GameButton {
         text: "Pause"
         onClicked: {
-            introMusic.stop()
-            up.running = false
-            down.running = false
-            left.running = false
-            right.running = false
 
-            inky.moveUp = false
-            inky.moveDown = false
-            inky.moveLeft = false
-            inky.moveRight = false
+            if(eating.running == true)
+            {
+                introMusic.stop()
+                eating.running = false
+                game.currentRotation = ""
+                game.prefferedRotation = ""
+                game.needToTurn = false
+                gbUp.enabled = false
+                gbDown.enabled = false
+                gbLeft.enabled = false
+                gbRight.enabled = false
+                Keys.enabled = false
 
-            pinky.moveUp = false
-            pinky.moveDown = false
-            pinky.moveLeft = false
-            pinky.moveRight = false
 
-            blinky.moveUp = false
-            blinky.moveDown = false
-            blinky.moveLeft = false
-            blinky.moveRight = false
+                /*inky.moveUp = false
+                inky.moveDown = false
+                inky.moveLeft = false
+                inky.moveRight = false
 
-            clyde.moveUp = false
-            clyde.moveDown = false
-            clyde.moveLeft = false
-            clyde.moveRight = false
+                pinky.moveUp = false
+                pinky.moveDown = false
+                pinky.moveLeft = false
+                pinky.moveRight = false
+
+                blinky.moveUp = false
+                blinky.moveDown = false
+                blinky.moveLeft = false
+                blinky.moveRight = false
+
+                clyde.moveUp = false
+                clyde.moveDown = false
+                clyde.moveLeft = false
+                clyde.moveRight = false*/
+            }
+            else
+            {
+                gbUp.enabled = true
+                gbDown.enabled = true
+                gbLeft.enabled = true
+                gbRight.enabled = true
+                Keys.enabled = true
+
+                if(sprite.rotation == 0)
+                {
+                    if(game.currentRotation.localeCompare("right") !== 0){
+                        game.needToTurn = true
+                        game.prefferedRotation = "right"
+                    }
+                    eating.running = true
+                    sprite.checkPacmanState()
+                }
+
+                else if(sprite.rotation == 180)
+                {
+                    if(game.currentRotation.localeCompare("left") !== 0){
+                        game.needToTurn = true
+                        game.prefferedRotation = "left"
+                    }
+                    eating.running = true
+                    sprite.checkPacmanState()
+                }
+
+                else if(sprite.rotation == 90)
+                {
+                    if(game.currentRotation.localeCompare("down") !== 0){
+                        game.needToTurn = true
+                        game.prefferedRotation = "down"
+                    }
+                    eating.running = true
+                    sprite.checkPacmanState()
+                }
+
+                else if(sprite.rotation == 270)
+                {
+                    if(game.currentRotation.localeCompare("up") !== 0){
+                        game.needToTurn = true
+                        game.prefferedRotation = "up"
+                    }
+                    eating.running = true
+                    sprite.checkPacmanState()
+                }
+            }
         }
         x:20
         y: 20
