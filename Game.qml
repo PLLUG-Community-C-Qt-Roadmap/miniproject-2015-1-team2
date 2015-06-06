@@ -136,32 +136,48 @@ Rectangle {
             scoreItem.scoreText = s.substr(s.length-4);
         }
 
+        function startAnimation(rotation){
+            switch(rotation){
+            case "right":
+                right.start();
+                break;
+            case "left":
+                left.start();
+                break;
+            case "up":
+                up.start();
+                break;
+            case "down":
+                down.start();
+                break;
+            }
+        }
+
+        function stopAnimation(rotation){
+            switch(rotation){
+            case "right":
+                right.stop();
+                break;
+            case "left":
+                left.stop();
+                break;
+            case "up":
+                up.stop();
+                break;
+            case "down":
+                down.stop();
+                break;
+            }
+        }
+
         function eatObject(index, rotation, objectType){
             for(var i = index - 1; i < index + 1; ++i) {
                 var item = idField.contentItem.children[i];
                 if (!item.objectName.localeCompare("objectOnMap" + index)){
-                    for(var j = 0; j < idField.contentItem.children.length; ++j) {
+                    for(var j = 0; j < item.children.length; ++j) {
                         var image = item.children[j];
                         if (!image.objectName.localeCompare("myImg")){
                             image.visible = false
-                            switch(rotation){
-                            case "right":
-                                right.start();
-                                break;
-                            case "left":
-                                left.start();
-                                break;
-                            case "up":
-                                up.start();
-                                break;
-                            case "down":
-                                down.start();
-                                break;
-                            default:
-                                console.log("Bad input.")
-                                break;
-                            }
-
                         }
                     }
                 }
@@ -169,6 +185,7 @@ Rectangle {
 
             switch(objectType){
             case "dot":
+                console.log("EAten!")
                 dotEaten()
                 break;
             case "fruit":
@@ -228,64 +245,53 @@ Rectangle {
                     }
                 }
 
-                switch(game.currentRotation){
-                case "right":
-                    right.start()
-                    break;
-                case "left":
-                    left.start()
-                    break;
-                case "up":
-                    up.start()
-                    break;
-                case "down":
-                    down.start()
-                    break;
-                }
+                sprite.startAnimation(game.currentRotation)
             }
             else{
+
+                // const int cMapWall = 0;
+                // const int cMapEmpty = 1;
+                // const int cMapDot = 2;
+                // const int cMapEnergizer = 3;
+                // const int cMapFruit = 4;
+                // const int cMapDotAndWall = 5;
+                // const int cMapEnergizerAndWall = 6;
+                // const int cMapFruitAndWall = 7;
+
                 switch(oper){
                 case 0:
-                    switch(rotation){
-                    case "right":
-                        right.stop();
-                        break;
-                    case "left":
-                        left.stop();
-                        break;
-                    case "up":
-                        up.stop();
-                        break;
-                    case "down":
-                        down.stop();
-                        break;
-                    }
+                    sprite.stopAnimation(rotation)
                     currentRotation = ""
                     break;
                 case 1:
-                    switch(rotation){
-                    case "right":
-                        right.start();
-                        break;
-                    case "left":
-                        left.start();
-                        break;
-                    case "up":
-                        up.start();
-                        break;
-                    case "down":
-                        down.start();
-                        break;
-                    }
+                    sprite.startAnimation(rotation)
                     break;
                 case 2:
                     sprite.eatObject(index, rotation, "dot")
+                    sprite.startAnimation(rotation)
                     break;
                 case 3:
                     sprite.eatObject(index, rotation, "energizer")
+                    sprite.startAnimation(rotation)
                     break;
                 case 4:
                     sprite.eatObject(index, rotation, "fruit")
+                    sprite.startAnimation(rotation)
+                    break;
+                case 5:
+                    sprite.eatObject(index, rotation, "dot")
+                    sprite.stopAnimation(rotation)
+                    currentRotation = ""
+                    break;
+                case 6:
+                    sprite.eatObject(index, rotation, "energizer")
+                    sprite.stopAnimation(rotation)
+                    currentRotation = ""
+                    break;
+                case 7:
+                    sprite.eatObject(index, rotation, "fruit")
+                    sprite.stopAnimation(rotation)
+                    currentRotation = ""
                     break;
                 }
             }

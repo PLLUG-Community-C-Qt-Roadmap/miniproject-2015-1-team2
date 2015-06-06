@@ -14,6 +14,9 @@ const int cMapEmpty = 1;
 const int cMapDot = 2;
 const int cMapEnergizer = 3;
 const int cMapFruit = 4;
+const int cMapDotAndWall = 5;
+const int cMapEnergizerAndWall = 6;
+const int cMapFruitAndWall = 7;
 const int cNumbOfListItems = 2;
 
 Field::Field(QObject *parent):
@@ -231,8 +234,26 @@ void Field::checkPacmanState(const int pPacX, const int pPacY, const QString &pD
     nextIndex = getNextIndex(pacIndex, pDirection);
 
     if(tileIsWall(nextIndex))
-    {
-        mOperIndexList << cMapWall;
+    {        
+        if(tileHasDot(pacIndex))
+        {
+            mOperIndexList << cMapDotAndWall;
+            clearObject(pacIndex);
+        }
+        else if(tileHasEnergizer(pacIndex))
+        {
+            mOperIndexList << cMapEnergizerAndWall;
+            clearObject(pacIndex);
+        }
+        else if(tileHasFruit(pacIndex))
+        {
+            mOperIndexList << cMapFruitAndWall;
+            clearObject(pacIndex);
+        }
+        else
+        {
+            mOperIndexList << cMapWall;
+        }
     }
     else if(tileHasDot(pacIndex))
     {
