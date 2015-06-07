@@ -428,6 +428,7 @@ Rectangle {
         frameX: 0
         frameY: 80
         speed: 100
+        running: true
     }
 
     ItemForGhost {
@@ -437,6 +438,7 @@ Rectangle {
         frameX: 0
         frameY: 100
         speed: 200
+        running: true
     }
 
     ItemForGhost {
@@ -446,6 +448,7 @@ Rectangle {
         frameX: 0
         frameY: 120
         speed: 150
+        running: true
     }
     ItemForGhost {
         id: clyde
@@ -454,6 +457,7 @@ Rectangle {
         frameX: 0
         frameY: 140
         speed: 300
+        running: true
     }
 
     GameButton {
@@ -610,6 +614,25 @@ Rectangle {
                 clyde.frameY = 140
             }
         }
+
+        Timer {
+            id: timer2
+            running: false
+            interval: 7000
+
+            onTriggered: {
+                sprite.scale = 1
+                sprite.eating = 18
+                blinky.frameX = 20
+                blinky.frameY = 160
+                pinky.frameX = 20
+                pinky.frameY = 160
+                inky.frameX = 20
+                inky.frameY = 160
+                clyde.frameX = 20
+                clyde.frameY = 160
+            }
+        }
     }
 
     focus: true
@@ -628,6 +651,7 @@ Rectangle {
             sprite.scale = 1.2
             sprite.eating = 10
             timer.start()
+            timer2.start()
             inky.frameX = 0
             inky.frameY = 160
             blinky.frameX = 0
