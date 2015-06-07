@@ -17,10 +17,13 @@
         <file>Legend2.qml</file>
         <file>Legend3.qml</file>
         <file>FieldCollisionAndObjects.js</file>
+        <file>GameScoreItem.qml</file>
+        <file>GameButton.qml</file>
     </qresource>
     <qresource prefix="/font">
         <file>Font/PAC-FONT.TTF</file>
         <file>Font/kirbyss.ttf</file>
+        <file>Font/score.ttf</file>
     </qresource>
     <qresource prefix="/images">
         <file>PacmanSprite.png</file>
@@ -32,6 +35,7 @@
         <file>Images/dot.png</file>
         <file>Images/energizer.png</file>
         <file>Images/field.png</file>
+        <file>Images/fruit.png</file>
     </qresource>
     <qresource prefix="/music">
         <file>Music/Dendy_Music.wav</file>
