@@ -1,10 +1,13 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
-
+#include <QMap>
 #include <QObject>
+#include <QVariant>
 
 class QString;
 class QSettings;
+
+typedef QMap<QString, QVariant> HighScoresMap;
 
 class Settings : public QObject
 {
@@ -14,6 +17,7 @@ class Settings : public QObject
     Q_PROPERTY(bool fullscreen READ fullscreen WRITE setFullscreen NOTIFY fullscreenChanged)
     Q_PROPERTY(int volume READ volume WRITE setVolume NOTIFY volumeChanged)
     Q_PROPERTY(int difficulty READ difficulty WRITE setDifficulty NOTIFY difficultyChanged)
+    Q_PROPERTY(HighScoresMap highScores READ highScores WRITE setHighScores NOTIFY highScoresChanged)
 
 public:
     explicit Settings(QObject *parent = 0);
@@ -25,6 +29,7 @@ public:
     bool soundEffects() const;
     int volume() const;
     int difficulty() const;
+    HighScoresMap highScores() const;
 
 public slots:
     void setMusic(bool music);
@@ -32,6 +37,7 @@ public slots:
     void setFullscreen(bool fullscreen);
     void setVolume(int volume);
     void setDifficulty(int difficulty);
+    void setHighScores(const HighScoresMap pMap);
 
 signals:
     void musicChanged(bool music);
@@ -39,6 +45,7 @@ signals:
     void fullscreenChanged(bool fullscreen);
     void volumeChanged(int volume);
     void difficultyChanged(int difficulty);
+    void highScoresChanged(HighScoresMap pMap);
 
 private:
     bool mMusic;
@@ -46,6 +53,7 @@ private:
     bool mFullscreen;
     int mVolume;
     int mDifficulty;
+    HighScoresMap mHighScores;
 };
 
 #endif // SETTINGS_H

@@ -8,7 +8,6 @@ Rectangle {
     id: highscores
 
 
-
         Text {
             text: "High scores"
             anchors.horizontalCenter: parent.horizontalCenter
