@@ -243,9 +243,12 @@ Rectangle {
                 if(!game.needToTurn){
                     game.currentRotation = "";
                 }
-                else
+                else{
                     if(!TileField.tileIsWall(TileField.getNextIndex(index, currentRotation)))
                         sprite.startAnimation(currentRotation)
+                    else
+                        currentRotation = ""
+                }
                 break;
             case 1:
                 if(game.prefferedRotation.localeCompare(rotation) === 0){
@@ -288,9 +291,12 @@ Rectangle {
                 if(!game.needToTurn){
                     currentRotation = ""
                 }
-                else
+                else{
                     if(!TileField.tileIsWall(TileField.getNextIndex(index, currentRotation)))
                         sprite.startAnimation(currentRotation)
+                    else
+                        currentRotation = ""
+                }
                 break;
             case 6:
                 sprite.eatObject(index, "energizer")
@@ -298,9 +304,12 @@ Rectangle {
                 if(!game.needToTurn){
                     currentRotation = ""
                 }
-                else
+                else{
                     if(!TileField.tileIsWall(TileField.getNextIndex(index, currentRotation)))
                         sprite.startAnimation(currentRotation)
+                    else
+                        currentRotation = ""
+                }
                 break;
             case 7:
                 sprite.eatObject(index, "fruit")
@@ -308,9 +317,12 @@ Rectangle {
                 if(!game.needToTurn){
                     currentRotation = ""
                 }
-                else
+                else{
                     if(!TileField.tileIsWall(TileField.getNextIndex(index, currentRotation)))
                         sprite.startAnimation(currentRotation)
+                    else
+                        currentRotation = ""
+                }
                 break;
             }
         }
@@ -323,13 +335,14 @@ Rectangle {
                 rotation = game.currentRotation;
 
             if(game.needToTurn){
+                console.log("Need to turn")
                 if(sprite.isInTileCenter()){
-
-
+                    console.log("In tile center")
                     TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, rotation)
                     var result = TileField.operIndexList()
                     var oper = result[0]
                     var index = result[1]
+                    console.log("oper == " + oper)
 
                     if(oper === 0){
                         TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, game.currentRotation)
