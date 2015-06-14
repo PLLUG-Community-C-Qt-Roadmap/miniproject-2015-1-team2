@@ -489,6 +489,15 @@ Rectangle {
                 gbRight.enabled = false
                 Keys.enabled = false
 
+                if(timer2.running == true)
+                {
+                    timer.running = false
+                    timer2.running = false
+                }
+                else if(timer.running == true)
+                {
+                    timer.running = false
+                }
 
                 /*inky.moveUp = false
                 inky.moveDown = false
@@ -512,6 +521,19 @@ Rectangle {
             }
             else
             {
+                if(blinky.frameX == 20 || inky.frameX == 20 || pinky.frameX == 20 || clyde.frameX == 20)
+                {
+                    timer.interval = 1500
+                    timer.running = true;
+                }
+                else if(timer.running == false && sprite.eating == 10)
+                {
+                    timer.interval = 5000
+                    timer2.interval = 2000
+                    timer.running = true
+                    timer2.running = true
+                }
+
                 gbUp.enabled = true
                 gbDown.enabled = true
                 gbLeft.enabled = true
@@ -564,35 +586,39 @@ Rectangle {
     }
 
     Keys.onUpPressed: {
-        sprite.rotation =  270
-        up.running = true
-        down.running = false
-        left.running = false
-        right.running = false
+        if(game.currentRotation.localeCompare("up") !== 0){
+            game.needToTurn = true
+            game.prefferedRotation = "up"
+        }
+        eating.running = true
+        sprite.checkPacmanState()
     }
 
     Keys.onDownPressed:{
-        sprite.rotation = 90
-        up.running = false
-        down.running = true
-        left.running = false
-        right.running = false
+        if(game.currentRotation.localeCompare("down") !== 0){
+            game.needToTurn = true
+            game.prefferedRotation = "down"
+        }
+        eating.running = true
+        sprite.checkPacmanState()
     }
 
     Keys.onLeftPressed: {
-        sprite.rotation = 180
-        up.running = false
-        down.running = false
-        left.running = true
-        right.running = false
+        if(game.currentRotation.localeCompare("left") !== 0){
+            game.needToTurn = true
+            game.prefferedRotation = "left"
+        }
+        eating.running = true
+        sprite.checkPacmanState()
     }
 
     Keys.onRightPressed: {
-        sprite.rotation = 0
-        up.running = false
-        down.running = false
-        left.running = false
-        right.running = true
+        if(game.currentRotation.localeCompare("right") !== 0){
+            game.needToTurn = true
+            game.prefferedRotation = "right"
+        }
+        eating.running = true
+        sprite.checkPacmanState()
     }
 
     Item {
@@ -621,8 +647,8 @@ Rectangle {
             interval: 7000
 
             onTriggered: {
-                sprite.scale = 1
-                sprite.eating = 18
+                sprite.scale = 1.2
+                sprite.eating = 10
                 blinky.frameX = 20
                 blinky.frameY = 160
                 pinky.frameX = 20
