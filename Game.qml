@@ -282,6 +282,7 @@ Rectangle {
                 sprite.startAnimation(rotation)
                 break;
             case 5:
+                console.log("Dot and Wall, Yami!")
                 sprite.eatObject(index, "dot")
                 sprite.stopAnimation(rotation)
                 if(!game.needToTurn){
@@ -318,13 +319,24 @@ Rectangle {
             else
                 rotation = game.currentRotation;
 
-            TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, rotation)
-            var result = TileField.operIndexList()
-            var oper = result[0]
-            var index = result[1]
-
             if(game.needToTurn){
                 if(sprite.isInTileCenter()){
+
+
+                    TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, rotation)
+                    var result = TileField.operIndexList()
+                    var oper = result[0]
+                    var index = result[1]
+
+                    if(oper === 0){
+                        console.log("oper = 0")
+                        TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, game.currentRotation)
+                        oper = TileField.operIndexList()[0]
+                        index = TileField.operIndexList()[1]
+                        rotation = game.currentRotation
+                        console.log("oper = " + oper)
+                        console.log("ROTAtion = " + rotation)
+                    }
                     sprite.checkOperation(oper, rotation, index);
                 }
                 else{
@@ -335,6 +347,10 @@ Rectangle {
                 }
             }
             else{
+                TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, rotation)
+                var result = TileField.operIndexList()
+                var oper = result[0]
+                var index = result[1]
                 checkOperation(oper, rotation, index)
             }
         }
