@@ -6,6 +6,7 @@
 
 class QString;
 class QSettings;
+struct PlayerStruct;
 
 typedef QMap<QString, QVariant> HighScoresMap;
 
@@ -24,6 +25,7 @@ public:
     ~Settings();
     Q_INVOKABLE void loadSettings();
     Q_INVOKABLE void saveSettings();
+    Q_INVOKABLE void addScore(QString playerName, int playerScore);
     bool music() const;
     bool fullscreen() const;
     bool soundEffects() const;

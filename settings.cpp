@@ -1,8 +1,17 @@
 #include "settings.h"
 #include <QSettings>
+#include <QVariant>
+
+Q_DECLARE_METATYPE(PlayerStruct)
+
+struct PlayerStruct{
+
+    QString playerName;
+    int playerScore;
+};
 
 Settings::Settings(QObject *parent) : QObject(parent)
-{    
+{
     loadSettings();
 }
 
@@ -16,12 +25,25 @@ void Settings::loadSettings()
 
     lSettings.beginGroup("options");
 
+    // Making default QMap
+    // with 5 elements: name = "Player", score = "0"
+    PlayerStruct lPlayerStruct;
+    lPlayerStruct.playerName = "Player";
+    lPlayerStruct.playerScore = 0;
+    QVariant variant;
+    variant.setValue(lPlayerStruct);
+    QVariantMap variantMap;
+    for(int i = 0; i < 5; i++)
+    {
+        variantMap.insert(QString::number(i), variant);
+    }
+
     bool lMusic = lSettings.value("music", true).toBool();
     bool lSoundEffects = lSettings.value("soundEffects", true).toBool();
     bool lFullscreen = lSettings.value("fullscreen", false).toBool();
     int lVolume = lSettings.value("volume", 50).toInt();
     int lDifficulty = lSettings.value("difficulty", 1).toInt();
-    HighScoresMap lHighScores = lSettings.value("high_scores").toMap();
+    HighScoresMap lHighScores = lSettings.value("high_scores", variantMap).toMap();
 
     setMusic(lMusic);
     setSoundEffects(lSoundEffects);
@@ -43,6 +65,11 @@ void Settings::saveSettings()
     lSettings.setValue("volume", volume());
     lSettings.setValue("difficulty", difficulty());
     lSettings.setValue("high_scores", highScores());
+}
+
+void Settings::addScore(QString playerName, int playerScore)
+{
+
 }
 
 bool Settings::music() const
