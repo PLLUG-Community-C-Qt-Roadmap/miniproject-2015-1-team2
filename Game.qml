@@ -13,6 +13,9 @@ Rectangle {
     property bool needToTurn : false
     property string currentRotation: "right"
     property string prefferedRotation: ""
+    property string currentRot: ""
+    property string prefferedRot: ""
+    property bool needTurn: false
 
     // Map implemantation
     Image {
@@ -334,12 +337,16 @@ Rectangle {
             else
                 rotation = game.currentRotation;
 
+            var result
+            var oper
+            var index
+
             if(game.needToTurn){
                 if(sprite.isInTileCenter()){
                     TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, rotation)
-                    var result = TileField.operIndexList()
-                    var oper = result[0]
-                    var index = result[1]
+                    result = TileField.operIndexList()
+                    oper = result[0]
+                    index = result[1]
 
                     if(oper === 0){
                         TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, game.currentRotation)
@@ -351,16 +358,16 @@ Rectangle {
                 }
                 else{
                     TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, game.currentRotation)
-                    var oper_ = TileField.operIndexList()[0]
-                    var index_ = TileField.operIndexList()[1]
-                    checkOperation(oper_, game.currentRotation, index_)
+                    oper = TileField.operIndexList()[0]
+                    index = TileField.operIndexList()[1]
+                    checkOperation(oper, game.currentRotation, index)
                 }
             }
             else{
                 TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, rotation)
-                var result = TileField.operIndexList()
-                var oper = result[0]
-                var index = result[1]
+                result = TileField.operIndexList()
+                oper = result[0]
+                index = result[1]
                 checkOperation(oper, rotation, index)
             }
         }
@@ -480,10 +487,14 @@ Rectangle {
 
     GameButton {
         text: "Pause"
-        onClicked: {
 
+        onClicked: {
             if(eating.running == true)
             {
+                currentRot = game.currentRotation
+                prefferedRot = game.prefferedRotation
+                needTurn = game.needToTurn
+
                 introMusic.stop()
                 eating.running = false
                 game.currentRotation = ""
@@ -546,45 +557,11 @@ Rectangle {
                 gbRight.enabled = true
                 Keys.enabled = true
 
-                if(sprite.rotation == 0)
-                {
-                    if(game.currentRotation.localeCompare("right") !== 0){
-                        game.needToTurn = true
-                        game.prefferedRotation = "right"
-                    }
-                    eating.running = true
-                    sprite.checkPacmanState()
-                }
-
-                else if(sprite.rotation == 180)
-                {
-                    if(game.currentRotation.localeCompare("left") !== 0){
-                        game.needToTurn = true
-                        game.prefferedRotation = "left"
-                    }
-                    eating.running = true
-                    sprite.checkPacmanState()
-                }
-
-                else if(sprite.rotation == 90)
-                {
-                    if(game.currentRotation.localeCompare("down") !== 0){
-                        game.needToTurn = true
-                        game.prefferedRotation = "down"
-                    }
-                    eating.running = true
-                    sprite.checkPacmanState()
-                }
-
-                else if(sprite.rotation == 270)
-                {
-                    if(game.currentRotation.localeCompare("up") !== 0){
-                        game.needToTurn = true
-                        game.prefferedRotation = "up"
-                    }
-                    eating.running = true
-                    sprite.checkPacmanState()
-                }
+                eating.running = true
+                game.needToTurn = needTurn
+                game.currentRotation = currentRot
+                game.prefferedRotation = prefferedRot
+                sprite.checkPacmanState()
             }
         }
         x:20
