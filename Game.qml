@@ -335,14 +335,11 @@ Rectangle {
                 rotation = game.currentRotation;
 
             if(game.needToTurn){
-                console.log("Need to turn")
                 if(sprite.isInTileCenter()){
-                    console.log("In tile center")
                     TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, rotation)
                     var result = TileField.operIndexList()
                     var oper = result[0]
                     var index = result[1]
-                    console.log("oper == " + oper)
 
                     if(oper === 0){
                         TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, game.currentRotation)
