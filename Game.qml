@@ -434,6 +434,13 @@ Rectangle {
         }
     }
 
+    Timer {
+        id: start1
+        interval: 100
+        running: false
+
+    }
+
     ItemForGhost {
         id: blinky
         x: game.width / 2 - 30
@@ -442,6 +449,10 @@ Rectangle {
         frameY: 80
         speed: 100
         running: true
+
+        Component.onCompleted: {
+            blseq = true
+        }
     }
 
     ItemForGhost {
@@ -452,6 +463,10 @@ Rectangle {
         frameY: 100
         speed: 200
         running: true
+
+        Component.onCompleted: {
+            piseq = true
+        }
     }
 
     ItemForGhost {
@@ -462,6 +477,10 @@ Rectangle {
         frameY: 120
         speed: 150
         running: true
+
+        Component.onCompleted: {
+            inseq = true
+        }
     }
     ItemForGhost {
         id: clyde
@@ -471,6 +490,10 @@ Rectangle {
         frameY: 140
         speed: 300
         running: true
+
+        Component.onCompleted: {
+            clseq = true
+        }
     }
 
     GameButton {
