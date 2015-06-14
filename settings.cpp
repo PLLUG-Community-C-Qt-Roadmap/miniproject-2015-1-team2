@@ -67,9 +67,33 @@ void Settings::saveSettings()
     lSettings.setValue("high_scores", highScores());
 }
 
+// Adds new player's score and name in mHighScores with sorting
 void Settings::addScore(QString playerName, int playerScore)
 {
+    HighScoresMap lHighScores = mHighScores;
+    int i = 0;
 
+    for(auto e : lHighScores.keys())
+    {
+        PlayerStruct lPlayer;
+        QVariant var = lHighScores.value(e);
+        lPlayer = var.value<PlayerStruct>();
+        if(lPlayer.playerScore < playerScore)
+        {
+            for(int j = i; j < 5; j++)
+            {
+                lHighScores[QString::number(j + 1)] = lHighScores.value(QString::number(j));
+            }
+            lPlayer.playerName = playerName;
+            lPlayer.playerScore = playerScore;
+            QVariant variant;
+            variant.setValue(lPlayer);
+            lHighScores[QString::number(i)] = variant;
+            setHighScores(lHighScores);
+            return;
+        }
+        ++i;
+    }
 }
 
 bool Settings::music() const
