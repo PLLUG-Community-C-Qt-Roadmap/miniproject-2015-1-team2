@@ -244,7 +244,8 @@ Rectangle {
                     game.currentRotation = "";
                 }
                 else
-                    sprite.startAnimation(currentRotation)
+                    if(!TileField.tileIsWall(TileField.getNextIndex(index, currentRotation)))
+                        sprite.startAnimation(currentRotation)
                 break;
             case 1:
                 if(game.prefferedRotation.localeCompare(rotation) === 0){
@@ -288,7 +289,8 @@ Rectangle {
                     currentRotation = ""
                 }
                 else
-                    sprite.startAnimation(currentRotation)
+                    if(!TileField.tileIsWall(TileField.getNextIndex(index, currentRotation)))
+                        sprite.startAnimation(currentRotation)
                 break;
             case 6:
                 sprite.eatObject(index, "energizer")
@@ -297,7 +299,8 @@ Rectangle {
                     currentRotation = ""
                 }
                 else
-                    sprite.startAnimation(currentRotation)
+                    if(!TileField.tileIsWall(TileField.getNextIndex(index, currentRotation)))
+                        sprite.startAnimation(currentRotation)
                 break;
             case 7:
                 sprite.eatObject(index, "fruit")
@@ -306,7 +309,8 @@ Rectangle {
                     currentRotation = ""
                 }
                 else
-                    sprite.startAnimation(currentRotation)
+                    if(!TileField.tileIsWall(TileField.getNextIndex(index, currentRotation)))
+                        sprite.startAnimation(currentRotation)
                 break;
             }
         }

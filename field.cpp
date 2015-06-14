@@ -124,6 +124,11 @@ int Field::getNextIndex(int index, const QString &pDirection)
             rNextIndex = -1;
         }
     }
+    // Else always return index of tile with wall
+    else
+    {
+        rNextIndex = 0;
+    }
 
     return rNextIndex;
 }
