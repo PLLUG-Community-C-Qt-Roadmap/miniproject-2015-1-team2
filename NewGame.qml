@@ -125,6 +125,13 @@ Rectangle {
                 }
 
                 onClicked: {
+                    if(textFieldPlayer.text.localeCompare("") === 0){
+                        mainWindow.playerName = "Player"
+                    }
+                    else{
+                        mainWindow.playerName = textFieldPlayer.text
+                    }
+
                     loader.source = "Game.qml"
                     gameMusic.stop()
                     settings.soundEffects ? introMusic.play() : introMusic.stop()
@@ -133,18 +140,16 @@ Rectangle {
         }
     }
 
-    Item {
-            ItemForButton {
-                id: buttonBack
+    ItemForButton {
+        id: buttonBack
+        x: (parent.width/2) - (buttonBack.width/2)
+        y: parent.height/2 + 100
+        text: "Back"
 
-                text: "Back"
-                onClicked: {
-                    loader.source = "MainMenu.qml"
-                    gameMusic.play()
-                }
-            }
-            x: (parent.width/2) - (buttonBack.width/2)
-            y: parent.height/2 + 100
+        onClicked: {
+            loader.source = "MainMenu.qml"
+            gameMusic.play()
+        }
     }
 
 

@@ -10,6 +10,9 @@ Window {
     height: 526
     id: mainWindow
 
+    property string playerName: ""
+    property int playerScore: 0
+
     FontLoader {
         id: pacmanFont
         source: "qrc:/font/Font/PAC-FONT.TTF"

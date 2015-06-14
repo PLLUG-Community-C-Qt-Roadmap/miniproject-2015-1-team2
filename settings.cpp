@@ -1,8 +1,17 @@
 #include "settings.h"
 #include <QSettings>
+#include <QVariant>
+
+Q_DECLARE_METATYPE(PlayerStruct)
+
+struct PlayerStruct{
+
+    QString playerName;
+    int playerScore;
+};
 
 Settings::Settings(QObject *parent) : QObject(parent)
-{    
+{
     loadSettings();
 }
 
@@ -16,12 +25,25 @@ void Settings::loadSettings()
 
     lSettings.beginGroup("options");
 
+    // Making default QMap
+    // with 5 elements: name = "Player", score = "0"
+    PlayerStruct lPlayerStruct;
+    lPlayerStruct.playerName = "Player";
+    lPlayerStruct.playerScore = 0;
+    QVariant variant;
+    variant.setValue(lPlayerStruct);
+    QVariantMap variantMap;
+    for(int i = 0; i < 5; i++)
+    {
+        variantMap.insert(QString::number(i), variant);
+    }
+
     bool lMusic = lSettings.value("music", true).toBool();
     bool lSoundEffects = lSettings.value("soundEffects", true).toBool();
     bool lFullscreen = lSettings.value("fullscreen", false).toBool();
     int lVolume = lSettings.value("volume", 50).toInt();
     int lDifficulty = lSettings.value("difficulty", 1).toInt();
-    HighScoresMap lHighScores = lSettings.value("high_scores").toMap();
+    HighScoresMap lHighScores = lSettings.value("high_scores", variantMap).toMap();
 
     setMusic(lMusic);
     setSoundEffects(lSoundEffects);
@@ -43,6 +65,45 @@ void Settings::saveSettings()
     lSettings.setValue("volume", volume());
     lSettings.setValue("difficulty", difficulty());
     lSettings.setValue("high_scores", highScores());
+}
+
+// Adds new player's score and name in mHighScores with sorting
+void Settings::addScore(QString playerName, int playerScore)
+{
+    HighScoresMap lHighScores = mHighScores;
+    int i = 0;
+
+    for(auto e : lHighScores.keys())
+    {
+        PlayerStruct lPlayer;
+        QVariant var = lHighScores.value(e);
+        lPlayer = var.value<PlayerStruct>();
+        if(lPlayer.playerScore < playerScore)
+        {
+            for(int j = i; j < 5; j++)
+            {
+                lHighScores[QString::number(j + 1)] = lHighScores.value(QString::number(j));
+            }
+            lPlayer.playerName = playerName;
+            lPlayer.playerScore = playerScore;
+            QVariant variant;
+            variant.setValue(lPlayer);
+            lHighScores[QString::number(i)] = variant;
+            setHighScores(lHighScores);
+            return;
+        }
+        ++i;
+    }
+}
+
+QString Settings::playerNameByKey(QString key) const
+{
+    return mHighScores[key].value<PlayerStruct>().playerName;
+}
+
+int Settings::playerScoreByKey(QString key) const
+{
+    return mHighScores[key].value<PlayerStruct>().playerScore;
 }
 
 bool Settings::music() const
