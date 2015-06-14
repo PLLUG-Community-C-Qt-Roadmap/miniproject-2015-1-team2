@@ -659,6 +659,8 @@ Rectangle {
             settings.soundEffects ? fruitEnergizerEatenMusic.play() : fruitEnergizerEatenMusic.stop()
             sprite.scale = 1.2
             sprite.eating = 10
+            timer.interval = 10000
+            timer2.interval = 7000
             timer.start()
             timer2.start()
             inky.frameX = 0
