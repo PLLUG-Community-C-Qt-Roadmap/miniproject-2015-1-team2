@@ -478,6 +478,7 @@ Rectangle {
         text: "Back"
         onClicked: {
             mainWindow.playerScore = parseInt(scoreItem.scoreText, "10")
+            settings.addScore(mainWindow.playerName, mainWindow.playerScore)
             loader.source = "MainMenu.qml"
             introMusic.stop()
             settings.music ? gameMusic.play() : gameMusic.stop()
