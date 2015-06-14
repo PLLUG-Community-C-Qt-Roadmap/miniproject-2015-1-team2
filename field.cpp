@@ -124,6 +124,11 @@ int Field::getNextIndex(int index, const QString &pDirection)
             rNextIndex = -1;
         }
     }
+    // Else always return index of tile with wall
+    else
+    {
+        rNextIndex = 0;
+    }
 
     return rNextIndex;
 }
@@ -229,12 +234,19 @@ void Field::checkPacmanState(const int pPacX, const int pPacY, const QString &pD
         pacColumn = lPacCol;
         pacIndex = getIndex(pacRow, pacColumn);
     }
+    // If bad argument was sent
+    else
+    {
+        mOperIndexList << cMapWall;
+        mOperIndexList << pacIndex;
+        return;
+    }
 
     // Determinating nextIndex
     nextIndex = getNextIndex(pacIndex, pDirection);
 
     if(tileIsWall(nextIndex))
-    {        
+    {
         if(tileHasDot(pacIndex))
         {
             mOperIndexList << cMapDotAndWall;

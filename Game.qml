@@ -75,8 +75,10 @@ Rectangle {
                 game.needToTurn = true
                 game.prefferedRotation = "up"
             }
+            if(game.currentRotation.localeCompare("") === 0){
+                sprite.checkPacmanState()
+            }
             eating.running = true
-            sprite.checkPacmanState()
         }
         x: 150
         y: 280
@@ -90,8 +92,10 @@ Rectangle {
                 game.needToTurn = true
                 game.prefferedRotation = "down"
             }
+            if(game.currentRotation.localeCompare("") === 0){
+                sprite.checkPacmanState()
+            }
             eating.running = true
-            sprite.checkPacmanState()
         }
         x: 150
         y: 320
@@ -105,8 +109,10 @@ Rectangle {
                 game.needToTurn = true
                 game.prefferedRotation = "right"
             }
+            if(game.currentRotation.localeCompare("") === 0){
+                sprite.checkPacmanState()
+            }
             eating.running = true
-            sprite.checkPacmanState()
         }
 
         x: 180
@@ -121,8 +127,10 @@ Rectangle {
                 game.needToTurn = true
                 game.prefferedRotation = "left"
             }
+            if(game.currentRotation.localeCompare("") === 0){
+                sprite.checkPacmanState()
+            }
             eating.running = true
-            sprite.checkPacmanState()
         }
         x: 120
         y: 300
@@ -213,7 +221,6 @@ Rectangle {
         }
 
         function isInTileCenter(){
-            console.log((sprite.x + 4) + " " + (sprite.y + 4))
             if((sprite.x + 4) % 16 === 0 && (sprite.y + 4) % 16 === 0)
                 return true;
             return false;
@@ -233,8 +240,15 @@ Rectangle {
             switch(oper){
             case 0:
                 sprite.stopAnimation(rotation)
-                if(!game.needToTurn)
+                if(!game.needToTurn){
                     game.currentRotation = "";
+                }
+                else{
+                    if(!TileField.tileIsWall(TileField.getNextIndex(index, currentRotation)))
+                        sprite.startAnimation(currentRotation)
+                    else
+                        currentRotation = ""
+                }
                 break;
             case 1:
                 if(game.prefferedRotation.localeCompare(rotation) === 0){
@@ -274,20 +288,41 @@ Rectangle {
             case 5:
                 sprite.eatObject(index, "dot")
                 sprite.stopAnimation(rotation)
-                if(!game.needToTurn)
+                if(!game.needToTurn){
                     currentRotation = ""
+                }
+                else{
+                    if(!TileField.tileIsWall(TileField.getNextIndex(index, currentRotation)))
+                        sprite.startAnimation(currentRotation)
+                    else
+                        currentRotation = ""
+                }
                 break;
             case 6:
                 sprite.eatObject(index, "energizer")
                 sprite.stopAnimation(rotation)
-                if(!game.needToTurn)
+                if(!game.needToTurn){
                     currentRotation = ""
+                }
+                else{
+                    if(!TileField.tileIsWall(TileField.getNextIndex(index, currentRotation)))
+                        sprite.startAnimation(currentRotation)
+                    else
+                        currentRotation = ""
+                }
                 break;
             case 7:
                 sprite.eatObject(index, "fruit")
                 sprite.stopAnimation(rotation)
-                if(!game.needToTurn)
+                if(!game.needToTurn){
                     currentRotation = ""
+                }
+                else{
+                    if(!TileField.tileIsWall(TileField.getNextIndex(index, currentRotation)))
+                        sprite.startAnimation(currentRotation)
+                    else
+                        currentRotation = ""
+                }
                 break;
             }
         }
@@ -299,48 +334,35 @@ Rectangle {
             else
                 rotation = game.currentRotation;
 
-            TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, rotation)
-            var result = TileField.operIndexList()
-            var oper = result[0]
-            var index = result[1]
-
             if(game.needToTurn){
-                if(sprite.isInTileCenter())
-                    console.log("needToTurn + isInTileCenter + oper: " + oper)
-                    sprite.checkOperation(oper, rotation, index);
-//                if(oper === 1 || oper === 2 || oper === 3 || oper === 4){
-//                    if(sprite.isInTileCenter()){
-//                        game.needToTurn = false
-//                        game.prefferedRotation = ""
-//                        game.currentRotation = rotation
-//                        switch(rotation){
-//                        case "right":
-//                            sprite.rotation =  0
-//                            right.start()
-//                            return;
-//                        case "left":
-//                            sprite.rotation =  180
-//                            left.start()
-//                            return;
-//                        case "up":
-//                            sprite.rotation =  270
-//                            up.start()
-//                            return;
-//                        case "down":
-//                            sprite.rotation = 90
-//                            down.start()
-//                            return;
-//                        }
-//                    }
-//                }
+                if(sprite.isInTileCenter()){
+                    TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, rotation)
+                    var result = TileField.operIndexList()
+                    var oper = result[0]
+                    var index = result[1]
 
-                TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, game.currentRotation)
-                var oper_ = TileField.operIndexList()[0]
-                var index_ = TileField.operIndexList()[1]
-                checkOperation(oper_, game.currentRotation, index_)
+                    if(oper === 0){
+                        TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, game.currentRotation)
+                        oper = TileField.operIndexList()[0]
+                        index = TileField.operIndexList()[1]
+                        rotation = game.currentRotation
+                    }
+                    sprite.checkOperation(oper, rotation, index);
+                }
+                else{
+                    TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, game.currentRotation)
+                    var oper_ = TileField.operIndexList()[0]
+                    var index_ = TileField.operIndexList()[1]
+                    checkOperation(oper_, game.currentRotation, index_)
+                }
             }
-            else
+            else{
+                TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, rotation)
+                var result = TileField.operIndexList()
+                var oper = result[0]
+                var index = result[1]
                 checkOperation(oper, rotation, index)
+            }
         }
 
         AnimatedSprite {
@@ -369,10 +391,6 @@ Rectangle {
             onStopped: {
                 sprite.checkPacmanState();
             }
-
-            //            onStopped: {
-            //                sprite.checkPacmanState("up");
-            //            }
         }
 
         NumberAnimation on y {
@@ -384,10 +402,6 @@ Rectangle {
             onStopped: {
                 sprite.checkPacmanState();
             }
-
-            //            onStopped: {
-            //                sprite.checkPacmanState("down");
-            //            }
         }
 
         NumberAnimation on x {
@@ -399,10 +413,6 @@ Rectangle {
             onStopped: {
                 sprite.checkPacmanState();
             }
-
-            //            onStopped: {
-            //                sprite.checkPacmanState("left");
-            //            }
         }
 
         NumberAnimation on x {
@@ -414,10 +424,6 @@ Rectangle {
             onStopped: {
                 sprite.checkPacmanState();
             }
-
-            //            onStopped: {
-            //                sprite.checkPacmanState("right");
-            //            }
         }
     }
 
