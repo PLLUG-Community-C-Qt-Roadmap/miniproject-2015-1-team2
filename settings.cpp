@@ -96,6 +96,16 @@ void Settings::addScore(QString playerName, int playerScore)
     }
 }
 
+QString Settings::playerNameByKey(QString key) const
+{
+    return mHighScores[key].value<PlayerStruct>().playerName;
+}
+
+int Settings::playerScoreByKey(QString key) const
+{
+    return mHighScores[key].value<PlayerStruct>().playerScore;
+}
+
 bool Settings::music() const
 {
     return mMusic;
