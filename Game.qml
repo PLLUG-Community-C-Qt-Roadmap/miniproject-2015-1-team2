@@ -139,6 +139,19 @@ Rectangle {
         y: 300
     }
 
+    Timer {
+        id: endTimer
+        running: false
+        interval: 1800
+        onTriggered: {
+            mainWindow.playerScore = parseInt(scoreItem.scoreText, "10")
+            settings.addScore(mainWindow.playerName, mainWindow.playerScore)
+            loader.source = "MainMenu.qml"
+            introMusic.stop()
+            settings.music ? gameMusic.play() : gameMusic.stop()
+        }
+    }
+
     Item {
         id: sprite
         width: 24
@@ -341,6 +354,32 @@ Rectangle {
             var oper
             var index
 
+            console.log(sprite.x)
+            console.log(sprite.y)
+            console.log(blinky.x)
+            console.log(blinky.y)
+
+            if(sprite.x == blinky.x - 14 && sprite.y == blinky.y - 11 && blinky.frameY == 160)
+            {
+                blinky.frameY = 200
+            }
+            else if(sprite.x == blinky.x - 14 && sprite.y == blinky.y - 11)
+            {
+                game.currentRotation = ""
+                game.prefferedRotation = ""
+                game.needToTurn = false
+                blinky.visible = false
+                eating.source = "qrc:/images/Images/pacman_sprite.png"
+                eating.rotation = 90
+                eating.frameX = 0
+                eating.frameY = 240
+                eating.frameHeight = 20
+                eating.frameWidth = 20
+                eating.frameCount = 10
+                eating.frameDuration = 200
+                endTimer.start()
+            }
+
             if(game.needToTurn){
                 if(sprite.isInTileCenter()){
                     TileField.checkPacmanState(sprite.x + 12, sprite.y + 12, rotation)
@@ -432,13 +471,6 @@ Rectangle {
                 sprite.checkPacmanState();
             }
         }
-    }
-
-    Timer {
-        id: start1
-        interval: 100
-        running: false
-
     }
 
     ItemForGhost {
@@ -629,43 +661,41 @@ Rectangle {
         sprite.checkPacmanState()
     }
 
-    Item {
-        Timer {
-            id: timer
-            running: false
-            interval: 10000
+    Timer {
+        id: timer
+        running: false
+        interval: 10000
 
-            onTriggered: {
-                sprite.scale = 1
-                sprite.eating = 18
-                blinky.frameX = 0
-                blinky.frameY = 80
-                pinky.frameX = 0
-                pinky.frameY = 100
-                inky.frameX = 0
-                inky.frameY = 120
-                clyde.frameX = 0
-                clyde.frameY = 140
-            }
+        onTriggered: {
+            sprite.scale = 1
+            sprite.eating = 18
+            blinky.frameX = 0
+            blinky.frameY = 80
+            pinky.frameX = 0
+            pinky.frameY = 100
+            inky.frameX = 0
+            inky.frameY = 120
+            clyde.frameX = 0
+            clyde.frameY = 140
         }
+    }
 
-        Timer {
-            id: timer2
-            running: false
-            interval: 7000
+    Timer {
+        id: timer2
+        running: false
+        interval: 7000
 
-            onTriggered: {
-                sprite.scale = 1.2
-                sprite.eating = 10
-                blinky.frameX = 20
-                blinky.frameY = 160
-                pinky.frameX = 20
-                pinky.frameY = 160
-                inky.frameX = 20
-                inky.frameY = 160
-                clyde.frameX = 20
-                clyde.frameY = 160
-            }
+        onTriggered: {
+            sprite.scale = 1.2
+            sprite.eating = 10
+            blinky.frameX = 20
+            blinky.frameY = 160
+            pinky.frameX = 20
+            pinky.frameY = 160
+            inky.frameX = 20
+            inky.frameY = 160
+            clyde.frameX = 20
+            clyde.frameY = 160
         }
     }
 

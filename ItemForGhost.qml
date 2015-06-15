@@ -84,7 +84,7 @@ Item {
         NumberAnimation {
             target: ghost
             property: "x"
-            to: ghost.x - 40
+            to: ghost.x - 88
             duration: 1500
         }
     }
