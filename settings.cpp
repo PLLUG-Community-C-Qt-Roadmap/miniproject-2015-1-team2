@@ -80,7 +80,7 @@ void Settings::addScore(QString playerName, int playerScore)
         lPlayer = var.value<PlayerStruct>();
         if(lPlayer.playerScore < playerScore)
         {
-            for(int j = i; j < 5; j++)
+            for(int j = i; j < 4; j++)
             {
                 lHighScores[QString::number(j + 1)] = lHighScores.value(QString::number(j));
             }
