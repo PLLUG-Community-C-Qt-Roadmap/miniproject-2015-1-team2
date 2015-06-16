@@ -142,13 +142,11 @@ Rectangle {
     Timer {
         id: endTimer
         running: false
-        interval: 1800
+        interval: 1700
         onTriggered: {
-            mainWindow.playerScore = parseInt(scoreItem.scoreText, "10")
-            settings.addScore(mainWindow.playerName, mainWindow.playerScore)
-            loader.source = "MainMenu.qml"
-            introMusic.stop()
-            settings.music ? gameMusic.play() : gameMusic.stop()
+            loader.item.enabled = false
+            loaderForExitWindow.source = "GameOver.qml"
+            eating.running = false
         }
     }
 
@@ -158,6 +156,7 @@ Rectangle {
         height: 24
         x: game.pacmanSpawnX
         y: game.pacmanSpawnY
+        z:1
         visible: true
         rotation: 0
         property alias eating: eating.frameDuration
@@ -354,31 +353,112 @@ Rectangle {
             var oper
             var index
 
-            console.log(sprite.x)
+
+           /* console.log(sprite.x)
             console.log(sprite.y)
             console.log(blinky.x)
-            console.log(blinky.y)
+            console.log(blinky.y)*/
 
-            if(sprite.x == blinky.x - 14 && sprite.y == blinky.y - 11 && blinky.frameY == 160)
+            if(sprite.x == blinky.x - 14 && sprite.y == blinky.y - 11 && blinky.visible == true)
             {
-                blinky.frameY = 200
+                if(blinky.frameY == 160)
+                {
+                    blinky.visible = false
+                    sprite.increaseScoreBy(200)
+                }
+                else
+                {
+                    game.currentRotation = ""
+                    game.prefferedRotation = ""
+                    game.needToTurn = false
+                    blinky.visible = false
+                    eating.source = "qrc:/images/Images/pacman_sprite.png"
+                    eating.rotation = 90
+                    eating.frameX = 0
+                    eating.frameY = 240
+                    eating.frameHeight = 20
+                    eating.frameWidth = 20
+                    eating.frameCount = 10
+                    eating.frameDuration = 200
+                    endTimer.start()
+                }
             }
-            else if(sprite.x == blinky.x - 14 && sprite.y == blinky.y - 11)
+
+            if(sprite.x == pinky.x - 14 && sprite.y == pinky.y - 11 && pinky.visible == true)
             {
-                game.currentRotation = ""
-                game.prefferedRotation = ""
-                game.needToTurn = false
-                blinky.visible = false
-                eating.source = "qrc:/images/Images/pacman_sprite.png"
-                eating.rotation = 90
-                eating.frameX = 0
-                eating.frameY = 240
-                eating.frameHeight = 20
-                eating.frameWidth = 20
-                eating.frameCount = 10
-                eating.frameDuration = 200
-                endTimer.start()
+                if(pinky.frameY == 160)
+                {
+                    pinky.visible = false
+                    sprite.increaseScoreBy(200)
+                }
+                else
+                {
+                    game.currentRotation = ""
+                    game.prefferedRotation = ""
+                    game.needToTurn = false
+                    pinky.visible = false
+                    eating.source = "qrc:/images/Images/pacman_sprite.png"
+                    eating.rotation = 90
+                    eating.frameX = 0
+                    eating.frameY = 240
+                    eating.frameHeight = 20
+                    eating.frameWidth = 20
+                    eating.frameCount = 10
+                    eating.frameDuration = 200
+                    endTimer.start()
+                }
             }
+
+            if(sprite.x == inky.x - 14 && sprite.y == inky.y - 11 && inky.visible == true)
+            {
+                if(inky.frameY == 160)
+                {
+                    inky.visible = false
+                    sprite.increaseScoreBy(200)
+                }
+                else
+                {
+                    game.currentRotation = ""
+                    game.prefferedRotation = ""
+                    game.needToTurn = false
+                    inky.visible = false
+                    eating.source = "qrc:/images/Images/pacman_sprite.png"
+                    eating.rotation = 90
+                    eating.frameX = 0
+                    eating.frameY = 240
+                    eating.frameHeight = 20
+                    eating.frameWidth = 20
+                    eating.frameCount = 10
+                    eating.frameDuration = 200
+                    endTimer.start()
+                }
+            }
+
+            if(sprite.x == clyde.x - 14 && sprite.y == clyde.y - 11 && clyde.visible == true)
+            {
+                if(clyde.frameY == 160)
+                {
+                    clyde.visible = false
+                    sprite.increaseScoreBy(200)
+                }
+                else
+                {
+                    game.currentRotation = ""
+                    game.prefferedRotation = ""
+                    game.needToTurn = false
+                    clyde.visible = false
+                    eating.source = "qrc:/images/Images/pacman_sprite.png"
+                    eating.rotation = 90
+                    eating.frameX = 0
+                    eating.frameY = 240
+                    eating.frameHeight = 20
+                    eating.frameWidth = 20
+                    eating.frameCount = 10
+                    eating.frameDuration = 200
+                    endTimer.start()
+                }
+            }
+
 
             if(game.needToTurn){
                 if(sprite.isInTileCenter()){
