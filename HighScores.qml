@@ -30,10 +30,16 @@ Rectangle {
         id: highscoresModel
 
         Component.onCompleted: {
-            for(var i = 0; i < 5; i++){
-                append({
-                           name: settings.playerNameByKey("" + i),
-                           score: settings.playerScoreByKey("" + i)})
+            var playerNames = new Array(5);
+            var playerScores = new Array(5);
+            var i;
+            for(i = 0; i < 5; i++){
+                playerNames[i] = settings.playerNameByKey("player" + i);
+                playerScores[i] = settings.playerScoreByKey("player" + i);
+            }
+
+            for(i = 0; i < 5; i++){
+                append({ name: playerNames[i], score: playerScores[i] });
             }
         }
     }
