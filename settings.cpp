@@ -1,22 +1,46 @@
 #include "settings.h"
 #include <QSettings>
 #include <QVariant>
+#include <QDataStream>
+#include <QString>
+#include <QDebug>
 
-Q_DECLARE_METATYPE(PlayerStruct)
+//typedef QHash<QString, QVariant> HighScoresHash;
 
+/*!
+ * \brief The PlayerStruct struct contains information
+ * about one player.
+ */
 struct PlayerStruct{
-
     QString playerName;
     int playerScore;
 };
 
+Q_DECLARE_METATYPE(PlayerStruct)
+
+QDataStream& operator<< (QDataStream &stream, const PlayerStruct &player)
+{
+    stream << player.playerName << player.playerScore;
+    return stream;
+}
+
+QDataStream& operator>> (QDataStream &stream, PlayerStruct &player)
+{
+    stream >> player.playerName;
+    stream >> player.playerScore;
+    return stream;
+}
+
 Settings::Settings(QObject *parent) : QObject(parent)
 {
+//    qRegisterMetaType<PlayerStruct>("PlayerStruct");
+    qRegisterMetaTypeStreamOperators<PlayerStruct>("PlayerStruct");
     loadSettings();
 }
 
 Settings::~Settings()
 {
+    delete mHighScores;
 }
 
 void Settings::loadSettings()
@@ -24,26 +48,42 @@ void Settings::loadSettings()
     QSettings lSettings(QSettings::NativeFormat, QSettings::UserScope, "PLLUG", "Pacman");
 
     lSettings.beginGroup("options");
-
-    // Making default QMap
-    // with 5 elements: name = "Player", score = "0"
-    PlayerStruct lPlayerStruct;
-    lPlayerStruct.playerName = "Player";
-    lPlayerStruct.playerScore = 0;
-    QVariant variant;
-    variant.setValue(lPlayerStruct);
-    QVariantMap variantMap;
-    for(int i = 0; i < 5; i++)
-    {
-        variantMap.insert(QString::number(i), variant);
-    }
-
     bool lMusic = lSettings.value("music", true).toBool();
     bool lSoundEffects = lSettings.value("soundEffects", true).toBool();
     bool lFullscreen = lSettings.value("fullscreen", false).toBool();
     int lVolume = lSettings.value("volume", 50).toInt();
     int lDifficulty = lSettings.value("difficulty", 1).toInt();
-    HighScoresMap lHighScores = lSettings.value("high_scores", variantMap).toMap();
+    lSettings.endGroup();
+
+    lSettings.beginGroup("highScores");
+    PlayerStruct lDefaultPlayer;
+    lDefaultPlayer.playerName = "Player";
+    lDefaultPlayer.playerScore = 0;
+    PlayerStruct lPlayer0 =
+            lSettings.value("player0", QVariant::fromValue(lDefaultPlayer)).value<PlayerStruct>();
+    PlayerStruct lPlayer1 =
+            lSettings.value("player1", QVariant::fromValue(lDefaultPlayer)).value<PlayerStruct>();
+    PlayerStruct lPlayer2 =
+            lSettings.value("player2", QVariant::fromValue(lDefaultPlayer)).value<PlayerStruct>();
+    PlayerStruct lPlayer3 =
+            lSettings.value("player3", QVariant::fromValue(lDefaultPlayer)).value<PlayerStruct>();
+    PlayerStruct lPlayer4 =
+            lSettings.value("player4", QVariant::fromValue(lDefaultPlayer)).value<PlayerStruct>();
+    lSettings.endGroup();
+
+    QHash<QString, QVariant> *lHighScores = new QHash<QString, QVariant>();
+    lHighScores->insert("player0", QVariant::fromValue(lPlayer0));
+    lHighScores->insert("player1", QVariant::fromValue(lPlayer1));
+    lHighScores->insert("player2", QVariant::fromValue(lPlayer2));
+    lHighScores->insert("player3", QVariant::fromValue(lPlayer3));
+    lHighScores->insert("player4", QVariant::fromValue(lPlayer4));
+
+    // DEBUUUUUUUUUUUUGGGGGG
+    qDebug() << "Player name: "
+             << lHighScores->value("player0").value<PlayerStruct>().playerName;
+    qDebug() << "Player score: "
+             << lHighScores->value("player0").value<PlayerStruct>().playerScore;
+    // DEEEEEEEEBUUUUUUUUUUG
 
     setMusic(lMusic);
     setSoundEffects(lSoundEffects);
@@ -58,53 +98,92 @@ void Settings::saveSettings()
     QSettings lSettings(QSettings::NativeFormat, QSettings::UserScope, "PLLUG", "Pacman");
 
     lSettings.beginGroup("options");
-
     lSettings.setValue("music", music());
     lSettings.setValue("soundEffects", soundEffects());
     lSettings.setValue("fullscreen", fullscreen());
     lSettings.setValue("volume", volume());
     lSettings.setValue("difficulty", difficulty());
-    lSettings.setValue("high_scores", highScores());
+    lSettings.endGroup();
 }
 
 // Adds new player's score and name in mHighScores with sorting
-void Settings::addScore(QString playerName, int playerScore)
+/*void Settings::addScore(QString playerName, int playerScore)
 {
-    HighScoresMap lHighScores = mHighScores;
+    qDebug() << "Function addScore(" << playerName << ", " << playerScore << ")";
+    HighScoresHash *lHighScores = new HighScoresHash();
+    *lHighScores = *mHighScores;
     int i = 0;
 
-    for(auto e : lHighScores.keys())
+    for(auto e : *lHighScores.keys())
     {
         PlayerStruct lPlayer;
-        QVariant var = lHighScores.value(e);
+        QVariant var = *lHighScores.value(e);
+        qDebug() << "100";
         lPlayer = var.value<PlayerStruct>();
+        qDebug() << "102";
         if(lPlayer.playerScore < playerScore)
         {
-            for(int j = i; j < 4; j++)
+            for(int j = 4; j > i; j--)
             {
-                lHighScores[QString::number(j + 1)] = lHighScores.value(QString::number(j));
+                *lHighScores["player" + QString::number(j)] = *lHighScores.value("player" +
+                                                                               QString::number(j - 1));
             }
             lPlayer.playerName = playerName;
             lPlayer.playerScore = playerScore;
-            QVariant variant;
-            variant.setValue(lPlayer);
-            lHighScores[QString::number(i)] = variant;
+            *lHighScores.insert("player" + QString::number(i), QVariant::fromValue(lPlayer));;
+            qDebug() << "113";
             setHighScores(lHighScores);
-            return;
+            qDebug() << "115";
+            break;
         }
         ++i;
     }
-}
 
-QString Settings::playerNameByKey(QString key) const
+    QSettings lSettings(QSettings::NativeFormat, QSettings::UserScope, "PLLUG", "Pacman");
+
+    lSettings.beginGroup("highScores");
+    lSettings.setValue("player0", *getVariantFromHighScoresByKey("player0"));
+    lSettings.setValue("player1", *getVariantFromHighScoresByKey("player1"));
+    lSettings.setValue("player2", *getVariantFromHighScoresByKey("player2"));
+    lSettings.setValue("player3", *getVariantFromHighScoresByKey("player3"));
+    lSettings.setValue("player4", *getVariantFromHighScoresByKey("player4"));
+    lSettings.endGroup();
+
+    qDebug() << "\nlHighScore:";
+    for(auto e : *lHighScores.keys())
+    {
+        PlayerStruct lPlayer;
+        QVariant var;
+        var.setValue(*lHighScores.value(e));
+        lPlayer = var.value<PlayerStruct>();
+        qDebug() << lPlayer.playerName << ", " << lPlayer.playerScore;
+    }
+
+    qDebug() << "\nmHighScore:";
+    for(auto e : *mHighScores.keys())
+    {
+        PlayerStruct lPlayer;
+        QVariant var;
+        var.setValue(lHighScores.value(e));
+        lPlayer = var.value<PlayerStruct>();
+        qDebug() << lPlayer.playerName << ", " << lPlayer.playerScore;
+    }
+
+    delete lHighScores;
+}
+*/
+
+/*QString Settings::playerNameByKey(QString key) const
 {
-    return mHighScores[key].value<PlayerStruct>().playerName;
+    return *mHighScores[key].value<PlayerStruct>().playerName;
 }
 
 int Settings::playerScoreByKey(QString key) const
 {
-    return mHighScores[key].value<PlayerStruct>().playerScore;
+    return *mHighScores[key].value<PlayerStruct>().playerScore;
 }
+
+*/
 
 bool Settings::music() const
 {
@@ -131,7 +210,7 @@ int Settings::difficulty() const
     return mDifficulty;
 }
 
-HighScoresMap Settings::highScores() const
+QHash<QString, QVariant> *Settings::highScores() const
 {
     return mHighScores;
 }
@@ -181,12 +260,7 @@ void Settings::setDifficulty(int difficulty)
     }
 }
 
-void Settings::setHighScores(const HighScoresMap pMap)
+void Settings::setHighScores(QHash<QString, QVariant> *pHighScores)
 {
-    if(mHighScores != pMap)
-    {
-        mHighScores = pMap;
-        emit highScoresChanged(pMap);
-    }
+    mHighScores = pHighScores;
 }
-
