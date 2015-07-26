@@ -5,8 +5,6 @@
 #include <QString>
 #include <QDebug>
 
-//typedef QHash<QString, QVariant> HighScoresHash;
-
 /*!
  * \brief The PlayerStruct struct contains information
  * about one player.
@@ -18,12 +16,24 @@ struct PlayerStruct{
 
 Q_DECLARE_METATYPE(PlayerStruct)
 
+/*!
+ * \brief operator << inputs PlayerStruct 'player' to 'stream'.
+ * \param stream - input stream
+ * \param player - struct to be inputed to stream
+ * \return input stream
+ */
 QDataStream& operator<< (QDataStream &stream, const PlayerStruct &player)
 {
     stream << player.playerName << player.playerScore;
     return stream;
 }
 
+/*!
+ * \brief operator >> outputs PlayerStruct from 'stream' to 'player'.
+ * \param stream - output stream
+ * \param player - struct, where 'stream' outputs PlayerStruct
+ * \return output stream
+ */
 QDataStream& operator>> (QDataStream &stream, PlayerStruct &player)
 {
     stream >> player.playerName;
@@ -42,9 +52,6 @@ Settings::~Settings()
     delete mHighScores;
 }
 
-/*!
- * \brief Settings::loadSettings loads settings for game.
- */
 void Settings::loadSettings()
 {
     QSettings lSettings(QSettings::NativeFormat,
@@ -86,13 +93,8 @@ void Settings::loadSettings()
     setVolume(lVolume);
     setDifficulty(lDifficulty);
     setHighScores(lHighScores);
-
-    addScore("John", 100);
 }
 
-/*!
- * \brief Settings::saveSettings saves settings of game.
- */
 void Settings::saveSettings()
 {
     QSettings lSettings(QSettings::NativeFormat,
@@ -106,15 +108,8 @@ void Settings::saveSettings()
     lSettings.endGroup();
 }
 
-/*!
- * \brief Settings::addScore adds new player's score and name
- *  in mHighScores with sorting.
- * \param playerName name of player to be added
- * \param playerScore score of player to be added
- */
 void Settings::addScore(QString playerName, int playerScore)
 {
-    qDebug() << "Function addScore(" << playerName << ", " << playerScore << ")";
     QHash<QString, QVariant> *lHighScores = new QHash<QString, QVariant>();
     *lHighScores = *mHighScores;
     int i = 0;
@@ -154,17 +149,15 @@ void Settings::addScore(QString playerName, int playerScore)
     lSettings.endGroup();
 }
 
-/*QString Settings::playerNameByKey(QString key) const
+QString Settings::playerNameByKey(QString key) const
 {
-    return *mHighScores[key].value<PlayerStruct>().playerName;
+    return mHighScores->value(key).value<PlayerStruct>().playerName;
 }
 
 int Settings::playerScoreByKey(QString key) const
 {
-    return *mHighScores[key].value<PlayerStruct>().playerScore;
+    return mHighScores->value(key).value<PlayerStruct>().playerScore;
 }
-
-*/
 
 bool Settings::music() const
 {

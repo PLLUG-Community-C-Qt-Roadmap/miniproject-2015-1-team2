@@ -19,11 +19,33 @@ class Settings : public QObject
 public:
     explicit Settings(QObject *parent = 0);
     ~Settings();
+    /*!
+     * \brief Settings::loadSettings loads settings for game.
+     */
     Q_INVOKABLE void loadSettings();
+    /*!
+     * \brief Settings::saveSettings saves settings of game.
+     */
     Q_INVOKABLE void saveSettings();
+    /*!
+     * \brief Settings::addScore adds new player's score and name
+     *  in mHighScores with sorting.
+     * \param playerName name of player to be added
+     * \param playerScore score of player to be added
+     */
     Q_INVOKABLE void addScore(QString playerName, int playerScore);
-//    Q_INVOKABLE QString playerNameByKey(QString key) const;
-//    Q_INVOKABLE int playerScoreByKey(QString key) const;
+    /*!
+     * \brief Settings::playerNameByKey returns name of player with key 'key'.
+     * \param key - key of certain player
+     * \return name of player
+     */
+    Q_INVOKABLE QString playerNameByKey(QString key) const;
+    /*!
+     * \brief Settings::playerScoreByKey returns score of player with key 'key'.
+     * \param key - key of certain player
+     * \return score of player
+     */
+    Q_INVOKABLE int playerScoreByKey(QString key) const;
     bool music() const;
     bool fullscreen() const;
     bool soundEffects() const;
