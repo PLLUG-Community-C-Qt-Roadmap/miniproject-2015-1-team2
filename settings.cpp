@@ -33,7 +33,6 @@ QDataStream& operator>> (QDataStream &stream, PlayerStruct &player)
 
 Settings::Settings(QObject *parent) : QObject(parent)
 {
-//    qRegisterMetaType<PlayerStruct>("PlayerStruct");
     qRegisterMetaTypeStreamOperators<PlayerStruct>("PlayerStruct");
     loadSettings();
 }
@@ -43,10 +42,13 @@ Settings::~Settings()
     delete mHighScores;
 }
 
+/*!
+ * \brief Settings::loadSettings loads settings for game.
+ */
 void Settings::loadSettings()
 {
-    QSettings lSettings(QSettings::NativeFormat, QSettings::UserScope, "PLLUG", "Pacman");
-
+    QSettings lSettings(QSettings::NativeFormat,
+                        QSettings::UserScope, "PLLUG", "Pacman");
     lSettings.beginGroup("options");
     bool lMusic = lSettings.value("music", true).toBool();
     bool lSoundEffects = lSettings.value("soundEffects", true).toBool();
@@ -78,25 +80,23 @@ void Settings::loadSettings()
     lHighScores->insert("player3", QVariant::fromValue(lPlayer3));
     lHighScores->insert("player4", QVariant::fromValue(lPlayer4));
 
-    // DEBUUUUUUUUUUUUGGGGGG
-    qDebug() << "Player name: "
-             << lHighScores->value("player0").value<PlayerStruct>().playerName;
-    qDebug() << "Player score: "
-             << lHighScores->value("player0").value<PlayerStruct>().playerScore;
-    // DEEEEEEEEBUUUUUUUUUUG
-
     setMusic(lMusic);
     setSoundEffects(lSoundEffects);
     setFullscreen(lFullscreen);
     setVolume(lVolume);
     setDifficulty(lDifficulty);
     setHighScores(lHighScores);
+
+    addScore("John", 100);
 }
 
+/*!
+ * \brief Settings::saveSettings saves settings of game.
+ */
 void Settings::saveSettings()
 {
-    QSettings lSettings(QSettings::NativeFormat, QSettings::UserScope, "PLLUG", "Pacman");
-
+    QSettings lSettings(QSettings::NativeFormat,
+                        QSettings::UserScope, "PLLUG", "Pacman");
     lSettings.beginGroup("options");
     lSettings.setValue("music", music());
     lSettings.setValue("soundEffects", soundEffects());
@@ -106,72 +106,53 @@ void Settings::saveSettings()
     lSettings.endGroup();
 }
 
-// Adds new player's score and name in mHighScores with sorting
-/*void Settings::addScore(QString playerName, int playerScore)
+/*!
+ * \brief Settings::addScore adds new player's score and name
+ *  in mHighScores with sorting.
+ * \param playerName name of player to be added
+ * \param playerScore score of player to be added
+ */
+void Settings::addScore(QString playerName, int playerScore)
 {
     qDebug() << "Function addScore(" << playerName << ", " << playerScore << ")";
-    HighScoresHash *lHighScores = new HighScoresHash();
+    QHash<QString, QVariant> *lHighScores = new QHash<QString, QVariant>();
     *lHighScores = *mHighScores;
     int i = 0;
 
-    for(auto e : *lHighScores.keys())
+    for(auto key : lHighScores->keys())
     {
         PlayerStruct lPlayer;
-        QVariant var = *lHighScores.value(e);
-        qDebug() << "100";
+        QVariant var = lHighScores->value(key);
         lPlayer = var.value<PlayerStruct>();
-        qDebug() << "102";
         if(lPlayer.playerScore < playerScore)
         {
             for(int j = 4; j > i; j--)
             {
-                *lHighScores["player" + QString::number(j)] = *lHighScores.value("player" +
-                                                                               QString::number(j - 1));
+                QString lKey = "player" + QString::number(j);
+                QString lPreviousKey = "player" + QString::number(j - 1);
+                QVariant lValue = lHighScores->value(lPreviousKey);
+                lHighScores->insert(lKey, lValue);
             }
             lPlayer.playerName = playerName;
             lPlayer.playerScore = playerScore;
-            *lHighScores.insert("player" + QString::number(i), QVariant::fromValue(lPlayer));;
-            qDebug() << "113";
+            lHighScores->insert("player" + QString::number(i),
+                                QVariant::fromValue(lPlayer));
             setHighScores(lHighScores);
-            qDebug() << "115";
             break;
         }
         ++i;
     }
 
-    QSettings lSettings(QSettings::NativeFormat, QSettings::UserScope, "PLLUG", "Pacman");
-
+    QSettings lSettings(QSettings::NativeFormat,
+                        QSettings::UserScope, "PLLUG", "Pacman");
     lSettings.beginGroup("highScores");
-    lSettings.setValue("player0", *getVariantFromHighScoresByKey("player0"));
-    lSettings.setValue("player1", *getVariantFromHighScoresByKey("player1"));
-    lSettings.setValue("player2", *getVariantFromHighScoresByKey("player2"));
-    lSettings.setValue("player3", *getVariantFromHighScoresByKey("player3"));
-    lSettings.setValue("player4", *getVariantFromHighScoresByKey("player4"));
+    lSettings.setValue("player0", highScores()->value("player0"));
+    lSettings.setValue("player1", highScores()->value("player1"));
+    lSettings.setValue("player2", highScores()->value("player2"));
+    lSettings.setValue("player3", highScores()->value("player3"));
+    lSettings.setValue("player4", highScores()->value("player4"));
     lSettings.endGroup();
-
-    qDebug() << "\nlHighScore:";
-    for(auto e : *lHighScores.keys())
-    {
-        PlayerStruct lPlayer;
-        QVariant var;
-        var.setValue(*lHighScores.value(e));
-        lPlayer = var.value<PlayerStruct>();
-        qDebug() << lPlayer.playerName << ", " << lPlayer.playerScore;
-    }
-
-    qDebug() << "\nmHighScore:";
-    for(auto e : *mHighScores.keys())
-    {
-        PlayerStruct lPlayer;
-        QVariant var;
-        var.setValue(lHighScores.value(e));
-        lPlayer = var.value<PlayerStruct>();
-        qDebug() << lPlayer.playerName << ", " << lPlayer.playerScore;
-    }
-
-    delete lHighScores;
 }
-*/
 
 /*QString Settings::playerNameByKey(QString key) const
 {
@@ -262,5 +243,9 @@ void Settings::setDifficulty(int difficulty)
 
 void Settings::setHighScores(QHash<QString, QVariant> *pHighScores)
 {
-    mHighScores = pHighScores;
+    if(pHighScores != mHighScores)
+    {
+        delete mHighScores;
+        mHighScores = pHighScores;
+    }
 }
