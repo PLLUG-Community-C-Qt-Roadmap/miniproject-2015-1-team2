@@ -227,6 +227,11 @@ Rectangle {
                 dotEaten()
                 break;
             case "fruit":
+                var fruitComponent = Qt.createComponent("ScoreSprite.qml")
+                if (fruitComponent.status === Component.Ready)
+                {
+                    fruitComponent.createObject(parent, {"x": sprite.x + 10, "y": sprite.y + 10, "frameX": 0});
+                }
                 fruitEaten()
                 break;
             case "energizer":
@@ -368,7 +373,7 @@ Rectangle {
                     blinky.visible = false
                     var component = Qt.createComponent("ScoreSprite.qml")
                     if (component.status === Component.Ready)
-                        component.createObject(parent, {"x": blinky.x, "y": blinky.y});
+                        component.createObject(parent, {"x": blinky.x, "y": blinky.y, "frameX": 0});
                     sprite.increaseScoreBy(200)
                 }
                 else
@@ -398,7 +403,7 @@ Rectangle {
                     pinky.visible = false
                     var component1 = Qt.createComponent("ScoreSprite.qml")
                     if (component1.status === Component.Ready)
-                        component1.createObject(parent, {"x": pinky.x, "y": pinky.y});
+                        component1.createObject(parent, {"x": pinky.x, "y": pinky.y, "frameX": 0});
                     sprite.increaseScoreBy(200)
                 }
                 else
@@ -428,7 +433,7 @@ Rectangle {
                     inky.visible = false
                     var component2 = Qt.createComponent("ScoreSprite.qml")
                     if (component2.status === Component.Ready)
-                        component2.createObject(parent, {"x": inky.x, "y": inky.y});
+                        component2.createObject(parent, {"x": inky.x, "y": inky.y, "frameX": 0});
                     sprite.increaseScoreBy(200)
                 }
                 else
@@ -458,7 +463,7 @@ Rectangle {
                     clyde.visible = false
                     var component3 = Qt.createComponent("ScoreSprite.qml")
                     if (component3.status === Component.Ready)
-                        component3.createObject(parent, {"x": clyde.x, "y":clyde.y});
+                        component3.createObject(parent, {"x": clyde.x, "y":clyde.y, "frameX": 0});
                     sprite.increaseScoreBy(200)
                 }
                 else
