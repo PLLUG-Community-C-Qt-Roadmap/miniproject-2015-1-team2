@@ -359,11 +359,16 @@ Rectangle {
             console.log(blinky.x)
             console.log(blinky.y)*/
 
-            if(sprite.x == blinky.x - 14 && sprite.y == blinky.y - 11 && blinky.visible == true)
+            if((sprite.x > blinky.x - 20 && sprite.x < blinky.x)
+                    && (sprite.y > blinky.y - 20)&& (sprite.y < blinky.y)
+                    && blinky.visible == true)
             {
                 if(blinky.frameY == 160)
                 {
                     blinky.visible = false
+                    var component = Qt.createComponent("ScoreSprite.qml")
+                    if (component.status === Component.Ready)
+                        component.createObject(parent, {"x": blinky.x, "y": blinky.y});
                     sprite.increaseScoreBy(200)
                 }
                 else
@@ -384,11 +389,16 @@ Rectangle {
                 }
             }
 
-            if(sprite.x == pinky.x - 14 && sprite.y == pinky.y - 11 && pinky.visible == true)
+            if((sprite.x > pinky.x - 20 && sprite.x < pinky.x)
+                    && (sprite.y > pinky.y - 20)&& (sprite.y < pinky.y)
+                    && pinky.visible == true)
             {
                 if(pinky.frameY == 160)
                 {
                     pinky.visible = false
+                    var component1 = Qt.createComponent("ScoreSprite.qml")
+                    if (component1.status === Component.Ready)
+                        component1.createObject(parent, {"x": pinky.x, "y": pinky.y});
                     sprite.increaseScoreBy(200)
                 }
                 else
@@ -409,11 +419,16 @@ Rectangle {
                 }
             }
 
-            if(sprite.x == inky.x - 14 && sprite.y == inky.y - 11 && inky.visible == true)
+            if((sprite.x > inky.x - 20 && sprite.x < inky.x)
+                    && (sprite.y > inky.y - 20)&& (sprite.y < inky.y)
+                    && inky.visible == true)
             {
                 if(inky.frameY == 160)
                 {
                     inky.visible = false
+                    var component2 = Qt.createComponent("ScoreSprite.qml")
+                    if (component2.status === Component.Ready)
+                        component2.createObject(parent, {"x": inky.x, "y": inky.y});
                     sprite.increaseScoreBy(200)
                 }
                 else
@@ -434,11 +449,16 @@ Rectangle {
                 }
             }
 
-            if(sprite.x == clyde.x - 14 && sprite.y == clyde.y - 11 && clyde.visible == true)
+            if((sprite.x > clyde.x - 20 && sprite.x < clyde.x)
+                    && (sprite.y > clyde.y - 20)&& (sprite.y < clyde.y)
+                    && clyde.visible == true)
             {
                 if(clyde.frameY == 160)
                 {
                     clyde.visible = false
+                    var component3 = Qt.createComponent("ScoreSprite.qml")
+                    if (component3.status === Component.Ready)
+                        component3.createObject(parent, {"x": clyde.x, "y":clyde.y});
                     sprite.increaseScoreBy(200)
                 }
                 else
