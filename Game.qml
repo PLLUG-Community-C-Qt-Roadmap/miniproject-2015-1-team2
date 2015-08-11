@@ -8,6 +8,8 @@ Rectangle {
     height: 526
     color: "black"
 
+    property int eaten: 0
+
     property int pacmanSpawnX : 4
     property int pacmanSpawnY : 14 * 16 - 4
     property bool needToTurn : false
@@ -359,11 +361,6 @@ Rectangle {
             var index
 
 
-           /* console.log(sprite.x)
-            console.log(sprite.y)
-            console.log(blinky.x)
-            console.log(blinky.y)*/
-
             if((sprite.x > blinky.x - 20 && sprite.x < blinky.x)
                     && (sprite.y > blinky.y - 20)&& (sprite.y < blinky.y)
                     && blinky.visible == true)
@@ -373,8 +370,32 @@ Rectangle {
                     blinky.visible = false
                     var component = Qt.createComponent("ScoreSprite.qml")
                     if (component.status === Component.Ready)
-                        component.createObject(parent, {"x": blinky.x, "y": blinky.y, "frameX": 0});
-                    sprite.increaseScoreBy(200)
+                    {
+                        if(eaten == 0)
+                        {
+                            component.createObject(parent, {"x": blinky.x, "y": blinky.y, "frameX": 0})
+                            sprite.increaseScoreBy(200)
+                            eaten++
+                        }
+                        else if (eaten == 1)
+                        {
+                            component.createObject(parent, {"x": blinky.x, "y": blinky.y, "frameX": 20})
+                            sprite.increaseScoreBy(400)
+                            eaten++
+                        }
+                        else if (eaten == 2)
+                        {
+                            component.createObject(parent, {"x": blinky.x, "y": blinky.y, "frameX": 40})
+                            sprite.increaseScoreBy(800)
+                            eaten++
+                        }
+                        else
+                        {
+                            component.createObject(parent, {"x": blinky.x, "y": blinky.y, "frameX": 60})
+                            sprite.increaseScoreBy(1600)
+                            eaten++
+                        }
+                    }
                 }
                 else
                 {
@@ -403,8 +424,32 @@ Rectangle {
                     pinky.visible = false
                     var component1 = Qt.createComponent("ScoreSprite.qml")
                     if (component1.status === Component.Ready)
-                        component1.createObject(parent, {"x": pinky.x, "y": pinky.y, "frameX": 0});
-                    sprite.increaseScoreBy(200)
+                    {
+                        if(eaten == 0)
+                        {
+                            component1.createObject(parent, {"x": pinky.x, "y": pinky.y, "frameX": 0})
+                            sprite.increaseScoreBy(200)
+                            eaten++
+                        }
+                        else if (eaten == 1)
+                        {
+                            component1.createObject(parent, {"x": pinky.x, "y": pinky.y, "frameX": 20})
+                            sprite.increaseScoreBy(400)
+                            eaten++
+                        }
+                        else if (eaten == 2)
+                        {
+                            component1.createObject(parent, {"x": pinky.x, "y": pinky.y, "frameX": 40})
+                            sprite.increaseScoreBy(800)
+                            eaten++
+                        }
+                        else
+                        {
+                            component1.createObject(parent, {"x": pinky.x, "y": pinky.y, "frameX": 60})
+                            sprite.increaseScoreBy(1600)
+                            eaten++
+                        }
+                    }
                 }
                 else
                 {
@@ -433,8 +478,32 @@ Rectangle {
                     inky.visible = false
                     var component2 = Qt.createComponent("ScoreSprite.qml")
                     if (component2.status === Component.Ready)
-                        component2.createObject(parent, {"x": inky.x, "y": inky.y, "frameX": 0});
-                    sprite.increaseScoreBy(200)
+                    {
+                        if(eaten == 0)
+                        {
+                            component2.createObject(parent, {"x": inky.x, "y": inky.y, "frameX": 0})
+                            sprite.increaseScoreBy(200)
+                            eaten++
+                        }
+                        else if (eaten == 1)
+                        {
+                            component2.createObject(parent, {"x": inky.x, "y": inky.y, "frameX": 20})
+                            sprite.increaseScoreBy(400)
+                            eaten++
+                        }
+                        else if (eaten == 2)
+                        {
+                            component2.createObject(parent, {"x": inky.x, "y": inky.y, "frameX": 40})
+                            sprite.increaseScoreBy(800)
+                            eaten++
+                        }
+                        else
+                        {
+                            component2.createObject(parent, {"x": inky.x, "y": inky.y, "frameX": 60})
+                            sprite.increaseScoreBy(1600)
+                            eaten++
+                        }
+                    }
                 }
                 else
                 {
@@ -463,8 +532,32 @@ Rectangle {
                     clyde.visible = false
                     var component3 = Qt.createComponent("ScoreSprite.qml")
                     if (component3.status === Component.Ready)
-                        component3.createObject(parent, {"x": clyde.x, "y":clyde.y, "frameX": 0});
-                    sprite.increaseScoreBy(200)
+                    {
+                        if(eaten == 0)
+                        {
+                            component3.createObject(parent, {"x": clyde.x, "y": clyde.y, "frameX": 0})
+                            sprite.increaseScoreBy(200)
+                            eaten++
+                        }
+                        else if (eaten == 1)
+                        {
+                            component3.createObject(parent, {"x": clyde.x, "y": clyde.y, "frameX": 20})
+                            sprite.increaseScoreBy(400)
+                            eaten++
+                        }
+                        else if (eaten == 2)
+                        {
+                            component3.createObject(parent, {"x": clyde.x, "y": clyde.y, "frameX": 40})
+                            sprite.increaseScoreBy(800)
+                            eaten++
+                        }
+                        else
+                        {
+                            component3.createObject(parent, {"x": clyde.x, "y": clyde.y, "frameX": 60})
+                            sprite.increaseScoreBy(1600)
+                            eaten++
+                        }
+                    }
                 }
                 else
                 {
@@ -769,7 +862,7 @@ Rectangle {
     Timer {
         id: timer
         running: false
-        interval: 10000
+        interval: 20000
 
         onTriggered: {
             sprite.scale = 1
@@ -782,13 +875,15 @@ Rectangle {
             inky.frameY = 120
             clyde.frameX = 0
             clyde.frameY = 140
+
+            eaten = 0
         }
     }
 
     Timer {
         id: timer2
         running: false
-        interval: 7000
+        interval: 14000
 
         onTriggered: {
             sprite.scale = 1.2
